@@ -1,0 +1,217 @@
+/* Container style */
+.supports-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    overflow: hidden;
+  }
+  
+  /* Chat area style */
+  .chat-area {
+    margin-top: 50px;
+    flex: 1;
+    padding: 20px;
+    overflow-y: scroll;
+    max-height: calc(100vh - 150px); /* Adjust based on header and input height */
+  }
+  /* .chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    margin-top: 100px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  } */
+  
+  /* Base message style */
+  .message {
+    max-width: 70%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+    word-wrap: break-word;
+  }
+  
+  /* User message (on the left) */
+  .user-message {
+    background-color: gray;
+    align-self: flex-start;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  /* System message (on the right) */
+  .system-message {
+    background-color: #1b334d;
+    align-self: flex-end;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  /* Input container */
+.input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+  }
+  
+  /* Input box styling */
+  .input-box {
+    flex: 1;
+    background-color: white;
+    border: 1px solid #ec8e22;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+  /* Send button with gradient */
+  .send-button {
+    background: linear-gradient(45deg, #f39c12, #e74c3c);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Gallery icon style */
+  .gallery-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #1b334d;
+  }
+  
+  /* .input-container {
+    display: flex;
+    padding: 10px;
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+  }
+  
+
+  .input-box {
+    flex: 1;
+    background-color: white;
+    border: 1px solid #ec8e22;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+
+  .send-button {
+    background-color: #1b334d;
+    color: #ec8e22;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+   */
+
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1000;
+  }
+  
+
+/* Container style
+.supports-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    overflow: hidden;
+  }
+  
+
+  .chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    margin-top: 100px;
+    box-sizing: border-box;
+  }
+  
+  .message {
+    max-width: 80%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .user-message {
+    background-color: gray;
+    align-self: flex-end;
+  }
+  
+  .system-message {
+    background-color: #1b334d;
+    color: white;
+  }
+  
+
+  .input-container {
+    display: flex;
+    padding: 10px;
+    position: fixed;
+    bottom: 10%;
+    width: 100%;
+    background-color: white;
+    box-sizing: border-box;
+  }
+  
+
+  .input-box {
+    flex: 1;
+    background-color: white;
+    border: 1px solid #ec8e22;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+  }
+  
+
+  .send-button {
+    background-color: #1b334d;
+    color: #ec8e22;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+
+  .header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1000;
+  }
+   */

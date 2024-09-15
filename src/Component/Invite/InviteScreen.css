@@ -1,0 +1,126 @@
+.invite-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  position: relative;
+  text-align: center;
+
+}
+
+.qr-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  text-align: center; /* Ensures the button is centered within the card */
+}
+
+.invite-details {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Centers the content inside */
+}
+
+.save-button, .invite-details button {
+  display: inline-block;
+  background: linear-gradient(135deg, #29e6c9, #0066ff); /* Applying the linear gradient */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.save-button:hover, .invite-details button:hover {
+  background: linear-gradient(135deg, #1bc6a3, #0056e6); /* Slightly different gradient on hover */
+}
+
+
+.invite-code,
+.invite-link {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* .invite-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    position: relative;
+    text-align: center;
+  
+  }
+  
+  .background-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
+  .qr-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+  }
+  
+  .qr-section {
+    margin-bottom: 20px;
+  }
+  
+  .save-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .save-button:hover {
+    background-color: #1976d2;
+  }
+  
+  .invite-details {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .invite-code,
+  .invite-link {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+   */

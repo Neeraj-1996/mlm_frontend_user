@@ -1,0 +1,210 @@
+/* .screenMiddle {
+  
+  margin-top: 0.8%; 
+  width: 98%; 
+  
+  align-self: center;
+  border-radius: 1%; 
+  margin: 0.5%; 
+}
+
+.text {
+  color: #ffffff; 
+  font-size: 18; 
+  margin-left: 0.5%;
+}
+
+.text1 {
+  color: #ffffff; 
+  font-size: 10; 
+  margin-left: 0.5%;
+}
+
+.buttonRow {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1%; 
+  margin-left: 0.8%;
+}
+
+.buttonRow1 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1%; 
+  margin-left: 0.8%;
+  justify-content: center;
+}
+
+.buttonRow2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 1%; 
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 0.2% solid #000; 
+  border-radius: 20; 
+}
+
+button:hover {
+  background-color: #f0f0f0;
+  border-color: #EC8E22;
+}
+
+.direct {
+  height: 5.5%; 
+  width: 40%; 
+  
+  background: linear-gradient(135deg, #29e6c9, #0066ff); 
+  
+  margin-right: 1%;
+  border-radius: 10px;
+  border-color: #fff;
+}
+
+.direct1 {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  height: 7%; 
+  width: 19%; 
+  
+  margin-right: 0.5%; 
+  border: none;
+  border-radius: 10px; 
+  color: #ffffff; /
+  transition: all 0.3s ease-in-out;
+}
+
+
+.direct1:nth-of-type(1) {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b); 
+}
+
+.direct1:nth-of-type(2) {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+.direct1:nth-of-type(3) {
+  background: linear-gradient(135deg, #07686f, #55d9e3); 
+}
+
+.direct1:nth-of-type(4) {
+  background: linear-gradient(135deg, #ff6f61, #de6a9e);
+}
+
+.direct1:nth-of-type(5) {
+  background: linear-gradient(135deg, #28a745, #d4edda); 
+}
+
+.direct2 {
+  height: 5.5%; 
+  width: 80%; 
+  
+  background: linear-gradient(135deg, #29e6c9, #0066ff); 
+  
+  border-radius: 10px;
+  border-color: #fff;
+
+}
+
+.icon {
+  margin-right: 0.5%; 
+  color: #ffffff;
+}
+
+.icon1 {
+  margin-right: 0.5%; 
+  color: #000; 
+}
+
+
+
+
+.screenMiddle3 {
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+.card {
+  position: relative;
+  flex: 0 1 calc(45% - 4px);
+  margin: 0; 
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden; 
+  background: #fff; 
+
+}
+
+.card.locked {
+  background: #f0f0f0; 
+}
+.lockIcon {
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  background: rgba(0, 0, 0, 0.5); 
+  border-radius: 50%; 
+  padding: 10px; 
+  color: #fff;
+  font-size: 24px; 
+}
+
+
+
+.cardImage {
+  width: 100%; 
+  height: auto;
+  border-radius: 10px;
+}
+
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  padding: 10px;
+}
+
+.card1 {
+  background-color: #fff;
+
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+}
+
+.topUser {
+  border: 2px solid gold;
+}
+
+.username {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.earning {
+  font-size: 16px;
+  color: #888;
+}
+
+.topUserTag {
+  margin-top: 5px;
+  font-size: 14px;
+  color: red;
+}
+ */

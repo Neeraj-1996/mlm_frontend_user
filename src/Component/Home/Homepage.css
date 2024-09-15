@@ -1,0 +1,247 @@
+/* src/components/HomePage.css */
+.home-container {
+    text-align: center;
+    /* padding: 2rem; */
+  }
+  
+  .nav-links {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .nav-links li {
+    display: inline;
+    /* margin: 0 1rem; */
+  }
+
+  .screenMiddle {
+    padding: 1%; /* Converted padding to percentage */
+    margin-top: 0.8%; /* Converted margin-top to percentage */
+    width: 98%; /* Already in percentage */
+    align-self: center;
+    border-radius: 1%; /* Converted border-radius to percentage */
+    margin: 0.5%; /* Converted margin to percentage */
+  }
+  
+  .text {
+    color: #ffffff; /* Set text color to white */
+    font-size: 18; /* Converted font-size to percentage */
+    margin-left: 0.5%; /* Converted margin-left to percentage */
+  }
+  
+  .text1 {
+    color: #ffffff; /* Set text color to white */
+    font-size: 10; /* Converted font-size to percentage */
+    margin-left: 0.5%; /* Converted margin-left to percentage */
+  }
+  
+  .buttonRow {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1%; /* Converted margin-top to percentage */
+    margin-left: 0.8%; /* Converted margin-left to percentage */
+  }
+  
+  .buttonRow1 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1%; /* Converted margin-top to percentage */
+    margin-left: 0.8%; /* Converted margin-left to percentage */
+    justify-content: center;
+  }
+  
+  .buttonRow2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 1%; /* Converted margin-top to percentage */
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1%; /* Converted padding to percentage */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: 0.2% solid #000; /* Converted border width to percentage */
+    border-radius: 20; /* Converted border-radius to percentage */
+  }
+  
+  button:hover {
+    background-color: #f0f0f0;
+    border-color: #EC8E22;
+  }
+  
+  .direct {
+    height: 5.5%; /* Converted height to percentage */
+    width: 40%; /* Already in percentage */
+    background: linear-gradient(135deg, #29e6c9, #0066ff); /* Gradient background */
+    margin-right: 1%; /* Converted margin-right to percentage */
+    border-radius: 10px;
+    border-color: #fff;
+  }
+  
+  .direct1 {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center align the icon and text */
+    justify-content: center;
+    height: 7%; /* Converted height to percentage */
+    width: 19%; /* Already in percentage */
+    margin-right: 0.5%; /* Converted margin-right to percentage */
+    border: none; /* Remove border */
+    border-radius: 10px; /* Converted border-radius to percentage */
+    color: #ffffff; /* Set text color to white */
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Unique gradient backgrounds for each button */
+  .direct1:nth-of-type(1) {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Gradient for Financial */
+  }
+  
+  .direct1:nth-of-type(2) {
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient for Promotion Reward */
+  }
+  
+  .direct1:nth-of-type(3) {
+    background: linear-gradient(135deg, #07686f, #55d9e3); /* Gradient for Company Profile */
+  }
+  
+  .direct1:nth-of-type(4) {
+    background: linear-gradient(135deg, #ff6f61, #de6a9e); /* Gradient for VIP Events */
+  }
+  
+  .direct1:nth-of-type(5) {
+    background: linear-gradient(135deg, #28a745, #d4edda); /* Gradient for Beginner Tutorial */
+  }
+  
+  .direct2 {
+    height: 5.5%; /* Converted height to percentage */
+    width: 80%; /* Already in percentage */
+    background: linear-gradient(135deg, #29e6c9, #0066ff); /* Gradient background */
+    border-radius: 10px;
+    border-color: #fff;
+  
+  }
+  
+  .icon {
+    margin-right: 0.5%; /* Converted margin-right to percentage */
+    color: #ffffff; /* Set icon color to white */
+  }
+  
+  .icon1 {
+    margin-right: 0.5%; /* Converted margin-right to percentage */
+    color: #000; /* Set icon color to white */
+  }
+  
+  
+  /* .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  } */
+  /* .screenMiddle3 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px; 
+    margin-top: 10px;
+  } */
+  .screenMiddle3 {
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+     justify-content: space-between; 
+    /* margin-top: -20px; */
+    gap: 0px;
+  }
+  
+  .cardPlan {
+    position: relative; /* Allows absolute positioning of the lock icon */
+    flex: 1 1 calc(48% - 10px); /* Two cards in one row with 10px gap */
+    /* margin: 0; No extra margin */
+    box-sizing: border-box; 
+    /* text-align: center; */
+    /* overflow: hidden; Prevent content overflow */
+    background: #fff; /* Default card background color */
+    margin: 10px;
+
+    /* background-color: #fff; */
+    /* border-radius: 8px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    /* margin-bottom: 20px; */
+    /* margin-top: 10%; */
+    margin-left: 8px;
+  }
+  
+  .card.locked {
+    background: #f0f0f0; /* Background color for cards with the lock icon */
+  }
+  .lockIcon {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset to truly center the icon */
+    background: rgba(0, 0, 0, 0.5); /* Light black background with transparency */
+    border-radius: 50%; /* Circular background */
+    padding: 10px; /* Padding around the icon */
+    color: #fff; /* White color for the icon */
+    font-size: 24px; /* Size of the icon */
+  }
+  
+  /* .card img {
+  
+    height: auto;
+  } */
+  
+  .cardImage {
+    width: 100%; /* Image should scale to fit the card */
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  
+  .userList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* max-width: 600px; */
+    /* background-color: #000; */
+    padding: 10px;
+  }
+  
+  .card1 {
+    background-color: #fff;
+    /* padding: 15px; */
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    
+  }
+  
+  .topUser {
+    border: 2px solid gold;
+  }
+  
+  .username {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .earning {
+    font-size: 16px;
+    color: #888;
+  }
+  
+  .topUserTag {
+    margin-top: 5px;
+    font-size: 14px;
+    color: red;
+  }
+  
+  
+  
+  

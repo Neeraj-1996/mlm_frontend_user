@@ -1,0 +1,61 @@
+/* src/components/SignUpPage.css
+.signup-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .btn-submit {
+    margin-top: 1rem;
+  }
+   */
+
+   /* src/components/Signup.css */
+.position-relative {
+  position: relative;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.top-50 {
+  top: 50%;
+}
+
+.start-0 {
+  left: 0;
+}
+
+.translate-middle-y {
+  transform: translateY(-50%);
+}
+
+.ms-2 {
+  margin-left: 0.5rem;
+}
+
+.ms-5 {
+  margin-left: 3rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}

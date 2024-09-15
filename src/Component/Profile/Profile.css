@@ -1,0 +1,158 @@
+/* Container styles */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* First part: Profile Info */
+.profile-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 20px;
+  height: 25vh;
+  margin-top: 60px;
+}
+
+.profile-photo-div {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-photo {
+  width: 200px; /* Adjust the size as needed */
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-details {
+  margin-left: 20px;
+}
+.level {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 15px;
+  border-radius: 20px;
+  background-image: linear-gradient(to right, #cd7f32, #b87333); /* Bronze gradient */
+  color: white;
+  font-weight: bold;
+  margin-top: 15px;
+  text-transform: uppercase;
+}
+.level {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 5px 15px;
+  border-radius: 20px;
+  background-image: linear-gradient(to right, #cd7f32, #b87333); /* Bronze gradient */
+  color: white;
+  font-weight: bold;
+  margin-top: 15px;
+  text-transform: uppercase;
+}
+
+/* .level {
+  display: inline-block;
+  margin-top: 10px;
+  background-image: linear-gradient(to right, #cd7f32, #b87333);
+  padding: 5px 15px 5px 25px; 
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  position: relative; 
+} */
+
+.level::before {
+  content: '';
+  position: absolute;
+  left: 0; /* Start from the left corner */
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 15px 15px 15px 0; /* Triangle pointing left */
+  border-color: transparent #cd7f32 transparent transparent; /* Bronze-colored triangle */
+  border-radius: 5px 0 0 5px; /* Add rounded effect to the corner */
+}
+
+
+
+/* Second part: Balance and buttons */
+.balance-section {
+  height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e0e0e0;
+  padding: 10px 20px;
+}
+
+.Avail-bal {
+  width: 50%;
+}
+
+.balance-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.balance-buttons button {
+  flex: 1;
+  margin: 0 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Third part: Cards section */
+.cards-section-profile {
+  height: auto; /* Adjust height based on content */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.cardProfile {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.cardProfile:hover {
+  background-color: #e0e0e0;
+}
+.card-margin-bottom{
+  margin-bottom: 400px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .cards-section-profile {
+    grid-template-columns: repeat(3, 1fr); /* Keep 3 cards per row */
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-section-profile {
+    grid-template-columns: repeat(3, 1fr); /* Keep 3 cards per row */
+  }
+
+  .profile-photo {
+    width: 80px; /* Smaller profile photo on mobile */
+    height: 80px;
+  }
+}

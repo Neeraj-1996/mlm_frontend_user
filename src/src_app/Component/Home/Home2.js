@@ -50,6 +50,7 @@ const Homeplan = ({ navigation }) => {
       });
 
       if (response.status === 200) {
+        console.log("response",response)
         setUserPlan(response.data.data.title);
       } else {
         console.log('Error: Unable to get data');
@@ -63,7 +64,7 @@ const Homeplan = ({ navigation }) => {
     axios.get(baseUrl + 'Plan')
       .then(response => {
         // setPlans(response.data.data);
-        // console.log("ram",response.data.data)
+        console.log("ram",response.data.data)
         const plansData = response.data.data;
       const plansArray = Object.values(plansData);
       setPlans(plansArray);

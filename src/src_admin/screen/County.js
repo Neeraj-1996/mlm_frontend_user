@@ -20,7 +20,8 @@ const CountryTable = () => {
   }, []);
 
   const fetchCountries = async () => {
-    const accessToken = localStorage.getItem('accessToken'); // Retrieve token from localStorage
+     const accessToken = localStorage.getItem('accessTokenAdmin'); 
+    // const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmYyNDBiNDVkZGYwMTk5YThkYmZkOGMiLCJlbWFpbCI6InRlc3QxMjRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJuZWVyYWoiLCJpYXQiOjE3MjczNTkyNDUsImV4cCI6MTcyNzQ0NTY0NX0.0K6WcpoRxTZB4BWT0Vp99e42zYmrSR9SiPXi6BO1qZo"
     setLoading(true);
     try {
       const result = await axios.get(`${baseUrl}getCountries`, {
@@ -57,7 +58,7 @@ const CountryTable = () => {
   };
 
   const handleSaveCountry = async () => {
-    const accessToken = localStorage.getItem('accessToken'); // Retrieve token from localStorage
+    const accessToken = localStorage.getItem('accessTokenAdmin'); // Retrieve token from localStorage
     const endpoint = isEditing ? 'updateCountries' : 'addCountries';
     const payload = isEditing
       ? { countryId: currentCountry._id, ...currentCountry }
@@ -78,7 +79,7 @@ const CountryTable = () => {
   };
 
   const handleDeleteCountry = async (id) => {
-    const accessToken = localStorage.getItem('accessToken'); // Retrieve token from localStorage
+    const accessToken = localStorage.getItem('accessTokenAdmin'); // Retrieve token from localStorage
     setLoading(true);
     try {
       await axios.delete(`${baseUrl}deleteCountries`, {
@@ -94,8 +95,8 @@ const CountryTable = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="d-flex justify-content-between mb-3">
+    <div className="container mt-1">
+      <div className="d-flex justify-content-between mb-1">
         <h2>Manage Countries</h2>
         <Button variant="primary" onClick={() => handleShowForm()}>
           Add Country
@@ -122,7 +123,7 @@ const CountryTable = () => {
                 <Button
                   variant="warning"
                   size="sm"
-                  className="me-2"
+                  className="me-1"
                   onClick={() => handleShowForm(country)}
                 >
                   Edit

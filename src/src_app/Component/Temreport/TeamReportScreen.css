@@ -1,43 +1,89 @@
 .team-report-container {
-    max-width: 1200px;
-    /* margin: 0 auto; */
-    /* padding: 20px; */
-    /* margin-top: 300; */
-
-  }
+  text-align: center;
+  margin-top: 65px;
+  background-color: #fff;
+}
+.team-container {
+  max-width: 370px;
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  justify-content: "center";
+background-color: #f0f0f0;
+  box-shadow: 0px 4px 12px rgba(64, 123, 250, 0.5);
+}
   
+
+  /* Date filter container styling */
   .date-filter-container {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    margin-top: 10%;
-    padding: 20px;
+    gap: 10px; 
+    align-items: center;
+    margin-top: 10px;
+    position: sticky;
+    top: 0; /* Adjust based on where you want it to stick */
+    z-index: 100; /* Ensures it stays above other content */
+    background-color: white; /* Matches the background */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(64, 123, 250, 0.5); /* Optional shadow for better visibility */
   }
   
-  .date-picker {
-    display: flex;
-    flex-direction: column;
-    width: 45%;
 
-  }
-  
-  .date-picker label {
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .cards-container {
+/* Wrapper for individual date-picker components */
+.date-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Label styling */
+.date-picker label {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* Custom styling for DatePicker input */
+.custom-date-picker {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 140px;
+  background-color: #f9f9f9;
+  margin-left: 5px;
+ 
+
+}
+
+/* Custom styling for the date picker popper (calendar) */
+.custom-datepicker-popper .react-datepicker__day--selected {
+  background-color: #4caf50;
+  color: white;
+}
+
+.custom-datepicker-popper .react-datepicker__day--keyboard-selected {
+  background-color: #2196f3;
+  color: white;
+}
+
+/* Add more styles to customize the DatePicker */
+
+  .cards-containerTeam {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding: 20px;
+    gap: 10px;
+    padding: 5px;
+    margin-top: 10px;
   }
   
-  .card {
-    background-color: #f5f5f5;
-    padding: 20px;
+  .cardTeam {
+    background-color: #fff;
+    padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(25, 74, 219, 0.5);
     text-align: center;
   }
   
@@ -53,3 +99,48 @@
   }
   
   
+/* Tab Styles */
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+/* Tab Item Styles */
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: lightblue;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  background: linear-gradient(90deg, #FF5733, #C70039);
+  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5),
+}
+
+/* Hover effect for tabs */
+.tab:hover {
+  background: linear-gradient(135deg, #29e6c9, #0066ff); /* Change background color on hover */
+  color: white; /* Change text color on hover */
+}
+.user-card {
+  background-color: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(64, 123, 250, 0.5);
+  text-align: left;
+}
+
+.user-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.user-card p {
+  font-size: 16px;
+  color: #333;
+  margin: 5px 0;
+}
+

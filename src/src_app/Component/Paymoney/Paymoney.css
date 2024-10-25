@@ -1,0 +1,202 @@
+/* Container styles */
+.container {
+    height: 100%;
+    width: 100%;
+    /* background-color: #00d1e0; */
+}
+
+/* Body styles */
+.body {
+    height: 100%;
+    width: 95%;
+}
+
+/* Card styles */
+.cardPymoney {
+    max-width: 600px;                   /* Sets a maximum width for the card */
+    margin: 1rem auto;                 /* Centers the card horizontally */
+    padding: 1rem;                     /* Adds padding inside the card */
+    border-radius: 15px;               /* Rounds the corners of the card */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Adds a shadow effect */
+    margin-top: 10px;                 /* Adds space above the card */
+    display: flex;                      /* Enables flexbox layout */
+    flex-direction: column;             /* Arranges children in a column */
+    align-items: center;                /* Centers children horizontally */
+    text-align: center;                 /* Centers text within children */
+}
+
+.minimum-deposit,
+.network,
+.gmail {
+    margin: 0.5rem 0;                  /* Adds vertical space between headings */
+}
+
+.address,
+.track-id {
+    margin: 0.5rem 0;                  /* Adds vertical space for address and track ID */
+    font-size: 12px;                   /* Sets font size for address and track ID */
+}
+
+.paymoneybutton {
+    background: linear-gradient(to right, #FF5733 0%, #C70039 51%,  #C70039 100%); /* Button gradient */
+    color: #fff;                       /* Sets button text color */
+    padding: 10px 0;                   /* Vertical padding for the button */
+    width: 100%;                        /* Makes the button full width */
+    border: none;                       /* Removes border */
+    border-radius: 8px;                /* Rounds button corners */
+    font-size: 16px;                    /* Sets button text size */
+    cursor: pointer;    
+           /* Changes cursor to pointer on hover */
+    /* transition: background 0.3s ease;  Smooth transition for background */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Shadow effect for button */
+}
+
+button:hover {
+    background: linear-gradient(90deg, #0056b3, #007BFF); /* Changes background on hover */
+}
+
+/* Loading container */
+.loading-container {
+    height: 40%;
+    width: 100%;
+    position: relative;
+}
+
+/* Loading text */
+.loading-text {
+    align-self: center;
+    position: absolute;
+    bottom: 20%;
+    color: white;
+}
+
+.loading-text.orange {
+    bottom: 40%;
+    color: #FF5733;
+}
+
+/* Minimum deposit */
+.minimum-deposit {
+    color: #000;
+}
+
+/* Network text */
+.network {
+    color: #FF5733;
+    margin-top: 30px;
+}
+
+/* Address box */
+.address {
+    /* border: 1px solid #FF5733; */
+    border-radius: 15px;
+    background-color: #fff;
+    /* margin: 20px; */
+    width: 98%;
+    text-align: center;
+    /* padding: 10px; */
+    color: #000;
+    font-size: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Button styles */
+.card button {
+    margin: 20px 0;
+    padding: 10px 20px;
+    background-color: #00d1e0;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.card button:hover {
+    background-color: #00b3b8;
+}
+
+.track-id {
+    /* border: 1px solid #FF5733; */
+    border-radius: 15px;
+    background-color: #fff;
+    margin: 10px;
+    width: 90%;
+    text-align: center;
+    /* padding: 10px; */
+    color: #000;
+    font-size: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Gmail text */
+.gmail {
+    color: #FF5733;
+}
+
+/* Transaction status */
+.transaction-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Transaction time */
+.transaction-time {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.transaction-time h6 {
+    margin-left: 10px;
+    font-size: 15px;
+    color: red;
+    font-weight: 800;
+}
+
+/* Transaction message */
+.transaction-message {
+    color: red;
+}
+
+/* Success container */
+.success-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.success-icon {
+    height: 30%;
+    width: 50%;
+    margin-left: 10px;
+    border-radius: 50px;
+    border: 2px solid green;
+}
+
+/* Success message */
+.success-message {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.success-text-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.success-text-red {
+    color: red;
+    margin-right: 10px;
+}
+
+.success-text-green {
+    color: green;
+}

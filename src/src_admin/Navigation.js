@@ -11,6 +11,7 @@ import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
+import { useNavigate } from 'react-router-dom';
 const Navigation = () => {
 
   const { collapseSidebar} = useProSidebar();
@@ -19,6 +20,13 @@ const Navigation = () => {
     background: 'linear-gradient(to bottom, #007bff, #00ff99)',
     height: "100vh" 
   };
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+     localStorage.clear();
+    navigate('/admindnd'); 
+};
+
   
   return (
     <div id="app" style={({ height: "100vh" }, { display: "flex" })}>
@@ -48,8 +56,11 @@ const Navigation = () => {
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/slider" />}>Slider</MenuItem>
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/plan-table" />}>Plan</MenuItem>
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/withdrawal-request" />}>Withdrawal</MenuItem>
+        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/user-transaction" />}>Transaction</MenuItem>
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/level-table" />}>Level</MenuItem>
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/support" />}>Support</MenuItem>
+        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/create-level" />}>Create Level</MenuItem>
+        <button onClick={handleLogout}>Logout</button>
 
         {/* <SubMenu icon={<HomeOutlinedIcon />} label="React liberary">
         <MenuItem icon={<PeopleOutlinedIcon />}  component={<Link to="/FormRegister" />}>React Form</MenuItem>

@@ -1,8 +1,8 @@
 .header {
     display: flex;
-    align-items: center; /* Center items vertically */
-    justify-content: space-between; /* Space out the items */
-    padding: 10px 20px; /* Add padding around the header */
+    align-items: center; 
+    /* justify-content: space-between; Space out the items */
+    /* padding: 10px 20px; Add padding around the header */
     background-color: #f8f8f8; /* Background color of the header */
     border-bottom: 1px solid #ddd; /* Optional: Border for visual separation */
   }
@@ -14,6 +14,8 @@
     font-size: 24px; /* Size of the icons */
     cursor: pointer;
     color: #333; /* Color of the icons */
+    width: 55px;
+    padding: 8px;
   }
   
   .header-title {
@@ -22,5 +24,14 @@
     font-size: 18px; /* Size of the header text */
     margin: 0; /* Remove default margin */
     color: #333; /* Color of the header text */
+  }
+  .dropdown-container1,countries{
+    background: none;
+    border: none;
+    font-size: 24px; /* Size of the icons */
+    cursor: pointer;
+    color: #333; /* Color of the icons */
+    /* width: 40px; */
+
   }
   

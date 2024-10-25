@@ -1,12 +1,13 @@
-/* src/components/ImageSlider/ImageSlider.css */
+
 .slider-container {
     width: 92%;
-    /* height: 10%; */
+    overflow: hidden;
     margin: 0 auto;
   }
   
   .slider-image {
     width: 100%;
     height: auto;
+    border-radius: 5px;
   }
   

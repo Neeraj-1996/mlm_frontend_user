@@ -1,3 +1,87 @@
+/* deposit.css */
+
+.container {
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  /* background-color: #CDF1E5; */
+  display: flex; /* Added to center contents */
+  flex-direction: column; /* Added to stack elements vertically */
+}
+
+.body1 {
+
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  /* border: 1px solid #ddd; */
+  border-radius: 15px;
+  justify-content: "center";
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+  margin-top: 50px;
+
+}
+
+.image-usdt {
+  width: 15%;
+  height: 15%;
+  border-radius: 10px;
+  border-width: 5px;
+  margin: 5px;
+}
+
+.button-next {
+  background: linear-gradient(90deg, #FF5733, #C70039);
+  color: #fff;
+  padding: 10px 0;
+  width: 60%;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  /* transition: background 0.3s ease; */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 100%;
+  max-height: 60%;
+  overflow-y: auto;
+  margin-bottom: 100px;
+}
+
+.close-button-container {
+  width: 100%;
+  padding: 10px;
+  text-align: right;
+}
+
+.close-button {
+  background-color: #1B334D;
+  width: 25%;
+  height: 20%;
+  border-radius: 10px;
+}
+
+
 /* Add this CSS to your stylesheet */
 .radio-button {
     position: relative;

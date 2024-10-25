@@ -8,36 +8,39 @@ const LoginPage = ({ onLogin }) => {
   const navigate = useNavigate(); // Hook to navigate programmatically
 
   const [error, setError] = useState('');
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => { 
     event.preventDefault();
     
     try {
-      // Make API request using axios
-      const response = await axios.post('http://localhost:9001/api/admin/adminLogin', {
-        mobile_no: number,
-        password: password
-      });
+        // Make API request using axios
+        const response = await axios.post('http://localhost:9001/api/admin/adminLogin', {
+            mobile_no: number,
+            password: password
+        });
+        // localStorage.clear();
 
-      // Assuming the response contains the token in 'accessToken' and 'refreshToken'
-      const { accessToken, refreshToken } = response.data.data;
-      console.log("accessToken",accessToken); 
-      
-      // Save tokens in local storage
-      // localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('accessToken', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmVlY2NjMmY0YWE2ZjBmMWFjZTY3YjMiLCJlbWFpbCI6ImxldmVsMUBnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImxldmVsMSIsImlhdCI6MTcyNjk4NzUwNCwiZXhwIjoxNzI3MDczOTA0fQ.S2hStv9oUpOZLc_nh6_vc1vD3qt9qJQIUL3FPehWCzU");
-      localStorage.setItem('refreshToken', refreshToken);
+        // Assuming the response contains the tokens as shown in your structure
+        const { accessTokenAdmin, refreshTokenAdmin } = response.data.data;
+        
+        // Log the access token
+        console.log("accessToken", accessTokenAdmin);
+        
+        // Save tokens in local storage
+        localStorage.setItem('accessTokenAdmin', accessTokenAdmin);
+        localStorage.setItem('refreshTokenAdmin', refreshTokenAdmin);
 
-      // Notify parent component of successful login
-      onLogin(); 
+        // Notify parent component of successful login
+        onLogin(); 
 
-      // Redirect to home page or another route after login
-      navigate('/admindnd/home'); // Change this route as needed
+        // Redirect to home page or another route after login
+        navigate('/admindnd/home'); // Change this route as needed
 
     } catch (error) {
-      console.error('Login failed:', error);
-      setError('Invalid login credentials. Please try again.');
+        console.error('Login failed:', error);
+        setError('Invalid login credentials. Please try again.');
     }
-  };
+};
+
 
 
 
@@ -49,7 +52,7 @@ const LoginPage = ({ onLogin }) => {
           <h2 className="text-center mb-4">Login</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label> Mobile</Form.Label>
               <Form.Control
                 type="number"
                 placeholder="Enter number"

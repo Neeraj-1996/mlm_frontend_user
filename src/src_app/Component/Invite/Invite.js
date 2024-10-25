@@ -5,7 +5,8 @@ import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
 const InviteScreen = () => {
   const navigate = useNavigate();
-  const inviteCode = 'ABC12345';  // Your dynamic invite code
+  // const ShareId = localStorage.getItem("sharedId");
+  const inviteCode = localStorage.getItem("sharedId");  // Your dynamic invite code
   const inviteLink = `https://yourwebsite.com/invite/${inviteCode}`;  // Dynamic invite link
   const [copiedText, setCopiedText] = useState('');
   const qrCodeRef = useRef(null);
@@ -66,9 +67,10 @@ const InviteScreen = () => {
       </div>
 
       {/* QR Code Card Section */}
+      <div className="cardInvite">
       <div className="qr-card">
         <div ref={qrCodeRef} className="qr-section">
-          <QRCode value={inviteLink} size={300} />
+          <QRCode value={inviteLink} size={150} />
         </div>
 
         {/* Save QR Button */}
@@ -90,6 +92,8 @@ const InviteScreen = () => {
           {copiedText === inviteLink ? 'Copied!' : 'Copy Invite Link'}
         </button>
       </div>
+      </div>
+
     </div>
   );
 };

@@ -2,6 +2,7 @@
 .home-container {
     text-align: center;
     /* padding: 2rem; */
+    margin-top: 65px;
   }
   
   .nav-links {
@@ -11,7 +12,7 @@
   
   .nav-links li {
     display: inline;
-    /* margin: 0 1rem; */
+    margin: 0 1rem;
   }
 
   .screenMiddle {
@@ -76,9 +77,12 @@
     height: 5.5%; /* Converted height to percentage */
     width: 40%; /* Already in percentage */
     background: linear-gradient(135deg, #29e6c9, #0066ff); /* Gradient background */
-    margin-right: 1%; /* Converted margin-right to percentage */
-    border-radius: 10px;
-    border-color: #fff;
+    margin-right: 1%; 
+    border-radius: 8px;
+    border:none;
+    cursor: "pointer";
+    transition: 'background 0.3s ease';
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   }
   
   .direct1 {
@@ -88,11 +92,16 @@
     justify-content: center;
     height: 7%; /* Converted height to percentage */
     width: 19%; /* Already in percentage */
-    margin-right: 0.5%; /* Converted margin-right to percentage */
-    border: none; /* Remove border */
-    border-radius: 10px; /* Converted border-radius to percentage */
-    color: #ffffff; /* Set text color to white */
-    transition: all 0.3s ease-in-out;
+    margin-right: 1.5%; /* Converted margin-right to percentage */
+    /* border: none; 
+    border-radius: 10px; 
+    color: #ffffff; 
+    transition: all 0.3s ease-in-out; */
+    border-radius: 8px;
+    border:none;
+    cursor: "pointer";
+    transition: 'background 0.1s ease';
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
   }
   
   /* Unique gradient backgrounds for each button */
@@ -120,8 +129,13 @@
     height: 5.5%; /* Converted height to percentage */
     width: 80%; /* Already in percentage */
     background: linear-gradient(135deg, #29e6c9, #0066ff); /* Gradient background */
-    border-radius: 10px;
-    border-color: #fff;
+    /* border-radius: px; */
+    /* border-color: #fff; */
+    border-radius: 8px;
+    border:none;
+    cursor: "pointer";
+    transition: 'background 0.1s ease';
+     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
   
   }
   
@@ -135,50 +149,31 @@
     color: #000; /* Set icon color to white */
   }
   
-  
-  /* .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  } */
-  /* .screenMiddle3 {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px; 
-    margin-top: 10px;
-  } */
+
   .screenMiddle3 {
     margin: 10px;
     display: flex;
     flex-wrap: wrap;
-     justify-content: space-between; 
-    /* margin-top: -20px; */
+    justify-content: space-between; 
     gap: 0px;
   }
   
   .cardPlan {
-    position: relative; /* Allows absolute positioning of the lock icon */
-    flex: 1 1 calc(48% - 10px); /* Two cards in one row with 10px gap */
-    /* margin: 0; No extra margin */
+    position: relative; 
+    flex: 1 1 calc(47% - 10px); 
+    border-radius: 8px;
     box-sizing: border-box; 
-    /* text-align: center; */
-    /* overflow: hidden; Prevent content overflow */
-    background: #fff; /* Default card background color */
-    margin: 10px;
-
-    /* background-color: #fff; */
-    /* border-radius: 8px; */
+    border: none;
+    background: linear-gradient(90deg, #FF5733, #C70039);
+    margin: 2px;
+    transition: background 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    /* margin-bottom: 20px; */
-    /* margin-top: 10%; */
     margin-left: 8px;
   }
   
-  .card.locked {
-    background: #f0f0f0; /* Background color for cards with the lock icon */
+  .locked {
+    background: #6a6a6a; /* Background color for cards with the lock icon */
   }
   .lockIcon {
     position: absolute;
@@ -198,50 +193,64 @@
   } */
   
   .cardImage {
-    width: 100%; /* Image should scale to fit the card */
+    width:125px; /* Image should scale to fit the card */
     height: auto;
     border-radius: 10px;
   }
   
   
-  .userList {
+  .userListH {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    /* max-width: 600px; */
-    /* background-color: #000; */
-    padding: 10px;
+    width: 98%;
+margin: 5px;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
   }
   
-  .card1 {
+  .cardH {
     background-color: #fff;
-    /* padding: 15px; */
-    margin: 10px 0;
+ justify-content: space-between;
+    margin: 5px 0;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(22, 43, 202, 0.5);
+    flex-direction: row;
+    display: flex;
+    padding: 10px;
     
   }
   
-  .topUser {
+  .topUserH {
     border: 2px solid gold;
   }
   
-  .username {
+  .usernameH {
     font-size: 18px;
     font-weight: bold;
   }
   
-  .earning {
+  .earningH {
     font-size: 16px;
     color: #888;
   }
+  .countryH{
+    font-size: 16px;
+    color: #000;
+  }
   
-  .topUserTag {
+  .topUserTagH {
     margin-top: 5px;
     font-size: 14px;
     color: red;
   }
+
   
+  .avatar-imgH {
+    width: 60px; /* Set desired image width */
+    height: 60px; /* Set desired image height */
+    border-radius: 50%; /* Optional: make the image round */
+  }
   
   
   

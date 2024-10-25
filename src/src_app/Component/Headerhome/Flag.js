@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import WorldFlag from 'react-world-flags';
 import './Flag.css'; // Ensure your CSS is imported correctly
 
-const CustomDropdown = ({ countries, selectedCountry, onSelectCountry }) => {
+const CustomDropdownHome = ({ countries, selectedCountry, onSelectCountry }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (country) => {
@@ -11,13 +11,14 @@ const CustomDropdown = ({ countries, selectedCountry, onSelectCountry }) => {
   };
 
   return (
-    <div className="custom-dropdown">
+    <div className="custom-dropdown1">
       <div className="custom-dropdown-header" onClick={() => setIsOpen(!isOpen)}>
         <WorldFlag code={selectedCountry.code} style={{ width: '30px', height: '20px', marginRight: '10px' }} />
-        <span>{selectedCountry.nativeName}</span>
+        {/* <span>{selectedCountry.nativeName}</span> */}
       </div>
+
       {isOpen && (
-        <div className="custom-dropdown-list">
+        <div className="custom-dropdown-list1">
           {countries.map((country, index) => (
             <div
               key={country.code}
@@ -34,4 +35,4 @@ const CustomDropdown = ({ countries, selectedCountry, onSelectCountry }) => {
   );
 };
 
-export default CustomDropdown;
+export default CustomDropdownHome;

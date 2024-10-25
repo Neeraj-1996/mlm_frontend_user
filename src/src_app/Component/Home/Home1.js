@@ -10,7 +10,7 @@ import { faWallet } from '@fortawesome/free-solid-svg-icons/faWallet'; // Import
 import { faStar } from '@fortawesome/free-solid-svg-icons/faStar'; // Import star icon
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons/faGraduationCap'; // Import graduation cap icon
 import { useNavigate } from 'react-router-dom';
-import './Homepart1.css'; // Import CSS file
+// import './Homepart1.css'; // Import CSS file
 
 const Homepart1 = () => {
   const navigate = useNavigate();
@@ -25,7 +25,9 @@ const Homepart1 = () => {
           <h6 className="text">Deposit</h6>
         </button>
 
-        <button className="direct">
+        <button className="direct"
+         onClick={() => navigate("/Withdrwal")}
+        >
           <FontAwesomeIcon icon={faWallet} size="lg" color="#764bd1" className="icon"   style={{height:"35px"}}/>
           <h6 className="text">Withdrawal</h6>
         </button>

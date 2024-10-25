@@ -2,9 +2,6 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-// import AppContent from './Component/Navigation/Routes'; // User Web Routes
-// import Adminroutes from './Component/Navigation/Adminroutes'; // Admin Web Routes
-// import Adminroutes from '../src_admin/Routesadmin';
 import AppContent from './src_app/Component/Navigation/Routes';
 import Adminroutes from './src_admin/Routesadmin';
 import 'slick-carousel/slick/slick.css';
@@ -37,18 +34,3 @@ const RootApp = () => {
 };
 
 export default RootApp;
-
-// import React from 'react';
-// import {BrowserRouter as Router  } from 'react-router-dom';
-// import AppContent from './Component/Navigation/Routes';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
-// const App = () => {
-//   return (
-//     <Router>
-//       <AppContent />
-//     </Router>
-//     );
-// };
-// export default App;
-

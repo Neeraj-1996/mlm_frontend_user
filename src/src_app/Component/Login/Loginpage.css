@@ -1,24 +1,93 @@
-/* src/components/LoginPage.css */
-.login-container {
-    max-width: 400px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    justify-content: "center";
-  }
 
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-  
-  .btn-submit {
-    margin-top: 1rem;
-  }
-  
+.login-container {
+  max-width: 300px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  justify-content: "center";
+background-color: #f0f0f0;
+  box-shadow: 0px 4px 12px rgba(64, 123, 250, 0.5);
+  /* margin: "20px auto", */
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+button.btn-link.forgot-password {
+  display: block;
+  text-align: right;
+  color: #007bff;
+  text-decoration: none;
+}
+
+button.btn-link.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* .button-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+button {
+  width: 48%; 
+} */
+
+
+.button-row1 {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.button-row1 button {
+  flex: 1; /* Ensure both buttons take equal space */
+  margin-right: 10px; /* Right margin for the first button */
+}
+
+/* Remove margin from the last button */
+.button-row1 button:last-child {
+  margin-right: 0;
+}
+
+/* Hide number input arrows (spinners) */
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.btn-grad {
+  background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%);
+  /* margin: 10px; */
+  /* padding: 15px 45px; */
+  text-align: center;
+  /* text-transform: uppercase; */
+  transition: 0.5s;
+  /* background-size: 200% auto; */
+  color: white;
+  /* box-shadow: 0 0 20px #eee; */
+  border-radius: 15px;
+  display: block;
+  /* width: 100%; Ensures the button takes full width */
+}
+
+.btn-grad:hover,
+.btn-grad:active { /* Include :active for mobile */
+  background-position: right center; /* Change the direction of the gradient on hover or tap */
+  color: #fff;
+  text-decoration: none;
+}
+

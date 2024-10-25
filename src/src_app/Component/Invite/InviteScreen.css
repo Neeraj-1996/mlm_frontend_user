@@ -9,13 +9,25 @@
   text-align: center;
 
 }
-
+.cardInvite {
+  max-width: 320px;                   /* Sets a maximum width for the card */
+  margin: 1rem auto;                 /* Centers the card horizontally */
+  padding: 1rem;                     /* Adds padding inside the card */
+  border-radius: 15px;               /* Rounds the corners of the card */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Adds a shadow effect */
+  margin-top: 20px;                 /* Adds space above the card */
+  display: flex;                      /* Enables flexbox layout */
+  flex-direction: column;             /* Arranges children in a column */
+  align-items: center;                /* Centers children horizontally */
+  text-align: center; 
+}
 .qr-card {
+  margin-top: 10px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-align: center; /* Ensures the button is centered within the card */
 }
 

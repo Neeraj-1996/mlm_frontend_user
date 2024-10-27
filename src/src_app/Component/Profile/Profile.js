@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import axios from "axios";
 import baseWallet from "../../../src_admin/screen/urlWallet";
+import baseUrlapp from "../Url/Urlapp";
 import ImageModal from "./Profilemodel";
 import './Profile.css';  // Styling file
 
@@ -26,6 +27,7 @@ const Profile = () => {
   const mobileNo = localStorage.getItem("mobileNo");
   const username = localStorage.getItem("username");
   const ShareId = localStorage.getItem("sharedId");
+  // const userId = localStorage.getItem("userId");
   const handleImageSelect = (image) => {
     setProfileImage(image);
     localStorage.setItem('profileImage', image); // Update the profile image
@@ -33,11 +35,13 @@ const Profile = () => {
   };
 
   useEffect(() => {
+    getUserLevel();
     // Check for existing image in local storage when the component mounts
     const storedImage = localStorage.getItem('profileImage');
     if (storedImage) {
       setProfileImage(storedImage);
     }
+
   }, []);
 
   const imageAssets = Array.from({ length: 20 }, (_, i) =>
@@ -68,6 +72,30 @@ const Profile = () => {
     fetchTransactions();
   }, []);
 
+  const [shareCount, setShareCount] = useState(0);
+  const [activePlanTitle, setActivePlanTitle] = useState(0);
+  const getUserLevel = async () => {
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("accessToken");
+
+    try {
+      // Make the GET request using Axios
+      const response = await axios.get(`${baseUrlapp}getUserLevel?userId=${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        }
+      });
+
+      // Extract the values and update state
+      const userData = response.data.data;
+      setShareCount(userData.shareCount); // Set share count
+      setActivePlanTitle(userData.activePlan.title); // Set active plan title
+      console.log("User level data:", userData);
+    } catch (error) {
+      console.error("Error fetching user level:", error);
+    }
+  };
 
   return (
     <div className="profile-container1">
@@ -80,9 +108,10 @@ const Profile = () => {
           </div>
           <div className="profile-details">
             <h2>{username}</h2>
-            <p>Invitation Code: {ShareId}</p>
-            {/* <p>Mobile: {mobileNo}</p> */}
-            <div className="level">Bronze</div>
+            <p>Invitation Code: {userId}</p>
+            <p>Share Count: {shareCount}</p>
+          
+            <div className="level">{activePlanTitle}</div>
           </div>
         </div>
 
@@ -91,7 +120,8 @@ const Profile = () => {
       <div className="balance-section">
         <div className="Avail-bal">
           <h3>Available Balance</h3>
-          <p style={{marginLeft:"10px",fontSize:'20px'}}>{balance}</p>
+          <p style={{ marginLeft: "10px", fontSize: '20px' }}>{balance.toFixed(2)}</p>
+
         </div>
         <div className="balance-buttons">
           <button  className="depositp" onClick={() => navigate("/Deposit")}>Deposit</button>
@@ -102,7 +132,7 @@ const Profile = () => {
       {/* Third part: Cards */}
       <div className="cards-section-profile">
         <div className="cardProfile" onClick={() => navigate("/ProfileComponent")}>Personal Info</div>
-        <div className="cardProfile" onClick={() => navigate("/OrderRecord")}>Order Record</div>
+        <div className="cardProfile" onClick={() => navigate("/OrderDetail")}>Order Record</div>
         <div className="cardProfile" onClick={() => navigate("/Transaction")}>Account Detail</div>
         <div className="cardProfile" onClick={() => navigate("/TeamReportScreen")}>Team Report</div>
         <div className="cardProfile" onClick={() => navigate("/VIPEvents")}>Announcement</div>

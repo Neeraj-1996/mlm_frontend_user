@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, Modal, Form, Card } from "react-bootstrap";
 import baseUrl from "./url";
 import axios from "axios";
-
-
+import ImageUploader from 'react-image-upload'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // Utility function to check if the timestamp is within the last 48 hours
 const isWithinLast48Hours = (timestamp) => {
   const now = new Date();
@@ -13,31 +14,62 @@ const isWithinLast48Hours = (timestamp) => {
 
 const SupportTable = () => {
   const [showMessageModal, setShowMessageModal] = useState(false);
-  const [showSendMessageModal, setShowSendMessageModal] = useState(false);
+  // const [showSendMessageModal, setShowSendMessageModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [message, setMessage] = useState([]);
-  const [messageSend, setMessageSend] = useState("");
+  // const [messageSend, setMessageSend] = useState("");
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
-
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [userInput, setUserInput] = useState("");
   const handleViewMessages = async (user) => {
     setSelectedUser(user);
-    await getMessages(user._id);
+    await getMessages(user.userId);
     setShowMessageModal(true);
   };
 
-  const handleSendMessageSubmit = () => {
-    if (message.trim()) {
-      setUsers((prevUsers) =>
-        prevUsers.map((user) =>
-          user.id === selectedUser.id
-            ? { ...user, messages: [...user.messages, message] }
-            : user
-        )
-      );
-      setMessage("");
-      setShowSendMessageModal(false);
+  const handleSendMessageSubmit = async () => {
+    // const token = localStorage.getItem("accessToken");
+    const userId = localStorage.getItem("userId");
+    // Check if userInput or image is available
+    if (!userInput && !selectedImage) {
+      // Show toast message if nothing is selected
+      toast.warn("Please enter a message or select an image", {
+      
+        autoClose: 3000,  // Toast will disappear after 3 seconds
+      });
+      return;
     }
+    const formData = new FormData();
+    if (userInput) formData.append("content", userInput);
+    if (selectedImage && selectedImage.file) {
+      formData.append("chatImg", selectedImage.file); // Append the actual file object
+    }console.log("FormData:", formData);
+    try {
+      const response = await axios.post(`http://localhost:9001/api/admin/sendMessageAdmin?user_id=${userId}`,
+         formData,
+    
+      );
+      console.log("Message sent:", response.data);
+
+      setUserInput("");
+      setSelectedImage(null);
+      getMessages(); 
+  
+      // Optionally show a success toast
+      toast.success("Message sent successfully!", {
+  
+        autoClose: 2000, // Toast will disappear after 2 seconds
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      
+      toast.error("Failed to send message!", {
+
+        autoClose: 3000,
+      });
+    }
+
   };
 
   const handleCloseMessageModal = () => {
@@ -48,10 +80,14 @@ const SupportTable = () => {
   // Fetch messages for a user and check if they have any messages within the last 48 hours
 
 const hasRecentMessages = async (userId) => {
+      const accessToken = localStorage.getItem('accessTokenAdmin');
   try {
-    const result = await axios.get(`http://localhost:9001/api/admin/getMessages/${userId}`);
+    const result = await axios.get(`http://localhost:9001/api/admin/getMessages?user_id=${userId}`,{
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
     if (result.status === 200) {
       // Filter messages sent within the last 48 hours and where isAdmin is false
+      console.log("hasRecentMessages",result.data)
       const recentMessages = result.data.filter(message => 
         isWithinLast48Hours(message.createdAt) && message.isAdmin === false
       );
@@ -74,16 +110,17 @@ const hasRecentMessages = async (userId) => {
         });
         if (result.status === 200) {
           const allUsers = result.data.data;
-          console.log("allUsers",allUsers);
+          // console.log("allUsers",allUsers);
           const usersWithRecentMessages = [];
   
           // Iterate over each user and check if they have recent messages
           for (const user of allUsers) {
-            const hasMessages = await hasRecentMessages(user._id);
+            const hasMessages = await hasRecentMessages(user.userId);
             if (hasMessages) {
               usersWithRecentMessages.push(user);
             }
           }
+          console.log("content",usersWithRecentMessages);
           
           setUsers(usersWithRecentMessages);
         }
@@ -95,13 +132,9 @@ const hasRecentMessages = async (userId) => {
     };
 
   const getMessages = async (userId) => {
-    // const token = localStorage.getItem("accessToken");
-    // setLoading(true);
-      const accessToken = localStorage.getItem('accessTokenAdmin');
+    const accessToken = localStorage.getItem('accessTokenAdmin');
     setLoading(true);
-    try {
-      // const result = await axios.get(`http://localhost:9001/api/admin/getMessages/${userId}`,
-      const result = await axios.get(`http://localhost:9001/api/admin/getMessages/${userId}`,{
+    try {const result = await axios.get(`http://localhost:9001/api/admin/getMessages?user_id=${userId}`,{
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       if (result.status === 200) {
@@ -118,6 +151,17 @@ const hasRecentMessages = async (userId) => {
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  function getImageFileObject(imageFile) {
+    console.log({ imageFile });
+    setSelectedImage({
+      file: imageFile.file,
+      dataUrl: imageFile.dataUrl // Storing the dataUrl to use it directly in the chat
+    });
+  }
+  function runAfterImageDelete(file) {
+    console.log({ file })
+  }
 
   return (
     <div className="container mt-1">
@@ -220,10 +264,21 @@ const hasRecentMessages = async (userId) => {
                 as="textarea"
                 rows={3}
                 placeholder="Enter your message"
-                value={messageSend}
-                onChange={(e) => setMessageSend(e.target.value)}
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
               />
             </Form.Group>
+
+            <ImageUploader
+        id="imageUploader"
+        withIcon={false}
+        buttonText="Choose image"
+        onFileAdded={(img) => getImageFileObject(img)}
+        onFileRemoved={(img) => runAfterImageDelete(img)}
+        singleImage={true}
+        withLabel={false}
+        buttonStyles={{ display: "none" }} // Hide the default button
+      />
             <Button
               variant="primary"
               onClick={handleSendMessageSubmit}

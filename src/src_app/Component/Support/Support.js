@@ -33,11 +33,11 @@ const Supports = () => {
     };
      const resultData = async () => {
       const token = localStorage.getItem("accessToken");
-    
+      const userId = localStorage.getItem("userId");
       try {
-        const result = await axios.get(baseUrlapp + "getMessages/66f240b45ddf0199a8dbfd8c", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const result = await axios.get(`${baseUrlapp}getMessages?user_id=${userId}`,
+          // {headers: { Authorization: `Bearer ${token}` },}
+        );
     
         console.log("hello chat ", result.data);
         if (result.data) {
@@ -70,9 +70,12 @@ const Supports = () => {
         dataUrl: imageFile.dataUrl // Storing the dataUrl to use it directly in the chat
       });
     }
+    function runAfterImageDelete(file) {
+      console.log({ file })
+    }
     const handleSend = async () => {
-      const token = localStorage.getItem("accessToken");
-    
+      // const token = localStorage.getItem("accessToken");
+      const userId = localStorage.getItem("userId");
       // Check if userInput or image is available
       if (!userInput && !selectedImage) {
         // Show toast message if nothing is selected
@@ -92,15 +95,9 @@ const Supports = () => {
       console.log("FormData:", formData);
     
       try {
-        const response = await axios.post(
-          baseUrlapp+"sendMessage/",
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "multipart/form-data",
-            },
-          }
+        const response = await axios.post(`${baseUrlapp}sendMessage?user_id=${userId}`,
+           formData,
+      
         );
         console.log("Message sent:", response.data);
     
@@ -124,9 +121,7 @@ const Supports = () => {
       }
     };
     
-  function runAfterImageDelete(file) {
-    console.log({ file })
-  }
+ 
   const navigate = useNavigate();
   const handleBackClick = () => {
     navigate(-1); // Navigates back to the previous page
@@ -198,185 +193,3 @@ const Supports = () => {
 
 export default Supports;
 
-
-
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faImage } from "@fortawesome/free-solid-svg-icons";
-    // Image picker handler
-//     const onDrop = (pictureFiles) => {
-// console.log("gfnjksfs",pictureFiles);      
-//       setPicture(pictureFiles[0]); // Get the first selected image
-//     };
-
-    // console.log("jsndfnds picture",picture);
-
-  
-    {/* <div className="chat-area">
-      {messages.map((message) => (
-        <div
-          key={message.id}
-          className={`message ${message.type === "user" ? "user-message" : "system-message"}`}
-        >
-          {message.image ? (
-            <img
-              src={message.image.dataUrl ? message.image.dataUrl : URL.createObjectURL(message.image.file)}
-              alt="Selected"
-              style={{ maxWidth: "100%" }}
-            />
-          ) : (
-            <p>{message.message}</p>
-          )}
-        </div>
-      ))}
-      <div ref={chatEndRef} /> 
-    </div> */}
-    
-
- // const handleSend = async () => {
-  //   console.log("hbfsdfds",picture)
-  //   if (userInput.trim() !== "" || picture) {
-  //     const messageData = {
-  //       id: new Date().getTime(),
-  //       type: picture ? "image" : "user",
-  //       message: picture ? "Image sent" : userInput, 
-  //       image: picture, // Handle image here
-  //     };
-
-  //     setMessages([...messages, messageData]);
-  //     setUserInput("");
-  //     setPicture(null); // Clear image
-
-  //     // Sending the message to the server
-  //     try {
-  //       const token = localStorage.getItem("tokenId");
-  //       const endpoint = "submit-chat";
-
-  //       await axios.post(
-  //         baseUrl + endpoint,
-  //         { message: userInput },
-  //         {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         }
-  //       );
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  // };
-  // const handleSend = async () => {
-
-  //   const messageData = {
-  //     id: new Date().getTime(),
-  //     type: picture ? "image" : "user",
-  //     message: picture ? "Image sent" : userInput, // Placeholder for image
-  //     image: picture, // Can be handled separately
-  //   };
-
-  //   if (userInput.trim() !== "") {
-  //     const newMessage = {
-  //       id: messages.length + 1,
-  //       message: userInput,
-  //       type: "user",
-  //     };
-  //     setMessages([...messages,messageData]);
-  //     setUserInput("");
-
-  //     try {
-  //       const token = localStorage.getItem("tokenId");
-  //       const endpoint = "submit-chat";
-
-  //       await axios.post(
-  //         baseUrl + endpoint,
-  //         { message: userInput },
-  //         {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         }
-  //       );
-
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  // };
-
-
-  
-
-
-  
-
-      {/* <div className="chat-area">
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`message ${message.type === "user" ? "user-message" : "system-message"}`}
-          >
-            <p>{message.message}</p>
-          </div>
-        ))}
-      </div> */}
-
-      {/* Fixed Input Box */}
-  {/* <div className="input-container">
-        <input
-          className="input-box"
-          placeholder="Type your message..."
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-        />
-           <ImageUploader
-      onFileAdded={(img) => getImageFileObject(img)}
-      onFileRemoved={(img) => runAfterImageDelete(img)}
-    />
-        <button className="send-button" onClick={handleSend}>
-          Send
-        </button>
-      </div> */}
-
-    // <div style={{ height: "100%", width: "100%", flex: 1, backgroundColor: "white" }}>
-    //   {/* <Header title="Supports" /> */}
-    //   <Header name="Header" onBack={handleBackClick} />
-    //   <div style={{ marginTop: 100, paddingHorizontal: 10,padding:'5px' }}>
-    //     {messages.map((message) => (
-    //       <div
-    //         key={message.id}
-    //         style={
-    //           message.type === "user"
-    //             ? {
-    //                 backgroundColor: "gray",
-    //                 alignSelf: "flex-end",
-    //                 padding: 5,
-    //                 borderTopLeftRadius: 10,
-    //                 borderBottomRightRadius: 10,
-    //                 borderBottomLeftRadius: 10,
-    //                 marginTop: 10,
-    //                 marginLeft:"100px"
-                    
-    //               }
-    //             : {
-    //                 backgroundColor: "#1B334D",
-    //                 alignSelf: "flex-start",
-    //                 padding: 5,
-    //                 borderTopRightRadius: 25,
-    //                 borderBottomRightRadius: 20,
-    //                 borderBottomLeftRadius: 15,
-    //                 marginTop: 10,
-    //                 width:"90%"
-    //               }
-    //         }
-    //       >
-    //         <p style={{ color: "white", fontSize: 16 }}>{message.message}</p>
-    //       </div>
-    //     ))}
-    //   </div>
-
-    //   <div style={{   marginTop: 240, marginBottom: 20, width: "100%" ,marginLeft:'20px',}}>
-    //     <input
-    //       style={{ flex: 1, backgroundColor: "white", borderWidth: 1, borderColor: "#EC8E22", borderRadius: 10, paddingVertical: 10, paddingHorizontal: 15, marginRight: 10,width:"70%" ,}}
-    //       placeholder="Type your message..."
-    //       value={userInput}
-    //       onChange={(e) => setUserInput(e.target.value)}
-    //     />
-    //     <button style={{ backgroundColor: "#1B334D", paddingVertical: 10, paddingHorizontal: 15, borderRadius: 5, borderWidth: 1, borderColor: "#EC8E22", color: "#EC8E22", fontSize: 16, fontWeight: "bold" }} onClick={handleSend}>Send</button>
-    //   </div>
-    // </div>

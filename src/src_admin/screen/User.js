@@ -46,17 +46,6 @@ const UserRecords = () => {
   };
 
 
-//   const handleDeleteUser = (user) =>{
-// console.log("user.dfd",user._id)
-//   }
-  // const handleAddBalance = (e) => {
-  //   e.preventDefault();
-  //   console.log("Add balance for user:", selectedUser._id);
-  //   handleModalClose();
-  // };
-
-
-
 const handleAddBalance = async (e) => {
   e.preventDefault();
   console.log("Add balance for user:", selectedUser._id);
@@ -81,7 +70,7 @@ const handleAddBalance = async (e) => {
 
   try {
     const response = await axios.post(
-      `${baseWallet}depositAmountAdmin?userId=${selectedUser._id}`,
+      `${baseWallet}depositAmountAdmin?userId=${selectedUser.userId}`,
       requestBody,
       { headers: myHeaders }
     );
@@ -280,7 +269,8 @@ const handleDeleteUser = async (user) => {
                       <td>{user.userId}</td>
                       <td>{user.sharedId}</td>
                   
-                      <td>{user.walletBalance}</td>
+                      <td>{user.walletBalance.toFixed(2)}</td>
+
                       <td>
                         <Button
                           variant="success"

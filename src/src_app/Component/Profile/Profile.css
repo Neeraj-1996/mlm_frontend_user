@@ -47,6 +47,10 @@ Container styles
 .profile-details {
   margin-left: 20px;
 }
+.profile-details h2,
+.profile-details p {
+  margin: 0;
+}
 .level {
   display: inline-block;
   margin-top: 10px;

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import baseUrl from "../Url/Url";
 import baseUrlapp from "../Url/Urlapp";
+import baseWallet from "../../../src_admin/screen/urlWallet";
 import axios from "axios";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode } from "@fortawesome/free-solid-svg-icons"; // Import the QR code icon
 import Header from "../Header/Header";
@@ -18,13 +18,7 @@ const Withdrwal = () => {
   const [reducedAmount, setReducedAmount] = useState("");
   const [walletAddress, setWalletAddress] = useState("");
   const [loadingLogin, setLoadingLogin] = useState(false);
-  // const [amountsend, setAmountSend] = useState("");
-  //   const [reversedData, setReversedData] = useState([]);
 
-  // const handleAmountChange = (event) => {
-  //   setAmount(event.target.value);
-  //   // Implement logic to calculate reducedAmount if needed
-  // };
 
   const handleAmountChange = (text) => {
     const enteredAmount = parseFloat(text);
@@ -46,9 +40,10 @@ const Withdrwal = () => {
 
   const resultDataWallet = async () => {
     // const token = await AsyncStorage.getItem("tokenId");
+    const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("tokenId");
     try {
-      const result = await axios.get(baseUrl + "wallet", {
+      const result = await axios.get( `${baseWallet}balanceUser?userId=${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (
@@ -71,10 +66,6 @@ const Withdrwal = () => {
       console.error("Error fetching wallet data:", error);
     }
   };
-
-  // const handleAdd = () => {
-  //   // Implement logic for withdrawal request
-  // };
 
   const handleAdd = async () => {
     const withdrawal_amount = amount;
@@ -145,6 +136,8 @@ const Withdrwal = () => {
   };
 
   const handleRequest = async () => {
+
+
     try {
       // Retrieve access token from local storage
 
@@ -220,7 +213,7 @@ console.log("requestBody",requestBody);
       if (response.data.statusCode === 200) {
         console.log(response.data.data);
         setLoadingLogin(false)
-        resultdata(); // Log the response data if status is 200
+        resultdata(); 
       } else {
         console.error("Unexpected status code:", response.status); // Handle other status codes if necessary
       }
@@ -235,12 +228,10 @@ console.log("requestBody",requestBody);
     resultdata();
   }, []);
   const resultdata = async () => {
-    //   const token = await AsyncStorage.getItem('tokenId');
-    // const token = localStorage.getItem("tokenId");
+   
     const accessToken = localStorage.getItem("accessToken");
-    axios
-      .get(
-        baseUrlapp + "getWithdrawalAddress",
+    const userId = localStorage.getItem("userId");
+    axios.get(`${baseUrlapp}getWithdrawalAddress?userId=${userId}`,
 
         {
           headers: { Authorization: `Bearer ${accessToken}` },
@@ -248,9 +239,15 @@ console.log("requestBody",requestBody);
       )
       .then((response) => {
         if (response.data.statusCode === 200) {
-          setData(response.data.data);
+          // setData(response.data.data);
 
-          // console.log("response.data.data", response.data.data)
+          const fetchedData = response.data.data;
+          if (Array.isArray(fetchedData)) {
+            setData(fetchedData);
+          } else {
+            setData([fetchedData]); // Wrap the object in an array if it's not an array
+          }
+          console.log("response.data.data", response.data.data)
         }
       })
       .catch((error) => {

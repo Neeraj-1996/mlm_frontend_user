@@ -25,6 +25,7 @@ import PrivateRoute from './PrivateRoute.js';
 import DepositTransactionScreen from '../Tranasaction/DepositTransaction.js';
 import ProfileComponent from '../Showprofile/ProfileComponent.js';
 import PaymentRequests from '../Deposit/Showalladdress.js';
+import OrderDetail from '../Order/OderDetail.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { ToastContainer } from 'react-toastify';
@@ -60,6 +61,7 @@ function AppContent() {
           <Route  path="/Order" element={<Order />}/>
           <Route  path="/FogetPassword" element={<ForgetPassword />}/>
           <Route  path="/ProfileComponent" element={<ProfileComponent />}/>
+          <Route  path="/OrderDetail" element={<OrderDetail />}/>
         </Routes>
       </div>
       );

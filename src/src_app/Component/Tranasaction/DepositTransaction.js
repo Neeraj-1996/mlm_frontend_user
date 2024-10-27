@@ -48,7 +48,7 @@ const DepositTransaction = () => {
     <div className="container">
       <Header name="Transaction" onBack={handleBackClick} />
       <div className="balance-section1">
-        <h2 className="balance">Current Balance: ${balance}</h2>
+        <h2 className="balance">Current Balance: ${balance.toFixed(2)}</h2>
       </div>
       <div className='transaction-deposit1'>
         <div className="scrollView">

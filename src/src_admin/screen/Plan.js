@@ -25,7 +25,7 @@ const PlanTable = () => {
   const resultData = async () => {
     setLoading(true);
     try {
-      const plansData = await fetchPlans(); // Use the fetchPlans function
+      const plansData = await fetchPlans();
       setPlans(plansData);
     } catch (error) {
       console.error('Error fetching plans:', error);

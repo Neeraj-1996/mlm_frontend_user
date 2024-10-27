@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding } from '@fortawesome/free-solid-svg-icons/faBuilding';
+// import { faBuilding } from '@fortawesome/free-solid-svg-icons/faBuilding';
 import { faGift } from '@fortawesome/free-solid-svg-icons/faGift';
 import { faChartBar } from '@fortawesome/free-solid-svg-icons/faChartBar';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
@@ -10,7 +10,7 @@ import { faWallet } from '@fortawesome/free-solid-svg-icons/faWallet'; // Import
 import { faStar } from '@fortawesome/free-solid-svg-icons/faStar'; // Import star icon
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons/faGraduationCap'; // Import graduation cap icon
 import { useNavigate } from 'react-router-dom';
-// import './Homepart1.css'; // Import CSS file
+
 
 const Homepart1 = () => {
   const navigate = useNavigate();

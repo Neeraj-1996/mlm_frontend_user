@@ -1,5 +1,4 @@
 import React from "react";
-// import './Modal.css'; // Create a CSS file for modal styling
 
 const ImageModal = ({ isOpen, onClose, images, onImageSelect }) => {
   if (!isOpen) return null;

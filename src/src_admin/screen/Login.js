@@ -13,7 +13,7 @@ const LoginPage = ({ onLogin }) => {
     
     try {
         // Make API request using axios
-        const response = await axios.post('http://localhost:9001/api/admin/adminLogin', {
+        const response = await axios.post('http://api.vortexvantures.com/admin/adminLogin', {
             mobile_no: number,
             password: password
         });

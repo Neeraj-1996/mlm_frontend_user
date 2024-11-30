@@ -94,7 +94,7 @@ const SignUpPage = () => {
     formData.append('mobileNo', phone);
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
-    const apiUrl = `http://localhost:9001/api/users/register?shared_Id=${shareId}`;
+    const apiUrl = `http://api.vortexvantures.com/api/users/register?shared_Id=${shareId}`;
 
     axios.post(apiUrl, formData)
       .then((response) => {

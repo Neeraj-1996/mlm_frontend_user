@@ -1,4 +1,4 @@
 
-const baseUrlapp = 'http://api.vortexvantures.com/api/users/';
+const baseUrlapp = 'https://api.vortexvantures.com/api/users/';
 
 export default baseUrlapp;

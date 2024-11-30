@@ -1,5 +1,5 @@
 
 const baseUrl = "https://www.smarttrade.org.in/public/api/v1/";
-const baseUrlAdmin = "http://localhost:9001/api/admin/";
+const baseUrlAdmin = "http://api.vortexvantures.com/api/admin/";
 
 export default baseUrlAdmin;

@@ -1,3 +1,3 @@
-const grabUrlapp = 'http://localhost:9001/api/grab/';
+const grabUrlapp = 'http://api.vortexvantures.com/api/grab/';
 
 export default grabUrlapp;

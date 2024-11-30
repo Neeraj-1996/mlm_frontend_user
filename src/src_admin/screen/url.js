@@ -1,4 +1,4 @@
 
-const baseUrl = "http://localhost:9001/api/admin/";
+const baseUrl = "http://api.vortexvantures.com/api/admin/";
 
 export default baseUrl;

@@ -63,6 +63,7 @@
             setSliderImages((prev) => [...prev, addedSliderImage]);
             setNewSliderImage({ image: null });
             handleCloseForm();
+            fetchSliderImages();
             } catch (error) {
             console.error('Error adding slider image:', error);
             } finally {
@@ -111,6 +112,7 @@
                     setEditSliderImage(null);
                     setEditImagePreview(null);
                     handleCloseEditForm();
+                    fetchSliderImages();
                 } else {
                     console.error('Error:', response.data.message);
                 }

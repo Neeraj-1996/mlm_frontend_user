@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom"; 
+import Header from "../Header/Header";
 import './ProfileComponent.css';
 
 const ProfileComponent = () => {
@@ -11,17 +12,17 @@ const ProfileComponent = () => {
   const userName = localStorage.getItem('username');
   const userMobile = localStorage.getItem('mobileNo');
   const userEmail = localStorage.getItem('email');
-
+  const handleBackClick = () => navigate(-1);
   const handleLogout = () => {
-    // Clear all local storage items
     localStorage.clear();
-
-    // Navigate to the login page
     navigate('/'); 
   };
 
   return (
+    <div className="container">
+   <Header name="Transaction" onBack={handleBackClick} />
     <div className="profile-container">
+
       <div className="profile-card">
         <div className="profile-item">
           <div className="profile-label">Head portrait</div>
@@ -54,6 +55,7 @@ const ProfileComponent = () => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

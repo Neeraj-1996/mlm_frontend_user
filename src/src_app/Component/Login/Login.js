@@ -5,42 +5,12 @@ import baseUrlapp from '../Url/Urlapp';
 import CustomDropdownHome from '../Headerhome/Flag';
 import LoadingButton from "../../Combutton/LoadingButton";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { faEye, faEyeSlash,faMobile } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
+import { countries } from '../../asset/data';
 import 'react-toastify/dist/ReactToastify.css';
 import './Loginpage.css';
 
-const countries = [
-  { code: 'US', name: 'United States', nativeName: 'United States' },
-  { code: 'GB', name: 'United Kingdom', nativeName: 'United Kingdom' },
-  { code: 'FR', name: 'France', nativeName: 'France' },
-  { code: 'DE', name: 'Germany', nativeName: 'Deutschland' },
-  { code: 'IT', name: 'Italy', nativeName: 'Italia' },
-  { code: 'ES', name: 'Spain', nativeName: 'España' },
-  { code: 'CN', name: 'China', nativeName: '中国' },
-  { code: 'JP', name: 'Japan', nativeName: '日本' },
-  { code: 'KR', name: 'South Korea', nativeName: '대한민국' },
-  { code: 'IN', name: 'India', nativeName: 'भारत' },
-  { code: 'BD', name: 'Bangladesh', nativeName: 'বাংলাদেশ' },
-  { code: 'BR', name: 'Brazil', nativeName: 'Brasil' },
-  { code: 'MX', name: 'Mexico', nativeName: 'México' },
-  { code: 'RU', name: 'Russia', nativeName: 'Россия' },
-  { code: 'AU', name: 'Australia', nativeName: 'Australia' },
-  { code: 'CA', name: 'Canada', nativeName: 'Canada' },
-  { code: 'ZA', name: 'South Africa', nativeName: 'South Africa' },
-  { code: 'AR', name: 'Argentina', nativeName: 'Argentina' },
-  { code: 'CL', name: 'Chile', nativeName: 'Chile' },
-  { code: 'CO', name: 'Colombia', nativeName: 'Colombia' },
-  { code: 'PH', name: 'Philippines', nativeName: 'Pilipinas' },
-  { code: 'EG', name: 'Egypt', nativeName: 'مصر' },
-  { code: 'NG', name: 'Nigeria', nativeName: 'Nigeria' },
-  { code: 'SA', name: 'Saudi Arabia', nativeName: 'المملكة العربية السعودية' },
-  { code: 'TH', name: 'Thailand', nativeName: 'ประเทศไทย' },
-  { code: 'SG', name: 'Singapore', nativeName: 'Singapore' },
-  { code: 'MY', name: 'Malaysia', nativeName: 'Malaysia' },
-  { code: 'ID', name: 'Indonesia', nativeName: 'Indonesia' }
-];
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -53,6 +23,7 @@ const LoginPage = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword); // Toggle between true and false
   };
+
 
 
 
@@ -80,6 +51,7 @@ const LoginPage = () => {
       const response = await axios.post(baseUrlapp + 'login', data, { headers: myHeaders });
   
       if (response.data.statusCode === 200) {
+        // console.log("data", response.data.data);
         // Save accessToken, refreshToken, and user info to localStorage
         localStorage.setItem('accessToken', response.data.data.accessToken);
         localStorage.setItem('refreshToken', response.data.data.refreshToken);
@@ -90,7 +62,7 @@ const LoginPage = () => {
         localStorage.setItem('sharedId', response.data.data.user.sharedId);
         
         console.log("Tokens and user information saved successfully.");
-        navigate('/Homepage'); // Navigate to Homepage
+        navigate('/Homepage'); 
       } else {
         console.error('Login failed:', response.data.message);
         toast.error(response.data.message || 'Login failed'); // Show error message from API
@@ -215,10 +187,8 @@ const LoginPage = () => {
                         <button 
     onClick={handleRegister}
     style={{
-      background: 'linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%)'
-      ,
-      // Blue gradient
-        color: "#fff",
+      background: 'linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%)',
+      color: "#fff",
         padding: "10px 0",
         width: "100%",
         border: "none",

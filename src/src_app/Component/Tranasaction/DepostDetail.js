@@ -2,23 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { fetchUserBalance } from '../Navigation/Allapi';
 import Header from '../Header/Header';
-import './DepositTransaction.css';
+import '.././Tranasaction/DepositTransaction.css'
 
-const DepositTransaction = () => {
+const DepositDetail= () => {
   const navigate = useNavigate();
-  const [balance, setBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
+  const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(true);
   const handleBackClick = () => navigate(-1);
-  // const userId = '66f240b45ddf0199a8dbfd8c'; // Replace with the actual user ID
-  // const userId = localStorage.getItem("userId");
 
-  const  resultDataTranasaction= async () => {
+  const resultDataTranasaction = async () => {
     try {
       const featchData = await fetchUserBalance();
       setBalance(featchData.balance);
-      setTransactions(featchData.transactions)
-      setLoading(false)
+      console.log("fetchUserWithdrawal", featchData);
+      const depositAndBonusTransactions = featchData.transactions.filter(
+        transaction => transaction.transactionType === 'Deposit' || transaction.transactionType === 'Bonus'
+      );
+      
+      setTransactions(depositAndBonusTransactions);  // Set transactions directly
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -32,20 +35,20 @@ const DepositTransaction = () => {
     return <div>Loading...</div>;
   }
 
-
   return (
     <div className="container">
-      <Header name="Transaction" onBack={handleBackClick} />
+      <Header name="Credit Amount" onBack={handleBackClick} />
       
       <div className='transaction-deposit1'>
       <div className="balance-section1">
         <h2 className="balance">Current Balance: ${balance.toFixed(2)}</h2>
       </div>
+      {/* <div className='transaction-deposit1'> */}
         <div className="scrollView">
-          {transactions.map((transaction) => (
+        {transactions.map((transaction) => (
             <div 
               key={transaction._id} 
-              className={`cardTrans ${transaction.transactionType === 'Deposit' ? 'deposit' : transaction.transactionType === 'withdrawal' ? 'withdrawal' : ''}`}
+              className={`cardTrans ${transaction.transactionType === 'Deposit' ? 'deposit' : 'bonus'}`}
             >
               <h4 className="transactionType">{transaction.transactionType}</h4>
               <p className="transactionDetail">Transaction ID: {transaction.transactionId}</p>
@@ -56,7 +59,8 @@ const DepositTransaction = () => {
               ) : (
                 <p className="transactionDetail">Credit: ${transaction.credit}</p> // Show credit for deposits
               )}
-              <p className="transactionDetail">Balance: ${transaction.balance}</p>
+<p className="transactionDetail">Balance: ${transaction.balance.toFixed(2)}</p>
+
               </div>
               <p className="transactionDetail">
                 Date: {new Date(transaction.createdAt).toLocaleString()}
@@ -69,29 +73,4 @@ const DepositTransaction = () => {
   );
 };
 
-export default DepositTransaction;
-
-  // useEffect(() => {
-  //   const fetchTransactions = async () => {
-  //     const token = localStorage.getItem("accessToken");
-  //     try {
-  //       const response = await axios.get(`http://localhost:9001/api/wallet/balanceUser?userId=${userId}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           "Content-Type": "application/json",
-  //         }
-  //       });
-
-  //       if (response.data.success) {
-  //         setBalance(response.data.data.balance);
-  //         setTransactions(response.data.data.transactions);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching transactions:', error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchTransactions();
-  // }, []);
+export default DepositDetail;

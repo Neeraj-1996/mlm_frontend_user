@@ -1,11 +1,13 @@
 import axios from 'axios';
-// import baseUrl from './url';
 import baseUrl from '../screen/url';
 import baseWallet from '../screen/urlWallet';
-
+import grabUrlapp from '../../src_app/Component/Url/graburl';
+import baseUrlapp from '../../src_app/Component/Url/Urlapp';
 const getAccessToken = () => {
   return localStorage.getItem('accessTokenAdmin');
 };
+
+
 
 export const fetchPlans = async () => {
   const accessToken = getAccessToken();
@@ -61,6 +63,7 @@ export const fetchEvents = async () => {
   };
   
   export const deleteEvent = async (id) => {
+    console.log("id",id);
     const accessToken = getAccessToken();
     await axios.delete(`${baseUrl}deleteEvent`, {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -83,3 +86,78 @@ export const fetchEvents = async () => {
     });
     return response.data.data;
   };
+
+  export const fetchUsers = async () => {
+    const accessToken = getAccessToken();
+    const response = await axios.get(`${baseUrl}getUserRecords`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    return response.data.data;
+  };
+  export const fetchOrderAsPerUser = async (userId) => {
+    const accessToken = getAccessToken();
+    const response = await axios.post(`${grabUrlapp}grabProductsUser?user_id=${userId}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    return response.data;
+  };
+
+  export const deleteUser = async (user) => {
+    const accessToken = getAccessToken();
+    const response = await axios.post(`${baseUrl}deleteUser/${user._id}`, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    return response.data.data;
+  };
+
+  export const handleAddBalance = async (userId, amount, onSuccess) => {
+    const accessToken = getAccessToken();
+    try {
+      const response = await axios.post(
+        `${baseWallet}depositAmountAdmin?userId=${userId}`,
+        { deposit_amount: amount },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+  
+      if (response.data.statusCode === 200) {
+        console.log("Amount added successfully:", response.data.message);
+        if (onSuccess) onSuccess(); // Call the onSuccess callback if provided
+      } else {
+        console.error("Failed to add balance:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error while adding balance:", error);
+    }
+  };
+
+  export const handleEditUser = async (mobileNo, newPassword, onSuccess) => {
+    const accessToken = getAccessToken();
+    try {
+      const response = await axios.post(
+        `${baseUrlapp}changePassword`,
+        { mobileNo: mobileNo, 
+          newPassword: newPassword},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+  
+      if (response.data.statusCode === 200) {
+        console.log("Amount added successfully:", response.data.message);
+        if (onSuccess) onSuccess(); // Call the onSuccess callback if provided
+      } else {
+        console.error("Failed to add balance:", response.data.message);
+      }
+    } catch (error) {
+      console.error("Error while adding balance:", error);
+    }
+  };
+

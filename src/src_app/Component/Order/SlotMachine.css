@@ -64,7 +64,7 @@
 
 /* Slot Images */
 .image-card img {
-  width: 0px;
+  width: 60px;
   height: auto;
 }
 
@@ -80,7 +80,7 @@
   padding: 0 10px;
 }
 
-.modal {
+.modalorder {
   position: fixed;
   top: 0;
   left: 0;
@@ -94,7 +94,7 @@
   z-index: 1000; /* Ensures the modal is above other elements */
 }
 
-.modal-content {
+.modal-contentOrder {
   background-color: #fff; /* White background for the modal */
   padding: 20px;
   border-radius: 8px; /* Rounded corners */
@@ -104,11 +104,11 @@
   text-align: center; /* Center text inside the modal */
 }
 
-.modal-content h3 {
+.modal-contentOrder h3 {
   margin: 0 0 10px; /* Margin for the heading */
 }
 
-.modal-content img {
+.modal-contentOrder img {
   width: 100px; /* Fixed width for the product image */
   height: auto; /* Maintain aspect ratio */
   margin-bottom: 10px; /* Space below the image */

@@ -109,6 +109,7 @@ const EventTable = () => {
   };
 
   const handleDeleteEvent = async (id) => {
+    console.log(id)
     setLoading(true);
     try {
       await deleteEvent(id);
@@ -174,7 +175,7 @@ const EventTable = () => {
                       <Button
                         variant="danger"
                         size="sm"
-                        onClick={() => handleDeleteEvent(event.id)}
+                        onClick={() => handleDeleteEvent(event._id)}
                       >
                         Delete
                       </Button>

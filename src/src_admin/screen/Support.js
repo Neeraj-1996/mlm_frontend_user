@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 // Utility function to check if the timestamp is within the last 48 hours
 const isWithinLast48Hours = (timestamp) => {
   const now = new Date();
-  const past48Hours = new Date(now.getTime() - 48 * 60 * 60 * 1000); // Subtract 48 hours from now
+  const past48Hours = new Date(now.getTime() - 168 * 60 * 60 * 1000); // Subtract 48 hours from now
   return new Date(timestamp) >= past48Hours;  // Compare timestamp with 48 hours ago
 };
 
@@ -23,15 +23,16 @@ const SupportTable = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [userInput, setUserInput] = useState("");
   const handleViewMessages = async (user) => {
+    console.log("USER",user);
     setSelectedUser(user);
     await getMessages(user.userId);
+    await fetchNotificationMessageRemove(user.userId);
+   
     setShowMessageModal(true);
   };
 
   const handleSendMessageSubmit = async () => {
-    // const token = localStorage.getItem("accessToken");
-    const userId = localStorage.getItem("userId");
-    // Check if userInput or image is available
+    
     if (!userInput && !selectedImage) {
       // Show toast message if nothing is selected
       toast.warn("Please enter a message or select an image", {
@@ -44,9 +45,10 @@ const SupportTable = () => {
     if (userInput) formData.append("content", userInput);
     if (selectedImage && selectedImage.file) {
       formData.append("chatImg", selectedImage.file); // Append the actual file object
-    }console.log("FormData:", formData);
+    }
+    console.log("FormData:", formData);
     try {
-      const response = await axios.post(`http://localhost:9001/api/admin/sendMessageAdmin?user_id=${userId}`,
+      const response = await axios.post(`${baseUrl}sendMessageAdmin?user_id=${selectedUser.userId}`,
          formData,
     
       );
@@ -55,19 +57,10 @@ const SupportTable = () => {
       setUserInput("");
       setSelectedImage(null);
       getMessages(); 
-  
-      // Optionally show a success toast
-      toast.success("Message sent successfully!", {
-  
-        autoClose: 2000, // Toast will disappear after 2 seconds
-      });
+     toast.success("Message sent successfully!", {autoClose: 2000, });
     } catch (error) {
       console.error("Error sending message:", error);
-      
-      toast.error("Failed to send message!", {
-
-        autoClose: 3000,
-      });
+      toast.error("Failed to send message!", {autoClose: 3000,});
     }
 
   };
@@ -82,7 +75,7 @@ const SupportTable = () => {
 const hasRecentMessages = async (userId) => {
       const accessToken = localStorage.getItem('accessTokenAdmin');
   try {
-    const result = await axios.get(`http://localhost:9001/api/admin/getMessages?user_id=${userId}`,{
+    const result = await axios.get(`${baseUrl}getMessages?user_id=${userId}`,{
         headers: { Authorization: `Bearer ${accessToken}` },
       });
     if (result.status === 200) {
@@ -99,6 +92,7 @@ const hasRecentMessages = async (userId) => {
   return false;
 };
 
+const [notificationCount, setNotificationCounts] = useState(0);
 
 // Fetch all users and filter those who have sent messages in the last 48 hours
     const fetchUsers = async () => {
@@ -112,10 +106,16 @@ const hasRecentMessages = async (userId) => {
           const allUsers = result.data.data;
           // console.log("allUsers",allUsers);
           const usersWithRecentMessages = [];
-  
+          const newNotificationCounts = {};
           // Iterate over each user and check if they have recent messages
           for (const user of allUsers) {
             const hasMessages = await hasRecentMessages(user.userId);
+            const unreadCount = await fetchNotificationMessage(user.userId); // Get the unread count
+
+        // Store the unread count for this user
+        if (unreadCount !== null) {
+          newNotificationCounts[user.userId] = unreadCount;
+        }
             if (hasMessages) {
               usersWithRecentMessages.push(user);
             }
@@ -123,6 +123,7 @@ const hasRecentMessages = async (userId) => {
           console.log("content",usersWithRecentMessages);
           
           setUsers(usersWithRecentMessages);
+          setNotificationCounts(newNotificationCounts); 
         }
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -134,7 +135,7 @@ const hasRecentMessages = async (userId) => {
   const getMessages = async (userId) => {
     const accessToken = localStorage.getItem('accessTokenAdmin');
     setLoading(true);
-    try {const result = await axios.get(`http://localhost:9001/api/admin/getMessages?user_id=${userId}`,{
+    try {const result = await axios.get(`${baseUrl}getMessages?user_id=${userId}`,{
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       if (result.status === 200) {
@@ -162,6 +163,38 @@ const hasRecentMessages = async (userId) => {
   function runAfterImageDelete(file) {
     console.log({ file })
   }
+
+  const fetchNotificationMessageRemove = async (userId) => {
+    try {
+      const response = await axios.get(`${baseUrl}getAdminMessagesCountRemove?user_id=${userId}`, {});
+      // console.log("remove admin", response.data);
+      setNotificationCounts({})
+      if (response.data.success) {
+        console.log("remove admin", response.data.data);
+        return response.data.data.unreadCount; // Return the unread count
+      }
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+      return null; // Return null on error
+    }
+  };
+
+ 
+
+  const fetchNotificationMessage = async (userId) => {
+    try {
+      const response = await axios.get(`${baseUrl}getAdminUnreadMessageCount?user_id=${userId}`, {});
+      
+      if (response.data.success) {
+        // console.log("fetchNotificationMessage admin", response.data.data);
+        return response.data.data.unreadCount; // Return the unread count
+      }
+    } catch (error) {
+      console.error('Error fetching transactions:', error);
+      return null; // Return null on error
+    }
+  };
+  
 
   return (
     <div className="container mt-1">
@@ -194,6 +227,11 @@ const hasRecentMessages = async (userId) => {
                       onClick={() => handleViewMessages(user)}
                     >   View Messages
                     </Button>
+                    {notificationCount[user.userId] > 0 && (
+                      <span className="notification-badge-admin-support">
+                        {notificationCount[user.userId]}
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -270,15 +308,15 @@ const hasRecentMessages = async (userId) => {
             </Form.Group>
 
             <ImageUploader
-        id="imageUploader"
-        withIcon={false}
-        buttonText="Choose image"
-        onFileAdded={(img) => getImageFileObject(img)}
-        onFileRemoved={(img) => runAfterImageDelete(img)}
-        singleImage={true}
-        withLabel={false}
-        buttonStyles={{ display: "none" }} // Hide the default button
-      />
+                id="imageUploader"
+                withIcon={false}
+                buttonText="Choose image"
+                onFileAdded={(img) => getImageFileObject(img)}
+                onFileRemoved={(img) => runAfterImageDelete(img)}
+                singleImage={true}
+                withLabel={false}
+                buttonStyles={{ display: "none" }} // Hide the default button
+              />
             <Button
               variant="primary"
               onClick={handleSendMessageSubmit}
@@ -295,6 +333,15 @@ const hasRecentMessages = async (userId) => {
 
 export default SupportTable;
 
+
+  // console.log("notification",notificationCount);
+
+  
+  // useEffect(() => {
+    
+
+  //   fetchNotificationMessage();
+  //     }, []);
 //   const message = await axios.get(`${baseUrl}getPlanRecords`, {
 //     headers: { Authorization: `Bearer ${accessToken}` },
 //   });

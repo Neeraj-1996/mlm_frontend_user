@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import LoadingButton from "../../Combutton/LoadingButton";
 import "./Deposit.css";
 import baseWallet from "../../../src_admin/screen/urlWallet";
-// import LoadingButton from "../../Combutton/LoadingButton";
+import api from "../Navigation/api";
 import "react-toastify/dist/ReactToastify.css";
 
 const Deposit = () => {
@@ -14,6 +13,7 @@ const Deposit = () => {
   const [selectedCurrency, setSelectedCurrency] = useState(null);
   const [loadingLogin, setLoadingLogin] = useState(false);
 
+  const handleBackClick = () => navigate(-1);
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -49,16 +49,7 @@ const Deposit = () => {
   
   const handleSendQRForPayment = async (currency) => {
     console.log("currency", currency);
-    // Retrieve the access token from localStorage
-    const accessToken = localStorage.getItem("accessToken");
     const userId = localStorage.getItem("userId");
-    // Prepare the headers
-    const myHeaders = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`, // Use the token from localStorage
-    };
-
-    // Prepare the data
     setLoadingLogin(true);
     const data = {
       currencyName: currency.currencyName,
@@ -71,9 +62,7 @@ const Deposit = () => {
     console.log("data", data);
 
     try {
-      const response = await axios.post(`${baseWallet}sendQRForPayment`, data, {
-        headers: myHeaders,
-      });
+      const response = await api.post(`${baseWallet}sendQRForPayment`, data);
       if (response.data.statusCode === 200) {
         // Log the response data only when statusCode is 200
         console.log(response.data.data);
@@ -151,9 +140,7 @@ const Deposit = () => {
     </button>
   );
 
-  const handleBackClick = () => {
-    navigate(-1);
-  };
+
 
   const handlePayRequest = () => {
     navigate("/PaymentRequests");

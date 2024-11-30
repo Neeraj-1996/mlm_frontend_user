@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'; 
 import { Table, Button, Modal, Form, Card, Spinner } from 'react-bootstrap';
 import axios from 'axios';
-import baseUrl from './url';
+import grabUrlapp from '../../src_app/Component/Url/graburl';
+
 
 const CreateLevel = () => {
   const [showForm, setShowForm] = useState(false);
@@ -13,7 +14,7 @@ const CreateLevel = () => {
     levelSecond: '',
     levelThird: '',
     firstPartyCommission: '',
-    secondPartyCommission: '',
+    // secondPartyCommission: '',
   });
   const [isEditing, setIsEditing] = useState(false);
 
@@ -26,7 +27,7 @@ const CreateLevel = () => {
     setLoading(true);
 
     try {
-      const result = await axios.get("http://localhost:9001/api/grab/getLevel", {
+      const result = await axios.get(grabUrlapp+"getLevel", {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       if (result.status === 200) {
@@ -50,7 +51,7 @@ const CreateLevel = () => {
         levelSecond: '',
         levelThird: '',
         firstPartyCommission: '',
-        secondPartyCommission: '',
+        // secondPartyCommission: '',
       });
       setIsEditing(false);
     }
@@ -75,13 +76,13 @@ const CreateLevel = () => {
       levelSecond: currentLevel.levelSecond,
       levelThird: currentLevel.levelThird,
       firstPartyCommission: currentLevel.firstPartyCommission,
-      secondPartyCommission: currentLevel.secondPartyCommission,
+      // secondPartyCommission: currentLevel.secondPartyCommission,
     };
 
     setLoading(true);
     try {
       if (isEditing) {
-        await axios.post(`http://localhost:9001/api/grab/updateLevel`, data, {
+        await axios.post(`${grabUrlapp}updateLevel`, data, {
           headers: { Authorization: `Bearer ${accessToken}` },
         });
       }
@@ -117,7 +118,7 @@ const CreateLevel = () => {
                     <th>Second Level</th>
                     <th>Third Level</th>
                     <th>First Level Commission</th>
-                    <th>Second Level Commission</th>
+                    {/* <th>Second Level Commission</th> */}
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -129,7 +130,7 @@ const CreateLevel = () => {
                       <td>{level.levelSecond}</td>
                       <td>{level.levelThird}</td>
                       <td>{level.firstPartyCommission}</td>
-                      <td>{level.secondPartyCommission}</td>
+                      {/* <td>{level.secondPartyCommission}</td> */}
                       <td>
                         <Button
                           variant="warning"
@@ -200,7 +201,7 @@ const CreateLevel = () => {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formSecondPartyCommission">
+            {/* <Form.Group className="mb-3" controlId="formSecondPartyCommission">
               <Form.Label>Second Level Commission</Form.Label>
               <Form.Control
                 type="text"
@@ -209,7 +210,7 @@ const CreateLevel = () => {
                 value={currentLevel.secondPartyCommission}
                 onChange={handleInputChange}
               />
-            </Form.Group>
+            </Form.Group> */}
 
             <Button variant="primary" onClick={handleSaveLevel}>
               {isEditing ? 'Save Changes' : 'Add Level'}

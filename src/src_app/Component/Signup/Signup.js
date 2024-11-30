@@ -9,39 +9,9 @@ import { faUser, faEnvelope, faPhone, faShare, faLock, faLockOpen, faShieldAlt,f
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Signup.css';
 import CustomDropdownHome from '../Headerhome/Flag';
-
-
-const countries = [
-  { code: 'US', name: 'United States', nativeName: 'United States' },
-  { code: 'GB', name: 'United Kingdom', nativeName: 'United Kingdom' },
-  { code: 'FR', name: 'France', nativeName: 'France' },
-  { code: 'DE', name: 'Germany', nativeName: 'Deutschland' },
-  { code: 'IT', name: 'Italy', nativeName: 'Italia' },
-  { code: 'ES', name: 'Spain', nativeName: 'España' },
-  { code: 'CN', name: 'China', nativeName: '中国' },
-  { code: 'JP', name: 'Japan', nativeName: '日本' },
-  { code: 'KR', name: 'South Korea', nativeName: '대한민국' },
-  { code: 'IN', name: 'India', nativeName: 'भारत' },
-  { code: 'BD', name: 'Bangladesh', nativeName: 'বাংলাদেশ' },
-  { code: 'BR', name: 'Brazil', nativeName: 'Brasil' },
-  { code: 'MX', name: 'Mexico', nativeName: 'México' },
-  { code: 'RU', name: 'Russia', nativeName: 'Россия' },
-  { code: 'AU', name: 'Australia', nativeName: 'Australia' },
-  { code: 'CA', name: 'Canada', nativeName: 'Canada' },
-  { code: 'ZA', name: 'South Africa', nativeName: 'South Africa' },
-  { code: 'AR', name: 'Argentina', nativeName: 'Argentina' },
-  { code: 'CL', name: 'Chile', nativeName: 'Chile' },
-  { code: 'CO', name: 'Colombia', nativeName: 'Colombia' },
-  { code: 'PH', name: 'Philippines', nativeName: 'Pilipinas' },
-  { code: 'EG', name: 'Egypt', nativeName: 'مصر' },
-  { code: 'NG', name: 'Nigeria', nativeName: 'Nigeria' },
-  { code: 'SA', name: 'Saudi Arabia', nativeName: 'المملكة العربية السعودية' },
-  { code: 'TH', name: 'Thailand', nativeName: 'ประเทศไทย' },
-  { code: 'SG', name: 'Singapore', nativeName: 'Singapore' },
-  { code: 'MY', name: 'Malaysia', nativeName: 'Malaysia' },
-  { code: 'ID', name: 'Indonesia', nativeName: 'Indonesia' }
-];
-
+import { countries } from '../../asset/data';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState('');
@@ -52,13 +22,72 @@ const SignUpPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [captcha, setCaptcha] = useState('');
   const [loadingLogin, setLoadingLogin] = useState(false);
-
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+
   const navigate = useNavigate();
+
+  const validateForm = () => {
+    // Reset all errors before validating
+    let isValid = true;
+
+    // Username validation
+    if (!username.trim()) {
+      toast.error("Username is required");
+      isValid = false;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      toast.error("Email is required");
+      isValid = false;
+    } else if (!emailRegex.test(email)) {
+      toast.error("Invalid email format");
+      isValid = false;
+    }
+
+    // Phone validation (7 to 10 digits)
+    const phoneRegex = /^[0-9]{7,10}$/;
+    if (!phone) {
+      toast.error("Phone number is required");
+      isValid = false;
+    } else if (!phoneRegex.test(phone)) {
+      toast.error("Phone must be 7 to 10 digits");
+      isValid = false;
+    }
+
+    // Share ID validation
+    if (!shareId.trim()) {
+      toast.error("Share ID is required");
+      isValid = false;
+    }
+
+    // Password validation (alphanumeric, min 5 characters)
+    // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@&])[A-Za-z\d@&]{5,}$/;
+    if (!password) {
+      toast.error("Password is required");
+      isValid = false;
+    } else if (!passwordRegex.test(password)) {
+      toast.error("Password must be at least 5 characters long and include letters, digits, and one of these special characters: @ or &");
+      isValid = false;
+    }
+
+    // Confirm password validation
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    setLoadingLogin(true)
+    if (!validateForm()) return;
+
+    setLoadingLogin(true);
     const formData = new FormData();
     formData.append('username', username);
     formData.append('email', email);
@@ -70,19 +99,24 @@ const SignUpPage = () => {
     axios.post(apiUrl, formData)
       .then((response) => {
         console.log('Response:', response.data);
-        navigate('/'); 
-        setLoadingLogin(false)
-        
+        navigate('/');
+        setLoadingLogin(false);
+        toast.success("Sign up successful!");
       })
       .catch((error) => {
         console.error('Error:', error);
+        setLoadingLogin(false);
+        // toast.error("Sign up failed. Please try again.");
+        const errorMessage = error.response?.data?.message || "An unexpected error occurred.";
+        toast.error(errorMessage);
       });
   };
 
+
   return (
-    <div className="container">
+    <div>
       <div className="row">
-        <div className="col-md-3">
+        {/* <div className="col-md-3"> */}
           <div className="dropdown-container">
             <CustomDropdownHome
               countries={countries}
@@ -90,12 +124,11 @@ const SignUpPage = () => {
               onSelectCountry={setSelectedCountry}
             />
           </div>
-        </div>
+        {/* </div> */}
 
         <div className="col-md-9">
           <div className="login-container">
-            {/* <h1 className="mb-4">Welcome to Register</h1> */}
-            <div 
+              <div 
                   style={{
                       display: "flex",
                       justifyContent: "center",
@@ -147,7 +180,14 @@ const SignUpPage = () => {
                   className="form-control ps-5"
                   placeholder="Phone"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  // onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    // Allow only digits and enforce length between 7 and 10
+                    if (/^\d{0,10}$/.test(value)) {
+                      setPhone(value);
+                    }
+                  }}
                   required
                 />
                 <FontAwesomeIcon icon={faAddressCard} className="position-absolute top-50 start-0 translate-middle-y ms-2 text-black" />
@@ -196,13 +236,11 @@ const SignUpPage = () => {
                 />
                 <FontAwesomeIcon icon={faShieldAlt} className="position-absolute top-50 start-0 translate-middle-y ms-2 text-black" />
               </div>
-              {/* <button type="submit" className="btn btn-light">Sign Up</button> */}
               <LoadingButton
-                            onClickFunction={handleSignUp}
-                            buttonText="Sign Up"
-                            loading={loadingLogin}
-                        />
-            
+                  onClickFunction={handleSignUp}
+                  buttonText="Sign Up"
+                  loading={loadingLogin}
+              />
             </form>
           </div>
         </div>
@@ -212,3 +250,29 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
+
+
+
+  // const handleSignUp = (e) => {
+  //   e.preventDefault();
+  //   setLoadingLogin(true)
+  //   const formData = new FormData();
+  //   formData.append('username', username);
+  //   formData.append('email', email);
+  //   formData.append('mobileNo', phone);
+  //   formData.append('password', password);
+  //   formData.append('confirmPassword', confirmPassword);
+  //   const apiUrl = `http://localhost:9001/api/users/register?shared_Id=${shareId}`;
+
+  //   axios.post(apiUrl, formData)
+  //     .then((response) => {
+  //       console.log('Response:', response.data);
+  //       navigate('/'); 
+  //       setLoadingLogin(false)
+        
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //       setLoadingLogin(false)
+  //     });
+  // };

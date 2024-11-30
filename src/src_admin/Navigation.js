@@ -23,18 +23,14 @@ const Navigation = () => {
 
   const navigate = useNavigate();
   const handleLogout = () => {
-     localStorage.clear();
     navigate('/admindnd'); 
+    localStorage.clear();
 };
 
   
   return (
     <div id="app" style={({ height: "100vh" }, { display: "flex" })}>
-    <Sidebar      
-        style={sidebarStyle}
-        rtl={false}
-        
-        transitionDuration={800}>
+    <Sidebar style={sidebarStyle} rtl={false} transitionDuration={800}>
       <Menu>
         <MenuItem  
          icon={<MenuOutlinedIcon />}
@@ -48,7 +44,6 @@ const Navigation = () => {
         <MenuItem icon={<PeopleOutlinedIcon />}  component={<Link to="/" />}>item 1</MenuItem>
           <MenuItem icon={<ContactsOutlinedIcon />}>item 2</MenuItem>
         </SubMenu>
-        {/* <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/settings" />}>Settings</MenuItem> */}
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/user-records" />}>User</MenuItem>
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/product-table" />}>Product</MenuItem>
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/country-table" />}>Country</MenuItem>
@@ -60,8 +55,9 @@ const Navigation = () => {
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/level-table" />}>Level</MenuItem>
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/support" />}>Support</MenuItem>
         <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/create-level" />}>Create Level</MenuItem>
+        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/Notification" />}>Notification</MenuItem>
         <button onClick={handleLogout}>Logout</button>
-
+        {/* <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/settings" />}>Settings</MenuItem> */}
         {/* <SubMenu icon={<HomeOutlinedIcon />} label="React liberary">
         <MenuItem icon={<PeopleOutlinedIcon />}  component={<Link to="/FormRegister" />}>React Form</MenuItem>
         <MenuItem icon={<PeopleOutlinedIcon />}  component={<Link to="/ReactDnd" />}>React Dnd</MenuItem>

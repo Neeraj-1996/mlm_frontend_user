@@ -20,14 +20,14 @@ const LoginPage = ({ onLogin }) => {
         // localStorage.clear();
 
         // Assuming the response contains the tokens as shown in your structure
-        const { accessTokenAdmin, refreshTokenAdmin } = response.data.data;
+        const { accessToken, refreshToken } = response.data.data;
         
         // Log the access token
-        console.log("accessToken", accessTokenAdmin);
+        console.log("accessToken", accessToken);
         
         // Save tokens in local storage
-        localStorage.setItem('accessTokenAdmin', accessTokenAdmin);
-        localStorage.setItem('refreshTokenAdmin', refreshTokenAdmin);
+        localStorage.setItem('accessTokenAdmin', accessToken);
+        localStorage.setItem('refreshTokenAdmin', refreshToken);
 
         // Notify parent component of successful login
         onLogin(); 

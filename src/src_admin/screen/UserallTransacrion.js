@@ -9,7 +9,6 @@ const UserTransactionsTable = () => {
   const [filteredTransactions, setFilteredTransactions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-
   useEffect(() => {
     resultData();
   }, []);
@@ -17,7 +16,7 @@ const UserTransactionsTable = () => {
   const resultData = async () => {
     setLoading(true);
     try {
-      const plansData = await fetchTransactions(); // Use the fetchPlans function
+      const plansData = await fetchTransactions();
       setFilteredTransactions(plansData);
       setTransactions(plansData);
     } catch (error) {

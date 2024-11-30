@@ -1,33 +1,31 @@
 import React, { useState ,useEffect } from "react";
-
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import axios from "axios";
-import baseWallet from "../../../src_admin/screen/urlWallet";
-import baseUrlapp from "../Url/Urlapp";
 import ImageModal from "./Profilemodel";
+import { fetchUserBalance ,fetchUserLevel} from "../Navigation/Allapi";
 import './Profile.css';  // Styling file
 
 
 const Profile = () => {
   const navigate = useNavigate();
-
-  const handleBackClick = () => {
-    navigate(-1); // Navigates back to the previous page
-  };
-
+  
+  const [balance, setBalance] = useState(0);
+  const [shareCount, setShareCount] = useState(0);
+  const [activePlanTitle, setActivePlanTitle] = useState(0);
   const [isModalOpen, setModalOpen] = useState(false);
+  const userId = localStorage.getItem("userId");
+  const handleBackClick = () => navigate(-1);
+
   // const [profileImage, setProfileImage] = useState("https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png");
   const [profileImage, setProfileImage] = useState(
     localStorage.getItem('profileImage') || "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png"
   );
-
-
-  const mobileNo = localStorage.getItem("mobileNo");
+  
+  // const mobileNo = localStorage.getItem("mobileNo");
+  // const ShareId = localStorage.getItem("sharedId");
   const username = localStorage.getItem("username");
-  const ShareId = localStorage.getItem("sharedId");
-  // const userId = localStorage.getItem("userId");
+  
   const handleImageSelect = (image) => {
     setProfileImage(image);
     localStorage.setItem('profileImage', image); // Update the profile image
@@ -35,65 +33,33 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    getUserLevel();
-    // Check for existing image in local storage when the component mounts
+    loadLevel();
+    resultDataTranasaction();
+
     const storedImage = localStorage.getItem('profileImage');
     if (storedImage) {
       setProfileImage(storedImage);
-    }
-
-  }, []);
+    }}, []);
 
   const imageAssets = Array.from({ length: 20 }, (_, i) =>
      require(`../../asset/avatar/${i + 1}.jpeg`)); // Update path as needed
 
-  const [balance, setBalance] = useState(0);
-  const userId = localStorage.getItem("userId");
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      const token = localStorage.getItem("accessToken");
-      try {
-        const response = await axios.get(`${baseWallet}balanceUser?userId=${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          }
-        });
+const  resultDataTranasaction= async () => {
+  try {
+    const featchData = await fetchUserBalance();
+    setBalance(featchData.balance);
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-        if (response.data.success) {
-          setBalance(response.data.data.balance);
-          // setTransactions(response.data.data.transactions);
-        }
-      } catch (error) {
-        console.error('Error fetching transactions:', error);
-      } 
-    };
-
-    fetchTransactions();
-  }, []);
-
-  const [shareCount, setShareCount] = useState(0);
-  const [activePlanTitle, setActivePlanTitle] = useState(0);
-  const getUserLevel = async () => {
-    const userId = localStorage.getItem("userId");
-    const token = localStorage.getItem("accessToken");
-
+const loadLevel = async () => {
     try {
-      // Make the GET request using Axios
-      const response = await axios.get(`${baseUrlapp}getUserLevel?userId=${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        }
-      });
-
-      // Extract the values and update state
-      const userData = response.data.data;
-      setShareCount(userData.shareCount); // Set share count
-      setActivePlanTitle(userData.activePlan.title); // Set active plan title
-      console.log("User level data:", userData);
+      const levelData = await fetchUserLevel();
+      setShareCount(levelData.shareCount);
+      setActivePlanTitle(levelData.activePlan.title)
     } catch (error) {
-      console.error("Error fetching user level:", error);
+      console.error(error);
     }
   };
 
@@ -124,8 +90,8 @@ const Profile = () => {
 
         </div>
         <div className="balance-buttons">
-          <button  className="depositp" onClick={() => navigate("/Deposit")}>Deposit</button>
-          <button  className="depositp" onClick={() => navigate("/Withdrawal")}>Withdrawal</button>
+          <button  className="depositp" onClick={() => navigate("/DepositDetail")}>Deposit</button>
+          <button  className="depositp" onClick={() => navigate("/WithdrawalTransaction")}>Withdrawal</button>
         </div>
       </div>
 
@@ -157,3 +123,26 @@ const Profile = () => {
 };
 
 export default Profile;
+
+//   const fetchTransactions = async () => {
+//     try {
+//      const response = await api.get(`${baseWallet}balanceUser?userId=${userId}`);
+//      if (response.data.success) {
+//        setBalance(response.data.data.balance);
+//      }
+//    } catch (error) {
+//      console.error('Error fetching transactions:', error);
+//    } 
+//  };
+  // const getUserLevel = async () => {
+  //   try {
+  //     // Make the GET request using Axios
+  //     const response = await api.get(`${baseUrlapp}getUserLevel?userId=${userId}`);
+  //     const userData = response.data.data;
+  //     setShareCount(userData.shareCount); // Set share count
+  //     setActivePlanTitle(userData.activePlan.title); // Set active plan title
+  //     console.log("User level data:", userData);
+  //   } catch (error) {
+  //     console.error("Error fetching user level:", error);
+  //   }
+  // };

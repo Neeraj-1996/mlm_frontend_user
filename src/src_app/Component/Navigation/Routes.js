@@ -26,6 +26,9 @@ import DepositTransactionScreen from '../Tranasaction/DepositTransaction.js';
 import ProfileComponent from '../Showprofile/ProfileComponent.js';
 import PaymentRequests from '../Deposit/Showalladdress.js';
 import OrderDetail from '../Order/OderDetail.js';
+import Notifications from '../Notification/Notification.js';
+import WithdrawalTransaction from '../Withdrawal/UserWithdrawalDetail.js';
+import DepositDetail from '../Tranasaction/DepostDetail.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { ToastContainer } from 'react-toastify';
@@ -37,31 +40,34 @@ function AppContent() {
        <div>
             <ToastContainer />
         <Routes>
-          {/* <Route exact path="/" element={<LoginPage />}/> */}
-          <Route exact path="/" element={<PrivateRoute>
+          <Route exact path="/" element={<LoginPage />}/>
+          {/* <Route exact path="/" element={<PrivateRoute>
                                           <LoginPage />
-                                        </PrivateRoute>}/>
+                                        </PrivateRoute>}/> */}
           <Route  path="/SignUpPage" element={<SignUpPage />}/>
-          <Route  path="/Homepage" element={<HomePage />}/>
-          <Route  path="/Finance" element={<Finance />}/>
+          <Route  path="/Homepage" element={<PrivateRoute><HomePage /></PrivateRoute>}/>
+          <Route  path="/Finance" element={<PrivateRoute><Finance /></PrivateRoute>}/>
           <Route  path="/Promotion" element={<Promotion />}/>
           <Route  path="/CompanyDetail" element={<CompanyDetail />}/>
           <Route  path="/VIPEvents" element={<VIPEvents />}/>
           <Route  path="/InviteScreen" element={<InviteScreen />}/>
-          <Route  path="/TeamReportScreen" element={<TeamReportScreen />}/>
+          <Route  path="/TeamReportScreen" element={<PrivateRoute><TeamReportScreen /></PrivateRoute>}/>
           <Route  path="/TutorialScreen" element={<TutorialScreen />}/>
           <Route  path="/Deposit" element={<Deposit />}/>
           <Route  path="/Transaction" element={<DepositTransactionScreen />}/>
           <Route  path="/PaymentRequests" element={<PaymentRequests />}/>
           <Route  path="/Paymoney" element={<Paymoney />}/>
-          <Route  path="/Supports" element={<Supports />}/>
-          <Route  path="/Profile" element={<Profile />}/>
+          <Route  path="/Supports" element={<PrivateRoute><Supports /></PrivateRoute>}/>
+          <Route  path="/Profile" element={<PrivateRoute><Profile /></PrivateRoute>}/>
           <Route  path="/Withdrwal" element={<Withdrwal />}/>
           <Route  path="/QRCode" element={<QRScanner />}/>
           <Route  path="/Order" element={<Order />}/>
           <Route  path="/FogetPassword" element={<ForgetPassword />}/>
           <Route  path="/ProfileComponent" element={<ProfileComponent />}/>
           <Route  path="/OrderDetail" element={<OrderDetail />}/>
+          <Route  path="/Notifications" element={<Notifications />}/>
+          <Route  path="/WithdrawalTransaction" element={<WithdrawalTransaction />}/>
+          <Route  path="/DepositDetail" element={<DepositDetail />}/>
         </Routes>
       </div>
       );

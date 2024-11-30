@@ -20,6 +20,7 @@ import SliderImageTable from './screen/Slider';
 import UserTransactionsTable from './screen/UserallTransacrion';
 import WithdrawalRequestsTable from './screen/Withdraldetail';
 import CreateLevel from './screen/Createlevel';
+import Notification from './screen/Notification';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 
 function Adminroutes() {
@@ -50,8 +51,10 @@ function Adminroutes() {
             <Route path="/admindnd/withdrawal-request" element={<WithdrawalRequestsTable />} />
             <Route path="/admindnd/create-level" element={<CreateLevel />} />
             <Route path="/admindnd/user-transaction" element={<UserTransactionsTable />} />
+            <Route path="/admindnd/Notification" element={<Notification />} />
             <Route path="/admindnd/react-dnd" element={<Reactdnd />} />
             <Route path="/admindnd/react-propper" element={<Reactpropper />} />
+            <Route path="/admindnd/Notification" element={<Reactpropper />} />
 
           </Routes>
         </ProSidebarProvider>

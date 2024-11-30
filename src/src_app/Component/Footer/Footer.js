@@ -1,15 +1,31 @@
+import React, { useState,useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faBox, faUsers, faUser, faGlobe } from '@fortawesome/free-solid-svg-icons';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Ensure Bootstrap is imported
-import './Footer.css'; // Import the global CSS file
-import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate and useLocation
+import { useNavigate, useLocation } from 'react-router-dom'; 
+import { fetchUnreadMessageCount } from '../Navigation/Allapi';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Footer.css'; 
 
 const Footer = () => {
-  const navigate = useNavigate(); // Initialize navigate
-  const location = useLocation(); // Get current location
+  const navigate = useNavigate(); 
+  const location = useLocation(); 
+  const isActive = (path) => location.pathname === path; 
+  const [notificationCount, setNotificationCount] = useState(0);
 
-  const isActive = (path) => location.pathname === path; // Check if the path is active
+  useEffect(() => {
+    loadNotificationCount();
+  }, []);
 
+  const loadNotificationCount = async () => {
+    try {
+      const unreadCount = await fetchUnreadMessageCount();
+      setNotificationCount(unreadCount);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+ 
   return (
     <footer className="footer">
       <div
@@ -37,7 +53,11 @@ const Footer = () => {
         className={`footerItem ${isActive('/Supports') ? 'activeTint' : ''}`}
         onClick={() => navigate('/Supports')}
       >
+        {notificationCount > 0 && (
+          <span className="notification-badge-message">{notificationCount}</span>
+        )}
         <FontAwesomeIcon icon={faGlobe} size="lg" />
+        
         <h6>Chat</h6>
       </div>
       <div

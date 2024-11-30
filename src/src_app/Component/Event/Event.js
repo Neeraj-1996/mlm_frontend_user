@@ -3,34 +3,23 @@ import axios from 'axios';
 import './VIPEvents.css';
 import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
+import baseUrlAdmin from '../Url/Url';
 
 const VIPEvents = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('all');
   const [eventsData, setEventsData] = useState({ all: [], inProgress: [], notStarted: [], ended: [] });
+  const handleBackClick = () => navigate(-1);
 
-  const handleBackClick = () => {
-    navigate(-1); // Navigate back to the previous page
-  };
-
-  useEffect(() => {
-    // Fetch the events data from the API
-    axios.get('http://localhost:9001/api/admin/getEventRecords', {
-      headers: {
-        Cookie: 'accessToken=your_access_token_here', // Replace with your actual access token
-      }
-    })
+  useEffect(() => { axios.get(baseUrlAdmin+'getEventRecords')
     .then((response) => {
       const eventData = response.data.data;
-
-      // Categorize events based on their status
       const categorizedEvents = {
-        all: eventData, // Assuming all events fall under 'All'
+        all: eventData,
         inProgress: eventData.filter(event => new Date(event.startDate) <= new Date() && new Date(event.endDate) > new Date()), // Events currently in progress
         notStarted: eventData.filter(event => new Date(event.startDate) > new Date()), // Events that have not started yet
         ended: eventData.filter(event => new Date(event.endDate) < new Date()) // Events that have ended
       };
-
       setEventsData(categorizedEvents);
     })
     .catch((error) => {

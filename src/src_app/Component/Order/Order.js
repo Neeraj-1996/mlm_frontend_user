@@ -199,7 +199,7 @@ const Order = () => {
         <p     style={{ marginLeft: "10px", fontSize: '20px' }}>Balance {balance.toFixed(2)}</p>
         </div>
         {/* <div style={{ marginTop: "20px", fontSize: "24px" }}>{result}</div> */}
-
+{/* 
         {productData && (
           <div className="modalorder">
             <div className="modal-contentOrder">
@@ -234,7 +234,7 @@ const Order = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
 
 {showModal && (
         <div className="modalorder">

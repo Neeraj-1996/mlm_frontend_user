@@ -143,7 +143,7 @@ const ProductTable = () => {
                       <td>{product.productName}</td>
                       <td>{product.ratioBetween}</td>
                       <td>{product.price}</td>
-                      <td>{product.planName}</td>
+                      <td>{product.plan_name}</td>
                       <td>
                         {product.productImg && (
                           <img

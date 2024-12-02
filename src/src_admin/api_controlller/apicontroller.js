@@ -5,7 +5,7 @@ import baseUrl from '../screen/url';
 const getToken = () => localStorage.getItem('accessTokenAdmin');
 
 
-console.log("getToken",getToken);
+// console.log("getToken",getToken);
 const authHeader = () => ({ Authorization: `Bearer ${getToken()}` });
 
 const handleFormData = (product) => {

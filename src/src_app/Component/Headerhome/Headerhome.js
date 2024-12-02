@@ -34,7 +34,7 @@ const Header = ({ name, onBack }) => {
           onSelectCountry={setSelectedCountry}
         />
       </div>
-      <h1 className="header-title">Venture Vertex</h1>
+      <h1 className="header-title">Vortex Vantures</h1>
       <button
         className="notification-btn"
         onClick={() => navigate("/Notifications")}

@@ -94,7 +94,7 @@ const SignUpPage = () => {
     formData.append('mobileNo', phone);
     formData.append('password', password);
     formData.append('confirmPassword', confirmPassword);
-    const apiUrl = `http://api.vortexvantures.com/api/users/register?shared_Id=${shareId}`;
+    const apiUrl = `https://api.vortexvantures.com/api/users/register?shared_Id=${shareId}`;
 
     axios.post(apiUrl, formData)
       .then((response) => {
@@ -252,27 +252,3 @@ const SignUpPage = () => {
 export default SignUpPage;
 
 
-
-  // const handleSignUp = (e) => {
-  //   e.preventDefault();
-  //   setLoadingLogin(true)
-  //   const formData = new FormData();
-  //   formData.append('username', username);
-  //   formData.append('email', email);
-  //   formData.append('mobileNo', phone);
-  //   formData.append('password', password);
-  //   formData.append('confirmPassword', confirmPassword);
-  //   const apiUrl = `http://localhost:9001/api/users/register?shared_Id=${shareId}`;
-
-  //   axios.post(apiUrl, formData)
-  //     .then((response) => {
-  //       console.log('Response:', response.data);
-  //       navigate('/'); 
-  //       setLoadingLogin(false)
-        
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error:', error);
-  //       setLoadingLogin(false)
-  //     });
-  // };

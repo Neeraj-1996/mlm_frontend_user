@@ -1,3 +1,3 @@
-const baseWallet = "http://api.vortexvantures.com/api/wallet/";
+const baseWallet = "https://api.vortexvantures.com/api/wallet/";
 
 export default baseWallet;

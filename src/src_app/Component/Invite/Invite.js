@@ -7,7 +7,7 @@ const InviteScreen = () => {
   const navigate = useNavigate();
   // const ShareId = localStorage.getItem("sharedId");
   const inviteCode = localStorage.getItem("sharedId");  // Your dynamic invite code
-  const inviteLink = `https://yourwebsite.com/invite/${inviteCode}`;  // Dynamic invite link
+  const inviteLink = `https://vortexvantures.com/SignUpPage/${inviteCode}`;  // Dynamic invite link
   const [copiedText, setCopiedText] = useState('');
   const qrCodeRef = useRef(null);
 

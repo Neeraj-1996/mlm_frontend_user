@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
   const storedToken = localStorage.getItem('accessToken');
-  console.log("storedToken",storedToken);
+  console.log("storedTokensfdf",storedToken);
   useEffect(() => {
     const checkTokenValidity = () => {
       const currentToken = localStorage.getItem('accessToken');
@@ -16,9 +16,8 @@ const PrivateRoute = ({ children }) => {
     };
 
     checkTokenValidity();
-
-    // Set interval to check token validity periodically
-    const tokenCheckInterval = setInterval(checkTokenValidity, 30000); // check every 30 seconds
+    
+    const tokenCheckInterval = setInterval(checkTokenValidity, 30000);
     return () => clearInterval(tokenCheckInterval);
   }, [storedToken]);
 

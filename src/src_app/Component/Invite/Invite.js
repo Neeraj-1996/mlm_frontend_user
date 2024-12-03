@@ -12,12 +12,32 @@ const InviteScreen = () => {
   const [copiedText, setCopiedText] = useState('');
   const qrCodeRef = useRef(null);
 
-  // Function to copy text
+
+  // Function to copy text (handles both Chrome and Safari)
   const handleCopy = (text) => {
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedText(text);
-      setTimeout(() => setCopiedText(''), 2000); // Reset after 2 seconds
-    });
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      // For Chrome and modern browsers
+      navigator.clipboard.writeText(text).then(() => {
+        setCopiedText(text);
+        setTimeout(() => setCopiedText(''), 2000); // Reset after 2 seconds
+      });
+    } else {
+      // Safari fallback using a temporary text area
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed'; // Avoids scrolling to the bottom of the page
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setCopiedText(text);
+        setTimeout(() => setCopiedText(''), 2000);
+      } catch (err) {
+        console.error('Copy command failed:', err);
+      }
+      document.body.removeChild(textArea);
+    }
   };
 
   // Function to save QR code

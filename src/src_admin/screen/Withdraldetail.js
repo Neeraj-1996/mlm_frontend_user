@@ -90,7 +90,7 @@ const WithdrawalRequestsTable = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 main_dsborad_cntenT">
       <div className="d-flex justify-content-between mb-3">
         <h2>Withdrawal Requests</h2>
       </div>

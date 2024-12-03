@@ -60,7 +60,7 @@ const Dashboard = () => {
     .reduce((acc, transaction) => acc + transaction.credit, 0);
 
   return (
-    <div className="transaction-summary">
+    <div className="transaction-summary main_dsborad_cntenT">
       {loading ? (
         <Spinner animation="border" role="status">
           <span className="visually-hidden">Loading...</span>

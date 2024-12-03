@@ -197,7 +197,7 @@ const [notificationCount, setNotificationCounts] = useState(0);
   
 
   return (
-    <div className="container mt-1">
+    <div className="container mt-1 main_dsborad_cntenT">
       <div className="d-flex justify-content-between mb-1">
         <h2>Support Table</h2>
       </div>

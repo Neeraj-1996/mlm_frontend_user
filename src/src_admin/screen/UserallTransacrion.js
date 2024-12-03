@@ -54,7 +54,7 @@ const UserTransactionsTable = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 main_dsborad_cntenT">
       <h2>User Transactions</h2>
 
       {alertMessage && <Alert variant="danger">{alertMessage}</Alert>}

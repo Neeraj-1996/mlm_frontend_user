@@ -92,6 +92,7 @@ const Order = () => {
         // resultData(); // Your resultData function call (if necessary)
         fetchUserBalance();
         resultDataOrder();
+        resultDataTranasaction();
      
         // Start the slot animations
         setTimeout(() => {
@@ -198,50 +199,14 @@ const Order = () => {
 
         <p     style={{ marginLeft: "10px", fontSize: '20px' }}>Balance {balance.toFixed(2)}</p>
         </div>
-        {/* <div style={{ marginTop: "20px", fontSize: "24px" }}>{result}</div> */}
-{/* 
-        {productData && (
-          <div className="modalorder">
-            <div className="modal-contentOrder">
-              <button
-                className="close-button-order"
-                onClick={() => setProductData(null)}
-              >
-                &times;
-              </button>
-              <h3>Product Details</h3>
-              <div style={{ flexDirection: "row", display: "flex" }}>
-                <img src={productData.productImg} alt="Product" />
-                <div>
-                  <p className="modal-contentp">
-                    Product Name: {productData.productName}
-                  </p>
-                  <p className="modal-contentp">
-                    Price: ${productData.productPrice}
-                  </p>
-                  <p className="modal-contentp">
-                    Commission: {productData.grabCommission}
-                  </p>
-                </div>
-              </div>
-              <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-              <button
-                className="done-button"
-                onClick={() => setProductData(null)}
-              >
-                Done
-              </button>
-              </div>
-            </div>
-          </div>
-        )} */}
+
 
 {showModal && (
         <div className="modalorder">
           <div className="modal-contentOrder">
             <button
               className="close-button-order"
-              onClick={() => setShowModal(false)}  // Close the modal
+              onClick={() => setShowModal(false)}  
             >
               &times;
             </button>
@@ -250,7 +215,7 @@ const Order = () => {
             <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
             <button
               className="done-button"
-              onClick={() => setShowModal(false)}  // Close the modal when done
+              onClick={() => setShowModal(false)}  
             >
               Done
             </button>

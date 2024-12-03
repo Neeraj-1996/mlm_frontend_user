@@ -185,7 +185,7 @@ const UserRecords = () => {
   // };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 main_dsborad_cntenT ">
       <h2>User Records</h2>
 
       {/* Search input */}

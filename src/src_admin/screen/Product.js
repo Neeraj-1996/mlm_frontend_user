@@ -111,7 +111,7 @@ const ProductTable = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 main_dsborad_cntenT">
       <h2>Product Table</h2>
 
       <Button variant="success" onClick={handleAdd}>

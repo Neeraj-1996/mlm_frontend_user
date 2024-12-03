@@ -1,7 +1,7 @@
 // src/components/SignUpPage.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import WorldFlag from 'react-world-flags';
+// import WorldFlag from 'react-world-flags';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import LoadingButton from '../../Combutton/LoadingButton';
@@ -10,14 +10,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Signup.css';
 import CustomDropdownHome from '../Headerhome/Flag';
 import { countries } from '../../asset/data';
+import { useLocation } from 'react-router-dom';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const SignUpPage = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const initialShareId = queryParams.get('shareId') || ''; // Extract shareId from URL
+
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [shareId, setShareId] = useState('');
+  const [shareId, setShareId] = useState(initialShareId);
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [captcha, setCaptcha] = useState('');
@@ -194,13 +202,13 @@ const SignUpPage = () => {
               </div>
               <div className="mb-3 position-relative">
                 <input
-                  type="text"
-                  className="form-control ps-5"
-                  placeholder="Share ID"
-                  value={shareId}
-                  onChange={(e) => setShareId(e.target.value)}
-                  required
-                />
+                    type="text"
+                    className="form-control ps-5"
+                    placeholder="Share ID"
+                    value={shareId}
+                    onChange={(e) => setShareId(e.target.value)}
+                    required
+                  />
                 <FontAwesomeIcon icon={faShare} className="position-absolute top-50 start-0 translate-middle-y ms-2 text-black" />
               </div>
               <div className="mb-3 position-relative">

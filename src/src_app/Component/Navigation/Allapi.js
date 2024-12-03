@@ -89,7 +89,7 @@ export const fetchUserWithdrawal = async () => {
   try {
     // Get mobile number from localStorage
     const mobileNo = localStorage.getItem("mobileNo");
-    const response = await api.post(`${baseUrlapp}getwithdrawalrequest`, {
+    const response = await api.get(`${baseUrlapp}getwithdrawalrequest`, {
       mobile: mobileNo
     });
     return response.data.data;

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import grabUrlapp from "../Url/graburl";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../Navigation/api";
-import { fetchUserOrders, fetchUserBalance} from "../Navigation/Allapi";
+import { fetchUserOrders, fetchUserBalance ,fetchGrabCountShareCount} from "../Navigation/Allapi";
 
 const Order = () => {
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const Order = () => {
   const [orderDetails, setOrderDetails] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [balance, setBalance] = useState(0);
+  const [grabCount, setGrabCount] = useState(0);
 
   const handleBackClick = () => navigate(-1);
 
@@ -35,7 +36,9 @@ const Order = () => {
     );
   };
 
-  const todayOrders = orderDetails.filter((item) => isToday(item.buyDate));
+  // const todayOrders = orderDetails.filter((item) => isToday(item.buyDate));
+  const todayOrders = Array.isArray(orderDetails)? orderDetails.filter((item) => isToday(item.buyDate)): [];
+
 
   // Reverse the filtered orders for today
   const reversedTodayOrders = [...todayOrders].reverse();
@@ -43,7 +46,9 @@ const Order = () => {
   const  resultDataOrder= async () => {
     try {
       const orderData = await fetchUserOrders();
-      setOrderDetails(orderData);
+      // setOrderDetails(orderData);
+      setOrderDetails(Array.isArray(orderData) ? orderData : []);
+      console.log("fsdfs",orderData)
     } catch (error) {
       console.error(error);
     }
@@ -57,6 +62,19 @@ const Order = () => {
       console.error(error);
     }
   };
+
+  const  resultDataGrabCount= async () => {
+    try {
+      const featchData = await fetchGrabCountShareCount();
+      // console.log("feacth data",featchData)
+      // setGrabCount(featchData.balance);
+      setGrabCount(featchData.grabCountDtl);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
 
 
   const getLogoImages = () => Array.from({ length: 3 }, () => logo);
@@ -134,12 +152,14 @@ const Order = () => {
   useEffect(() => {
     resultDataOrder();
     resultDataTranasaction();
+
+    resultDataGrabCount();
   }, []);
 
 
   return (
     <div>
-      <Header name="Vertex Venture" onBack={handleBackClick} />
+      <Header name="Vortex Vantures" onBack={handleBackClick} />
       <div style={{ textAlign: "center", marginTop: "80px" }}>
         <div className="slot-machine-card">
           <div className="slot-card">
@@ -196,8 +216,12 @@ const Order = () => {
         >
           {isSpinning ? "Vantures..." : "Vortex 🎰"}
         </button>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', padding: '0px' }}>
+  <span style={{ marginLeft: '10px', fontSize: '18px' }}>Balance {balance.toFixed(2)}</span>
+  <span style={{ fontSize: '18px',  }}>Grab Count {grabCount.grabCount}</span>
+</div>
 
-        <p     style={{ marginLeft: "10px", fontSize: '20px' }}>Balance {balance.toFixed(2)}</p>
+    
         </div>
 
 
@@ -228,6 +252,39 @@ const Order = () => {
 <div className="orderGrid">
       {orderDetails.length === 0 ? (
         <p>No order details available.</p>
+      ) : todayOrders.length === 0 ? (
+        <p>No product found today.</p>
+      ) : (
+        <div className="orderGrid">
+          {reversedTodayOrders.map((item) => (
+            <div key={item._id} className="orderCard">
+              <div>
+                {item.productImg && (
+                  <img
+                    src={item.productImg}
+                    alt={item.productName}
+                    className="productImageOrder"
+                  />
+                )}
+              </div>
+              <div className="orderContent">
+                <h6 className="productNameOrder">{item.productName}</h6>
+                <p className="priceorder">Price: ${item.productPrice}</p>
+                <p className="commissionOder">
+                  Commission: ${item.grabCommission.toFixed(2)}
+                </p>
+                <p className="buyDate">
+                  Buy Date: {new Date(item.buyDate).toLocaleString()}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+{/* <div className="orderGrid">
+      {orderDetails.length === 0 ? (
+        <p>No order details available.</p>
       ) : (
         <div className="orderGrid">
           {(todayOrders.length > 0 ? reversedTodayOrders : orderDetails).map((item) => (
@@ -255,7 +312,7 @@ const Order = () => {
           ))}
         </div>
       )}
-    </div>
+    </div> */}
 
       </div>
     </div>

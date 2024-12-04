@@ -72,6 +72,15 @@ export const fetchUserOrders = async () => {
     throw error;
   }
 };
+export const fetchGrabCountShareCount = async () => {
+  try {
+    const response = await api.get(`${grabUrlapp}getGrabCount?user_id=${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user orders:", error);
+    throw error;
+  }
+};
 
 export const fetchNotificationData = async () => {
     try {

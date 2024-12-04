@@ -5,6 +5,7 @@ import "./TeamReportScreen.css"; // Custom CSS for styling
 import Header from "../Header/Header";
 import { useNavigate } from "react-router-dom";
 import baseUrlapp from "../Url/Urlapp";
+import mainlUrl from "../Url/MainUrl";
 import axios from "axios";
 // import { width } from "@fortawesome/free-solid-svg-icons/faBuilding";
 const TeamReportScreen = () => {
@@ -14,8 +15,23 @@ const TeamReportScreen = () => {
   const [userData, setUserData] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState("level1");
 
+
+  const [demoData, setDemoData] = useState([
+    { label: "Team Balance", value: "0" },
+    { label: "Team Cash Flow", value: "0" },
+    { label: "Team Deposit", value: "0" },
+    { label: "Team Withdrawal", value: "0" },
+    { label: "Team order comission", value: "0" },
+    { label: "First time depositor", value: "0" },
+    { label: "First level member", value: "0" },
+    { label: "Team Size", value: "0" },
+    { label: "New Members today", value: "0" },
+    { label: "Active members day", value: "0" },
+  ]);
+
   useEffect(() => {
     getUsersAtLevel();
+    getLevelTeamData()
   }, []);
 
   
@@ -25,13 +41,13 @@ const TeamReportScreen = () => {
   
     // Set up headers with the token
     const headers = {
-      "Authorization": `Bearer ${token}`, // Add the token in the Authorization header
+      "Authorization": `Bearer ${token}`, 
       "Content-Type": "application/json", // Optional, but often good to include
     };
   
     try {
       // Make the GET request using Axios
-      const response = await axios.get(`${baseUrlapp}users-at-Level?userId=${userId}`, {
+      const response = await axios.get(`${mainlUrl}users/users-at-Level?userId=${userId}`, {
         headers: headers,
       });
   
@@ -43,6 +59,43 @@ const TeamReportScreen = () => {
     }
   };
 
+  const getLevelTeamData = async () => {
+  
+    const token = localStorage.getItem("accessToken"); // Get the token from localStorage
+  
+    // Set up headers with the token
+    const headers = {
+      Authorization: `Bearer ${token}`, // Add the token in the Authorization header
+      "Content-Type": "application/json", // Optional, but often good to include
+    };
+  
+    try {
+      // Make the GET request using Axios
+      const response = await axios.get(`${mainlUrl}team/getTeamDataByDate`, {
+        headers: headers,
+      });
+
+      const data = response.data;
+
+      // Map the API response to the demoData structure
+      const updatedDemoData = [
+        { label: "Team Balance", value: data.teamBalance?.toFixed(2) || "0" },
+        { label: "Team Cash Flow", value: data.teamCredit?.toFixed(2) || "0" },
+        { label: "Team Deposit", value: data.teamCredit?.toFixed(2) || "0" },
+        { label: "Team Withdrawal", value: data.teamWithdraw?.toFixed(2) || "0" },
+        { label: "Team order comission", value: data.teamOrderCommission?.toFixed(2) || "0" },
+        { label: "First time depositor", value: data.firstTimeDepositors || "0" },
+        { label: "First level member", value: data.firstLevelMembers || "0" },
+        { label: "Team Size", value: data.teamSize || "0" },
+        { label: "New Members today", value: "0" }, // You may need additional data for this
+        { label: "Active members day", value: "0" }, // You may need additional data for this
+      ];
+
+      setDemoData(updatedDemoData);
+    } catch (error) {
+      console.error("Error fetching team data:", error);
+    }
+  };
   // Filter users based on selected level
   const filteredUsers = userData.filter((user) => {
     if (selectedLevel === "level1") return user.level === 1;
@@ -51,18 +104,18 @@ const TeamReportScreen = () => {
     return false;
   });
 
-  const demoData = [
-    { label: "Team Balance", value: "0" },
-    { label: "Team Cash Flow", value: "0" },
-    { label: "Team Deposit", value: "0" },
-    { label: "Team Withdrawal", value: "0" },
-    { label: "Team order comission", value: "0" },
-    { label: "Fisrt time depositor", value: "0" },
-    { label: "First level member", value: "0" },
-    { label: "Team Size", value: "0" },
-    { label: "New Members today", value: "0" },
-    { label: "Active members day", value: "0" },
-  ];
+  // const demoData = [
+  //   { label: "Team Balance", value: "0" },
+  //   { label: "Team Cash Flow", value: "0" },
+  //   { label: "Team Deposit", value: "0" },
+  //   { label: "Team Withdrawal", value: "0" },
+  //   { label: "Team order comission", value: "0" },
+  //   { label: "Fisrt time depositor", value: "0" },
+  //   { label: "First level member", value: "0" },
+  //   { label: "Team Size", value: "0" },
+  //   { label: "New Members today", value: "0" },
+  //   { label: "Active members day", value: "0" },
+  // ];
 
   const handleBackClick = () => {
     navigate(-1);

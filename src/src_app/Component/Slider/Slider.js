@@ -16,7 +16,7 @@ const sliderSettings = {
 
 const ImageSlider = ({ imageUrls }) => {
   return (
-    <div className="slider-container">
+    <div className="slider-container main__sLideR">
       <Slider {...sliderSettings}>
         {imageUrls.map((url, index) => (
           <div key={index}>

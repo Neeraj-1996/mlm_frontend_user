@@ -38,11 +38,13 @@
   text-align: center; /* Center the date */
   font-weight: bold;
   color: #999; /* Light color for date */
+  margin-bottom: 1em;
 }
 
 .message-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 15px;
 }
 
 .message-time {
@@ -50,8 +52,15 @@
   color: #ccc;
 }
 
+.uploader__placeholder {
+  min-height: 60px;
+  min-width: 80px;
+  margin-right: 8px;
+  border-radius: 5px;
+}
+
 .message {
-  max-width: 70%;
+  max-width: 90%;
   margin-bottom: 10px;
   padding: 5px;
   color: #000;
@@ -94,7 +103,7 @@
   border: 1px solid #ec8e22;
   border-radius: 10px;
   padding: 10px;
-  margin-right: 10px;
+  margin-right: 0px;
 }
 
 .send-button {

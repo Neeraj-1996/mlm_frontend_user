@@ -85,8 +85,8 @@ const loadLevel = async () => {
       {/* Second part: Balance and buttons */}
       <div className="balance-section">
         <div className="Avail-bal">
-          <h3>Available Balance</h3>
-          <p style={{ marginLeft: "10px", fontSize: '20px' }}>{balance.toFixed(2)}</p>
+          <h3 className="textAvailbal">Available Balance</h3>
+          <p className="testAvalbalAmount">{balance.toFixed(2)}</p>
 
         </div>
         <div className="balance-buttons">

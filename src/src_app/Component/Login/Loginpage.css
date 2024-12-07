@@ -6,7 +6,7 @@
   border: 1px solid #ddd;
   border-radius: 15px;
   justify-content: "center";
-background-color: #f0f0f0;
+  background-color: #f0f0f0;
   box-shadow: 0px 4px 12px rgba(64, 123, 250, 0.5);
   /* margin: "20px auto", */
 }
@@ -40,6 +40,11 @@ button.btn-link.forgot-password:hover {
 button {
   width: 48%; 
 } */
+
+.forgeT_butN:hover {
+  text-decoration: none !important;
+  background: transparent;
+}
 
 
 .button-row1 {

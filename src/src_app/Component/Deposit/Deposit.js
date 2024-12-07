@@ -146,7 +146,7 @@ const Deposit = () => {
     navigate("/PaymentRequests");
   };
   return (
-    <div className="container">
+    <div className="containerDeposit">
       <Header name="Deposit" onBack={handleBackClick} />
 
 <div>
@@ -154,7 +154,7 @@ const Deposit = () => {
   {/* <button onClick={handlePayRequest}>All address</button> */}
 
 </div>
-      <div className="body1">
+      <div className="bodyDepsoit">
         <div
           style={{
             alignItems: "center",

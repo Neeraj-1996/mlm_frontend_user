@@ -21,7 +21,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); // Toggle between true and false
+    setShowPassword(!showPassword);
   };
 
 
@@ -33,7 +33,7 @@ const LoginPage = () => {
     // Check for empty fields
     if (!email || !password) {
       toast.error("Please enter mobile number and password"); // Show error message
-      return; // Exit the function if validation fails
+      return;
     }
   
     const myHeaders = {
@@ -41,18 +41,16 @@ const LoginPage = () => {
     };
   
     const data = {
-      mobile_no: email, // Assuming 'email' represents the mobile number here
+      mobile_no: email,
       password: password,
     };
     
-    setLoadingLogin(true); // Set loading state
+    setLoadingLogin(true);
   
     try {
       const response = await axios.post(baseUrlapp + 'login', data, { headers: myHeaders });
   
       if (response.data.statusCode === 200) {
-        // console.log("data", response.data.data);
-        // Save accessToken, refreshToken, and user info to localStorage
         localStorage.setItem('accessToken', response.data.data.accessToken);
         localStorage.setItem('refreshToken', response.data.data.refreshToken);
         localStorage.setItem('username', response.data.data.user.username);
@@ -61,7 +59,7 @@ const LoginPage = () => {
         localStorage.setItem('userId', response.data.data.user.userId);
         localStorage.setItem('sharedId', response.data.data.user.sharedId);
         
-        console.log("Tokens and user information saved successfully.");
+        // console.log("Tokens and user information saved successfully.");
         navigate('/Homepage'); 
       } else {
         console.error('Login failed:', response.data.message);
@@ -165,10 +163,14 @@ const LoginPage = () => {
                     </button>
                 </div>
             </div>
-
-            <button className="btn btn-link w-100 forgot-password" onClick={handleForgotPassword}>
+            <button className="btn btn-link forgot-password forgeT_butN w-100" onClick={handleForgotPassword}>
                 Forgot Password?
             </button>
+
+
+            {/* <button className="btn btn-link forgot-password" onClick={handleForgotPassword}>
+                Forgot Password?
+            </button> */}
 
 
             <div className="button-row1">

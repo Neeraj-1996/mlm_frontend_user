@@ -1,6 +1,6 @@
 /* deposit.css */
 
-.container {
+.containerDeposit {
   height: 100%;
   width: 100%;
   align-items: center;
@@ -11,7 +11,7 @@
   flex-direction: column; /* Added to stack elements vertically */
 }
 
-.body1 {
+.bodyDepsoit {
 
   max-width: 500px;
   margin: 2rem auto;
@@ -20,7 +20,21 @@
   border-radius: 15px;
   justify-content: "center";
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
-  margin-top: 50px;
+  margin-top: 100px;
+
+}
+.bodyDepsoitY {
+
+  /* max-width: 700px; */
+  /* margin: 2rem auto; */
+  padding: 0.5rem;
+  /* border: 1px solid #ddd; */
+  width: 95%;
+  border-radius: 15px;
+  justify-content: "center";
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
+  margin-top: 100px;
+
 
 }
 

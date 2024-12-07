@@ -32,13 +32,15 @@ const WithdrawalTransaction = () => {
   }
 
   return (
-    <div className="container">
+    <div className="containerDeposit">
       <Header name="Withdrawal Detail" onBack={handleBackClick} />
-      <div className="transaction-deposit1">
+      <div className='bodyWithdral'>
+      <div className="transaction-Withdrawal">
+        
         <div className="scrollView">
           {transactions.length > 0 ? (
             transactions.map((transaction) => (
-              <div key={transaction._id} className="cardTrans1">
+              <div key={transaction._id} className="cardTrans">
                 <p className="transactionDetail">Address: {transaction.address}</p>
                 <div style={{ flexDirection: 'row', display: 'flex', justifyContent: "space-between" }}>
                   <p className="transactionDetail">Amount: {transaction.amount}</p>
@@ -57,6 +59,7 @@ const WithdrawalTransaction = () => {
             <div className="no-data-message">No withdrawals available</div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );

@@ -277,14 +277,14 @@ console.log("requestBody",requestBody);
         style={{
           justifyContent: "center",
           alignItems: "center",
-          width: "99%",
-          backgroundColor: "#fff", // Set background to white
+          width: "100%",
+          backgroundColor: "#fff", 
           marginBottom: "2px",
           borderRadius: 10,
           flexDirection: "row",
           display: "flex",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)", // Add shadow
-          padding: "10px", // Add padding for better spacing
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)", 
+          padding: "5px",
         }}
       >
         <div
@@ -301,7 +301,7 @@ console.log("requestBody",requestBody);
               background: "linear-gradient(90deg, #EC8E22, #FFC107)", // Gradient background for button
               border: "none",
               borderRadius: 5,
-              padding: "10px", // Adjusted padding to fill the button better
+              padding: "5px", // Adjusted padding to fill the button better
               width: "100%", // Make button take the full width
               cursor: "pointer",
               outline: "none",
@@ -310,7 +310,7 @@ console.log("requestBody",requestBody);
             <h6
               style={{
                 color: "#fff",
-                fontSize: 12,
+                fontSize: 10,
                 margin: 0,
               }}
             >
@@ -318,7 +318,7 @@ console.log("requestBody",requestBody);
             </h6>
           </button>
 
-          <h6 style={{ color: "#EC8E22", marginTop: 5 }}>
+          <h6 style={{ color: "#EC8E22", marginTop: 2,fontSize:10 }}>
             {" "}
 
             {formattedDate} {formattedTime}
@@ -351,7 +351,7 @@ console.log("requestBody",requestBody);
             <h6
               style={{
                 color: "white",
-                fontSize: 16,
+                fontSize: 10,
                 margin: 0,
                 padding: "2px",
               }}
@@ -370,9 +370,9 @@ console.log("requestBody",requestBody);
   };
 
   return (
-    <div className="container">
+    <div className="containerWithdrawal">
       <Header name="Withdrawal" onBack={handleBackClick} />
-      <div className="body">
+      <div className="bodyWithdral">
         {upi ? (
           <div className="upi-section">
             <button className="buttonw">

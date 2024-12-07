@@ -154,6 +154,7 @@ const ForgetPassword = () => {
           borderRadius: "15px",
           padding: "20px",
           boxShadow: "0px 5px 15px rgba(64, 123, 250, 0.5)",
+          margin:"10px"
         }}
       >
         {step === "verifyEmail" ? (

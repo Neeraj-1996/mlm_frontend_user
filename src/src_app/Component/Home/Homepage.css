@@ -1,8 +1,7 @@
-/* src/components/HomePage.css */
+
 .home-container {
     text-align: center;
-    /* padding: 2rem; */
-    margin-top: 65px;
+    margin-top: 60px;
   }
   
   .nav-links {
@@ -16,56 +15,59 @@
   }
 
   .screenMiddle {
-    padding: 1%; /* Converted padding to percentage */
-    margin-top: 0.8%; /* Converted margin-top to percentage */
-    width: 98%; /* Already in percentage */
+    padding: 1%; 
+    margin-top: 0.8%;
+    width: 98%; 
     align-self: center;
-    border-radius: 1%; /* Converted border-radius to percentage */
-    margin: 0.5%; /* Converted margin to percentage */
+    border-radius: 1%; 
+    margin: 0.5%; 
   }
   
   .text {
-    color: #ffffff; /* Set text color to white */
-    font-size: 18; /* Converted font-size to percentage */
-    margin-left: 0.5%; /* Converted margin-left to percentage */
+    color: #ffffff; 
+    font-size: 20px; 
+    margin-left: 0.5%; 
+    margin-bottom: 0%;
   }
   
   .text1 {
-    color: #ffffff; /* Set text color to white */
-    font-size: 10; /* Converted font-size to percentage */
-    margin-left: 0.5%; /* Converted margin-left to percentage */
+    color: #ffffff; 
+    font-size: 20px; 
+    margin-top: 2.5%;
   }
   
   .buttonRow {
     display: flex;
     flex-direction: row;
-    margin-top: 1%; /* Converted margin-top to percentage */
-    margin-left: 0.8%; /* Converted margin-left to percentage */
+    margin-top: 1%; 
+    margin-left: 0.8%; 
+    margin-bottom:10px;
   }
   
   .buttonRow1 {
     display: flex;
     flex-direction: row;
-    margin-top: 1%; /* Converted margin-top to percentage */
-    margin-left: 0.8%; /* Converted margin-left to percentage */
+    margin-top: 1%;
+    margin-left: 0.8%; 
     justify-content: center;
+    margin-bottom:10px;
   }
   
   .buttonRow2 {
     display: flex;
     justify-content: center;
-    margin-top: 1%; /* Converted margin-top to percentage */
+    margin-top: 1%; 
   }
   
   button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1%; /* Converted padding to percentage */
+    padding: 1%;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    border: 0.2% solid #000; /* Converted border width to percentage */
-    border-radius: 20; /* Converted border-radius to percentage */
+    border: 0.2% solid #000;
+    border-radius: 20; 
   }
   
   button:hover {
@@ -74,15 +76,32 @@
   }
   
   .direct {
-    height: 5.5%; /* Converted height to percentage */
-    width: 40%; /* Already in percentage */
-    background: linear-gradient(135deg, #29e6c9, #0066ff); /* Gradient background */
+    height: 5%; 
+    width: 40%; 
+    background: linear-gradient(135deg, #29e6c9, #0066ff);
     margin-right: 1%; 
     border-radius: 8px;
     border:none;
     cursor: "pointer";
     transition: 'background 0.3s ease';
      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    
+  }
+
+  @media screen and (max-width: 575px) {
+    .direct {
+        width: 50% !important;
+        /* padding: 0.8em !important; */
+    }
+    .text {
+        margin-left: 4.5%;
+        font-size: 15px;
+    }
+    .text1 {
+        color: #ffffff;
+        font-size: 12px;
+        margin-top: 2.5%;
+    }
   }
   
   .direct1 {
@@ -93,11 +112,7 @@
     height: 7%; /* Converted height to percentage */
     width: 19%; /* Already in percentage */
     margin-right: 1.5%; /* Converted margin-right to percentage */
-    /* border: none; 
-    border-radius: 10px; 
-    color: #ffffff; 
-    transition: all 0.3s ease-in-out; */
-    border-radius: 8px;
+     border-radius: 8px;
     border:none;
     cursor: "pointer";
     transition: 'background 0.1s ease';
@@ -125,8 +140,12 @@
     background: linear-gradient(135deg, #28a745, #d4edda); /* Gradient for Beginner Tutorial */
   }
   
+  .screenMiddle svg {
+      width: 22px !important;
+  }
+
   .direct2 {
-    height: 5.5%; /* Converted height to percentage */
+    height: 5%; /* Converted height to percentage */
     width: 80%; /* Already in percentage */
     background: linear-gradient(135deg, #29e6c9, #0066ff); /* Gradient background */
     /* border-radius: px; */
@@ -136,6 +155,7 @@
     cursor: "pointer";
     transition: 'background 0.1s ease';
      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+     /* padding:1em; */
   
   }
   
@@ -168,7 +188,7 @@
     margin: 2px;
     transition: background 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 2px;
     margin-left: 8px;
   }
   
@@ -177,11 +197,11 @@
   }
   .lockIcon {
     position: absolute;
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Offset to truly center the icon */
-    background: rgba(0, 0, 0, 0.5); /* Light black background with transparency */
-    border-radius: 50%; /* Circular background */
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background: rgba(0, 0, 0, 0.5); 
+    border-radius: 50%; 
     padding: 10px; /* Padding around the icon */
     color: #fff; /* White color for the icon */
     font-size: 24px; /* Size of the icon */
@@ -193,9 +213,11 @@
   } */
   
   .cardImage {
-    width:125px; /* Image should scale to fit the card */
+    width:100%; /* Image should scale to fit the card */
     height: auto;
     border-radius: 10px;
+    object-fit:cover;
+    aspect-ratio:2/1.5;
   }
   
   

@@ -19,6 +19,7 @@ background-color: #f0f0f0;
   .date-filter-container {
     display: flex;
     gap: 10px; 
+    justify-content: center;
     align-items: center;
     margin-top: 10px;
     position: sticky;
@@ -88,10 +89,10 @@ background-color: #f0f0f0;
   }
   
   .card-label {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
   
   .card-value {
     font-size: 24px;
@@ -108,12 +109,12 @@ background-color: #f0f0f0;
 
 /* Tab Item Styles */
 .tab {
-  padding: 10px 20px;
+  padding: 10px 10px;
   cursor: pointer;
   background: lightblue;
   border: none;
   border-radius: 5px;
-  margin: 10px;
+  margin: 00px;
   background: linear-gradient(90deg, #FF5733, #C70039);
   transition: background-color 0.3s; /* Smooth transition for hover effect */
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5),

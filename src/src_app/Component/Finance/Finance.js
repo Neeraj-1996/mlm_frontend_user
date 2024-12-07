@@ -8,7 +8,7 @@ const Finance = () => {
     navigate(-1); // Navigates back to the previous page
   };
   return (
-    <div className="container">
+    <div className="containerFinance">
          <Header name="Finance" onBack={handleBackClick} />
       {/* Yellow Section */}
       <div className="yellow-section">

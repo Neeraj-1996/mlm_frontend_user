@@ -55,14 +55,15 @@ const PaymentRequests = () => {
   };
 
   return (
-    <div className="container">
+    <div className="containerDeposit">
       <Header name="Payment Requests" onBack={handleBackClick} />
+      <div className="bodyDepsoitY">
       <div className="cardContainer">
         {paymentRequests.length > 0 ? (
           paymentRequests.map((request) => (
             <div key={request._id} className="cardShowaddress">
               <div className="cardHeader">
-                <h6>Track Id {request.trackId}</h6>
+                <h6>Track Id {request.transactionId}</h6>
               </div>
               <div className="cardBody">
                 <div
@@ -85,7 +86,7 @@ const PaymentRequests = () => {
                   }}
                 >
                   <p style={{ width: "50%" }}>
-                    <strong>Amount:</strong> {request.amount}
+                    <strong>Amount:</strong> {request.balance}
                   </p>
                   <p style={{ width: "50%" }}>
                     <strong>Currency:</strong> {request.currency}
@@ -112,9 +113,9 @@ const PaymentRequests = () => {
                   }}
                 >
                   <p>
-                    <strong>Status:</strong> {request.status}
+                    <strong>Status:</strong> {request.reference}
                   </p>
-                  <p> {new Date(request.expiredAt).toLocaleString()}</p>
+                  <p> {new Date(request.createdAt).toLocaleString()}</p>
                 </div>
               </div>
             </div>
@@ -122,6 +123,7 @@ const PaymentRequests = () => {
         ) : (
           <div>No payment requests found.</div>
         )}
+      </div>
       </div>
     </div>
   );

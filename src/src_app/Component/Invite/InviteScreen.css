@@ -2,27 +2,31 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  margin-top: 10%;
   justify-content: center;
-  height: 100vh;
+  /* height: vh; */
   background-color: #f0f0f0;
-  position: relative;
+  /* position: relative; */
   text-align: center;
+  /* padding: 5px; */
 
 }
 .cardInvite {
-  max-width: 320px;                   /* Sets a maximum width for the card */
-  margin: 1rem auto;                 /* Centers the card horizontally */
+  max-width: 300px;                   /* Sets a maximum width for the card */
+  /* margin: 1rem;    s             Centers the card horizontally */
   padding: 1rem;                     /* Adds padding inside the card */
   border-radius: 15px;               /* Rounds the corners of the card */
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5); /* Adds a shadow effect */
-  margin-top: 20px;                 /* Adds space above the card */
+  margin-top: 10px;                 /* Adds space above the card */
   display: flex;                      /* Enables flexbox layout */
   flex-direction: column;             /* Arranges children in a column */
   align-items: center;                /* Centers children horizontally */
   text-align: center; 
+  padding: 10px;
 }
 .qr-card {
-  margin-top: 10px;
+  margin-top: 5px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
@@ -33,10 +37,11 @@
 
 .invite-details {
   background-color: white;
-  padding: 20px;
+  margin: 5px;
+  /* padding: 1px; */
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Centers the content inside */
+  text-align: center;
 }
 
 .save-button, .invite-details button {

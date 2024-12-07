@@ -1,9 +1,15 @@
 
 .slider-container {
-    width: 92%;
+    width: 100%;
     overflow: hidden;
     margin: 0 auto;
   }
+
+  .main__sLideR img {
+    aspect-ratio: 2/1;
+    object-fit: cover;
+    border-radius:0px !important;
+}
   
   .slider-image {
     width: 100%;

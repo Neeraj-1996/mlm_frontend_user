@@ -31,10 +31,10 @@ api.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       // If 401 Unauthorized, remove token and redirect to login
       localStorage.removeItem('accessToken');
-      // window.location.href = '/'; 
+      window.location.href = '/'; 
     } else if (error.response && error.response.status === 500) {
       localStorage.removeItem('accessToken');
-      // window.location.href = '/';
+      window.location.href = '/';
     } else {
       console.error("Error:", error.message);
       alert("Unable to connect to the server. Please check your network.");
@@ -42,6 +42,11 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+
+
+export default api;
+
 
 
 
@@ -72,7 +77,29 @@ api.interceptors.response.use(
 //   }
 // );
 
-export default api;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // api.js

@@ -5,8 +5,8 @@ Container styles
   /* height: 100vh; */
 }
 .cardp{
-  max-width: 550px;
-  max-height: 720px;
+  max-width: 100%;
+  max-height: 830px;
   margin: 1rem ;
   padding: 1rem;
   border-radius: 15px;
@@ -15,6 +15,13 @@ Container styles
   margin-top: 80px;
   margin-bottom: 80px;
 }
+
+@media only screen and (max-width:575px) {
+  .cardp {
+      max-height: 770px;
+  }
+}
+
 /* First part: Profile Info */
 .profile-info {
   display: flex;
@@ -76,15 +83,38 @@ Container styles
 
 /* Second part: Balance and buttons */
 .balance-section {
-  height: 20vh;
+  height: 16vh;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   align-items: center;
   background-color: #e0e0e0;
-  padding: 10px 20px;
+  padding: 20px 20px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
   margin-top: 20px;
+}
+
+
+@media screen and (max-width: 575px) { 
+  .balance-section {
+    height: 20vh;
+    display: flex;
+    padding: 20px 20px;
+  }
+  .cardProfile {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #f5f5f5; */
+    background:linear-gradient(90deg, #FF5733, #C70039);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    border-radius: 5px;
+    font-size: 12px;
+  }
 }
 
 .Avail-bal {
@@ -196,10 +226,90 @@ Container styles
 @media (max-width: 480px) {
   .cards-section-profile {
     grid-template-columns: repeat(3, 1fr); /* Keep 3 cards per row */
+
   }
+
+  .testAvalbalAmount{
+    font-size: 18px; 
+    margin-left: 20px;
+  }
+  .textAvailbal{
+    font-size: 18px;
+  }
+
+  .cardProfile {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #f5f5f5; */
+    background:linear-gradient(90deg, #FF5733, #C70039);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
 
   .profile-photo {
     width: 80px; /* Smaller profile photo on mobile */
     height: 80px;
   }
+
+
+
 }
+
+@media (max-width: 768px) {
+  .cards-section-profile {
+    grid-template-columns: repeat(3, 1fr); /* Keep 3 cards per row */
+  }
+  .testAvalbalAmount{
+    font-size: 18px; 
+    margin-left: 20px;
+  }
+  .textAvailbal{
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 399px) {
+  .cards-section-profile {
+    grid-template-columns: repeat(3, 1fr); /* Keep 3 cards per row */
+
+  }
+  .testAvalbalAmount{
+    font-size: 18px; 
+    margin-left: 20px;
+  }
+  .textAvailbal{
+    font-size: 18px;
+  }
+
+  .cardProfile {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #f5f5f5; */
+    background:linear-gradient(90deg, #FF5733, #C70039);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
+
+  .profile-photo {
+    width: 80px; /* Smaller profile photo on mobile */
+    height: 80px;
+  }
+
+  
+
+}
+

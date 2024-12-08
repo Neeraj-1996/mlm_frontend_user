@@ -111,6 +111,7 @@ const Order = () => {
         fetchUserBalance();
         resultDataOrder();
         resultDataTranasaction();
+        resultDataGrabCount()
      
         // Start the slot animations
         setTimeout(() => {

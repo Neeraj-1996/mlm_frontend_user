@@ -7,7 +7,7 @@ const api = axios.create({
   },
 });
 
-// Add a request interceptor to include the access token
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('accessToken');
@@ -22,8 +22,6 @@ api.interceptors.request.use(
   }
 );
 
-// Add a response interceptor to handle token expiration and other errors
-// api.js
 
 api.interceptors.response.use(
   (response) => response,
@@ -47,7 +45,10 @@ api.interceptors.response.use(
 
 export default api;
 
+// Add a request interceptor to include the access token
 
+// Add a response interceptor to handle token expiration and other errors
+// api.js
 
 
 // api.interceptors.response.use(

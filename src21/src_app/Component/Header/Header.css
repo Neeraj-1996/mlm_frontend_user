@@ -1,0 +1,33 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  z-index: 1000;
+}
+
+.back-btn {
+  position: absolute;
+  left: 10px; /* Adjusted to have some spacing from the left */
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  width: 50px;
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for back button */
+.back-btn:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+.header-title {
+  font-size: 20px;
+  color: #333;
+  margin: 0;
+  text-align: center; /* Center the title */
+}

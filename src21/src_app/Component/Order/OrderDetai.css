@@ -1,0 +1,76 @@
+.containerOrder {
+    max-width: 1200px;
+    margin: auto;
+    /* padding: 20px; */
+    font-family: Arial, sans-serif;
+  }
+  
+  .orderGrid {
+    margin-top: 5px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .orderCard {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    transition: transform 0.2s;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .orderCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .productImageOrder {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    width: 100px; /* Set a fixed width for the image */
+    height: auto;
+    border-radius: 8px;
+    margin-right: 15px; /* Space between image and text */
+    aspect-ratio:2/2;
+  }
+  
+  .orderContent { 
+    flex-grow: 1; /* Allow content to take available space */
+    text-align: left; /* Align text to the left */
+  }
+  
+  .productNameOrder {
+    font-size: 1em;
+    margin: 0;
+  }
+  
+  .priceorder {
+    color: #4CAF50;
+    font-size: 0.9em;
+    margin: 0;
+  }
+  
+  .commissionOder {
+    font-size: 0.9em;
+    color: #FF9800;
+  }
+  
+  .buyDate {
+    color: #777;
+    font-size: 0.6em;
+    margin: 0;
+  }
+  
+  .close-button-order {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+  }

@@ -3,12 +3,15 @@ import baseUrlapp from '../Url/Urlapp';
 import baseWallet from '../../../src_admin/screen/urlWallet';
 import grabUrlapp from '../Url/graburl';
 import axios from 'axios';
-const userId = localStorage.getItem("userId");
+// const userId = localStorage.getItem("userId");
 const mobileNo = localStorage.getItem("mobileNo");
 // import baseWallet from '../../../src_admin/screen/urlWallet';
 
 // Fetch user level data
+
+// console.log("fetchUserBalance ",userId);
 export const fetchUserLevel = async () => {
+  const userId = localStorage.getItem("userId");
   try {
     const response = await api.get(`${baseUrlapp}getUserLevel?userId=${userId}`);
     return response.data.data;
@@ -42,6 +45,7 @@ export const fetchNotificationCount = async () => {
 
 // Fetch unread message count for user
 export const fetchUnreadMessageCount = async () => {
+  const userId = localStorage.getItem("userId");
   try {
     const response = await axios.get(`${baseUrlapp}getUserUnreadMessageCount?userId=${userId}`);
     return response.data.data.unreadCount;
@@ -53,7 +57,9 @@ export const fetchUnreadMessageCount = async () => {
 
 // Fetch user's balance
 export const fetchUserBalance = async () => {
+  const userId = localStorage.getItem("userId");
   try {
+
     const response = await api.get(`${baseWallet}balanceUser?userId=${userId}`);
     return response.data.data;
   } catch (error) {
@@ -64,6 +70,7 @@ export const fetchUserBalance = async () => {
 
 // Fetch user order details
 export const fetchUserOrders = async () => {
+  const userId = localStorage.getItem("userId");
   try {
     const response = await api.post(`${grabUrlapp}grabProductsUser?user_id=${userId}`);
     return response.data;
@@ -73,6 +80,7 @@ export const fetchUserOrders = async () => {
   }
 };
 export const fetchGrabCountShareCount = async () => {
+  const userId = localStorage.getItem("userId");
   try {
     const response = await api.get(`${grabUrlapp}getGrabCount?user_id=${userId}`);
     return response.data;

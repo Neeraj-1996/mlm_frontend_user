@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 const InviteScreen = () => {
   const navigate = useNavigate();
   // const ShareId = localStorage.getItem("sharedId");
-  const inviteCode = localStorage.getItem("sharedId");  // Your dynamic invite code
+  const inviteCode = localStorage.getItem("sharedId");  
+  const userId = localStorage.getItem("userId");
   // const inviteLink = `https://vortexvantures.com/SignUpPage/${inviteCode}`;  
-  const inviteLink = `https://vortexvantures.com/SignUpPage?shareId=${inviteCode}`;
+  const inviteLink = `https://vortexvantures.com/SignUpPage?shareId=${userId}`;
   const [copiedText, setCopiedText] = useState('');
   const qrCodeRef = useRef(null);
 
@@ -57,7 +58,7 @@ const InviteScreen = () => {
 
         const link = document.createElement('a');
         link.href = pngFile;
-        link.download = `invite-qr-${inviteCode}.png`;
+        link.download = `invite-qr-${userId}.png`;
         link.click();
       };
 
@@ -102,9 +103,9 @@ const InviteScreen = () => {
 
       {/* Invite Code Section */}
       <div className="invite-details">
-        <p className="invite-code">Your Invite Code: {inviteCode}</p>
-        <button onClick={() => handleCopy(inviteCode)}>
-          {copiedText === inviteCode ? 'Copied!' : 'Copy Invite Code'}
+        <p className="invite-code">Your Invite Code: {userId}</p>
+        <button onClick={() => handleCopy(userId)}>
+          {copiedText === userId ? 'Copied!' : 'Copy Invite Code'}
         </button>
 
         {/* Invite Link Section */}

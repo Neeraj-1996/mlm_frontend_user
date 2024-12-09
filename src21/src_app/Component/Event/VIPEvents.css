@@ -1,0 +1,88 @@
+.vip-events {
+    /* padding: 20px; */
+    /* font-family: Arial, sans-serif; */
+    text-align: center;
+    margin-top: 65px;
+    background-color: #fff;
+  }
+  
+  .header1 {
+    display: flex;
+    gap: 2px; 
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    position: sticky;
+    top: 0; /* Adjust based on where you want it to stick */
+    z-index: 100; /* Ensures it stays above other content */
+    background-color: white; /* Matches the background */
+    padding: 2px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(64, 123, 250, 0.5); /* Optional shadow for better visibility */
+
+
+  }
+  
+  .tab {
+    display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  }
+  
+  .tab.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .events-content {
+    /* display: flex;
+    flex-wrap: wrap;
+    gap: 20px; */
+    max-width: 370px;
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    justify-content: "center";
+  background-color: #f0f0f0;
+    box-shadow: 0px 4px 12px rgba(64, 123, 250, 0.5);
+  }
+  
+  .event-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(33.333% - 20px);
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .event-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .event-detail {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  /* Adjust for mobile view */
+  @media (max-width: 768px) {
+    .event-card {
+      width: calc(50% - 20px);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .event-card {
+      width: 100%;
+    }
+  }
+  

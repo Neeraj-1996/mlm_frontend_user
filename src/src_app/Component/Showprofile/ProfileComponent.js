@@ -13,8 +13,16 @@ const ProfileComponent = () => {
   const userMobile = localStorage.getItem('mobileNo');
   const userEmail = localStorage.getItem('email');
   const handleBackClick = () => navigate(-1);
+
   const handleLogout = () => {
     localStorage.clear();
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('username');
+    localStorage.removeItem('email');
+    localStorage.removeItem('mobileNo');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('sharedId');
     navigate('/'); 
   };
 

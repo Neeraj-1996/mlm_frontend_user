@@ -11,6 +11,7 @@ import './Signup.css';
 import CustomDropdownHome from '../Headerhome/Flag';
 import { countries } from '../../asset/data';
 import { useLocation } from 'react-router-dom';
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -118,6 +119,13 @@ const SignUpPage = () => {
         const errorMessage = error.response?.data?.message || "An unexpected error occurred.";
         toast.error(errorMessage);
       });
+  };
+
+  const handleLogin = (e) => {
+
+    e.preventDefault();
+    navigate('/');
+    
   };
 
 
@@ -233,7 +241,7 @@ const SignUpPage = () => {
                 />
                 <FontAwesomeIcon icon={faLockOpen} className="position-absolute top-50 start-0 translate-middle-y ms-2 text-black" />
               </div>
-              <div className="mb-3 position-relative">
+              {/* <div className="mb-3 position-relative">
                 <input
                   type="text"
                   className="form-control ps-5"
@@ -243,12 +251,22 @@ const SignUpPage = () => {
                   required
                 />
                 <FontAwesomeIcon icon={faShieldAlt} className="position-absolute top-50 start-0 translate-middle-y ms-2 text-black" />
-              </div>
+              </div> */}
               <LoadingButton
                   onClickFunction={handleSignUp}
                   buttonText="Sign Up"
                   loading={loadingLogin}
               />
+              <div style={{ marginTop: 10, textAlign: 'center' }}>
+                <p style={{ marginBottom: 5 }}>Already have an account? <span style={{ fontWeight: 'bold' }}>Log in</span></p>
+                <LoadingButton
+                  onClickFunction={handleLogin}
+                  buttonText="Log in"
+                  loading={loadingLogin}
+                />
+              </div>
+
+            
             </form>
           </div>
         </div>

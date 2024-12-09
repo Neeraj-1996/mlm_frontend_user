@@ -1,0 +1,136 @@
+/* Slot Machine Card Container */
+.slot-machine-card {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Space between the slots */
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  max-width: 300px; /* Keep a balanced size */
+  margin: 10px auto;
+  transition: box-shadow 0.3s ease;
+  overflow: hidden; /* Prevent any content overflow */
+}
+
+/* Each Slot Card */
+.slot-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden; /* Prevent overflow from showing outside card */
+}
+
+/* Individual Slot */
+.slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the slot content */
+}
+
+/* Animation for spinning slots */
+.spinning {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+/* Image Card inside slot */
+.image-card {
+  background-color: #ffffff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 0px;
+  /* margin: 5px 0; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* font-size: 40px; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100px; 
+  height: 80px;
+}
+
+/* Slot Images */
+.image-card img {
+  width: 60px;
+  height: auto;
+}
+
+/* Adjust logo size inside slots */
+.logo-img {
+  width: 60px;
+  height: auto;
+}
+
+/* Adjust padding between elements in the slot card */
+.slot-machine-card .slot-card {
+  margin: 0;
+  padding: 0 10px;
+}
+
+.modalorder {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: #fff; */
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensures the modal is above other elements */
+}
+
+.modal-contentOrder {
+  background-color: #fff; /* White background for the modal */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  max-width: 400px; /* Maximum width for the modal */
+  width: 90%; /* Responsive width */
+  text-align: center; /* Center text inside the modal */
+}
+
+.modal-contentOrder h3 {
+  margin: 0 0 10px; /* Margin for the heading */
+}
+
+.modal-contentOrder img {
+  width: 100px; /* Fixed width for the product image */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 10px; /* Space below the image */
+}
+
+.modal-contentp{
+  margin: 0px 0; /* Margin for paragraphs */
+  font-size: 15px;
+ 
+}
+
+.done-button {
+  margin-top: 0px;
+  padding: 6px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #FF5733, #C70039);
+  color: white;
+  cursor: pointer;
+}
+
+.done-button:hover {
+  background-color: #45a049;
+}

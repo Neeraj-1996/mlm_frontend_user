@@ -1,0 +1,86 @@
+.App {
+  text-align: center;
+}
+
+/* @media only screen and (max-width:575px;) {
+  #main_dsborad_cntenT {
+      width: calc(100% - 20%);
+      margin-left: 80px;
+  }
+} */
+
+div#main_dsborad_cntenT {
+  width: calc(100% - 20%);
+  margin-left: 80px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.card-container {
+  max-width: 1200px;
+  max-height: 1200px;
+  margin: 20px auto; /* Center the card */
+}
+
+.card-body {
+  width: 100%; /* Full width for the card body */
+}
+
+.table-container {
+  max-height: 420px; /* Max height for the table */
+  max-width: 100%; /* Full width */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+
+th {
+  position: sticky; /* Allows the header to stick */
+  top: 0; /* Position it at the top */
+  z-index: 1; /* Ensure it's above the table body */
+}
+.notification-badge-admin-support {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+

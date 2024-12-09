@@ -1,0 +1,17 @@
+@media only screen and (max-width:575px) {
+    .css-1dabzo2 {
+        position: fixed;
+        border-right-width: 1px;
+        border-right-style: solid;
+        border-color: #efefef;
+        -webkit-transition: width,left,right,800ms;
+        transition: width,left,right,800ms;
+        width: 250px;
+        min-width: 250px;
+        top: 0;
+        left: 0;
+        z-index: 9;
+    }
+}
+
+

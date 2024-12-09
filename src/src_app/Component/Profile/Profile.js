@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import ImageModal from "./Profilemodel";
 import { fetchUserBalance ,fetchUserLevel} from "../Navigation/Allapi";
-import './Profile.css';  // Styling file
+import './Profile.css';  
 
 
 const Profile = () => {
@@ -15,6 +15,7 @@ const Profile = () => {
   const [activePlanTitle, setActivePlanTitle] = useState(0);
   const [isModalOpen, setModalOpen] = useState(false);
   const userId = localStorage.getItem("userId");
+  const inviteCode = localStorage.getItem("sharedId");
   const handleBackClick = () => navigate(-1);
 
   // const [profileImage, setProfileImage] = useState("https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png");
@@ -24,11 +25,13 @@ const Profile = () => {
   
   // const mobileNo = localStorage.getItem("mobileNo");
   // const ShareId = localStorage.getItem("sharedId");
+
+  console.log("userid",userId);
   const username = localStorage.getItem("username");
   
   const handleImageSelect = (image) => {
     setProfileImage(image);
-    localStorage.setItem('profileImage', image); // Update the profile image
+    localStorage.setItem('profileImage', image); 
     setModalOpen(false); // Close the modal
   };
 
@@ -39,7 +42,7 @@ const Profile = () => {
     const storedImage = localStorage.getItem('profileImage');
     if (storedImage) {
       setProfileImage(storedImage);
-    }}, []);
+    }}, [userId]);
 
   const imageAssets = Array.from({ length: 20 }, (_, i) =>
      require(`../../asset/avatar/${i + 1}.jpeg`)); // Update path as needed

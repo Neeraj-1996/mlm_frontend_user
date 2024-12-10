@@ -111,7 +111,7 @@ const Order = () => {
 
         // Handle the normal case where the API returned product data
         if (data.statusCode === 200) {
-          setProductData(data.data); // Store API result in state
+        // Store API result in state
           // resultData(); // Your resultData function call (if necessary)
           fetchUserBalance();
           // resultDataOrder();
@@ -130,6 +130,7 @@ const Order = () => {
             setSlot3(Array.from({ length: 3 }, () => data.data.productImg));
             setSpinning3(false);
             setIsSpinning(false);
+            setProductData(data.data);
           }, 12000);
         } else {
           // console.error("Unexpected response:", data);
@@ -240,7 +241,7 @@ const Order = () => {
               Balance {balance.toFixed(2)}
             </span>
             <span style={{ fontSize: "18px" }}>
-              Grab Count {grabCount.grabCount}
+              Grab Count {grabCount.grabCountLeft}
             </span>
           </div>
         </div>

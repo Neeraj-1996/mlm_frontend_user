@@ -1,1 +1,0 @@
-exports.baseUrl = 'https://www.smarttrade.org.in/public/api/v1/';

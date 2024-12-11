@@ -36,14 +36,13 @@ import 'react-toastify/dist/ReactToastify.css';
 // import 'react-toastify/dist/ReactToastify.css';
 function AppContent() {
   
+  const accessToken = localStorage.getItem('accessToken');
     return (
        <div>
-            <ToastContainer />
+      <ToastContainer />
         <Routes>
-          <Route exact path="/" element={<LoginPage />}/>
-          {/* <Route exact path="/" element={<PrivateRoute>
-                                          <LoginPage />
-                                        </PrivateRoute>}/> */}
+          {/* <Route exact path="/" element={<LoginPage />}/> */}
+          <Route path="/" element={accessToken ? <Navigate to="/Homepage" replace /> : <LoginPage />} />
           <Route  path="/SignUpPage" element={<SignUpPage />}/>
           <Route  path="/Homepage" element={<PrivateRoute><HomePage /></PrivateRoute>}/>
           <Route  path="/Finance" element={<PrivateRoute><Finance /></PrivateRoute>}/>
@@ -74,3 +73,7 @@ function AppContent() {
   }
 
 export default AppContent;
+
+          {/* <Route exact path="/" element={<PrivateRoute>
+                                          <LoginPage />
+                                        </PrivateRoute>}/> */}

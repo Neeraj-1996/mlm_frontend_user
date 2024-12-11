@@ -77,3 +77,12 @@ th {
   width: calc(100% - 20%);
   margin-left: 72px;
 }
+
+.sidebarAdmin {
+  background: linear-gradient(90deg, #FF5733, #C70039);
+  height: 150vh;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+}

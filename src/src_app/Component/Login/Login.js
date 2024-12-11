@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import baseUrlapp from '../Url/Urlapp';
@@ -24,7 +24,18 @@ const LoginPage = () => {
     setShowPassword(!showPassword);
   };
 
+ 
 
+  useEffect(() => {
+    localStorage.clear();
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('username');
+  localStorage.removeItem('email');
+  localStorage.removeItem('mobileNo');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('sharedId');
+  }, []);
 
 
   const handleLogin = async (e) => {

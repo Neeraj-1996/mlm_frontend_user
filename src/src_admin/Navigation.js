@@ -31,10 +31,10 @@ const Navigation = () => {
   const sidebarStyle = {
     background: 'linear-gradient(to bottom, #007bff, #00ff99)',
     height: "100vh",
-    position: "fixed", // Makes the sidebar fixed
-    zIndex: 9,         // Ensures it is above other elements
-    top: 0,            // Aligns it to the top of the viewport
-    left: 0            // Aligns it to the left of the viewport
+    position: "fixed", 
+    zIndex: 9,        
+    top: 0,           
+    left: 0           
   };
 
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const Navigation = () => {
   
   return (
     <div id="app" style={({ height: "100vh" }, { display: "flex" })}>
-    <Sidebar style={sidebarStyle} rtl={false} transitionDuration={800}>
+    <Sidebar  style={sidebarStyle} rtl={false} transitionDuration={800} className='sidebarAdmin'>
       <Menu>
         <MenuItem  
          icon={<MenuOutlinedIcon />}
@@ -60,18 +60,7 @@ const Navigation = () => {
         <MenuItem icon={<PeopleOutlinedIcon />}  component={<Link to="/" />}>item 1</MenuItem>
           <MenuItem icon={<ContactsOutlinedIcon />}>item 2</MenuItem>
         </SubMenu>
-        {/* <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/user-records" />}>User</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/product-table" />}>Product</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/country-table" />}>Country</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/event-table" />}>Event</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/slider" />}>Slider</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/plan-table" />}>Plan</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/withdrawal-request" />}>Withdrawal</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/user-transaction" />}>Transaction</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/level-table" />}>Level</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/support" />}>Support</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/create-level" />}>Create Level</MenuItem>
-        <MenuItem icon={<CalendarTodayOutlinedIcon/>} component={<Link to="/admindnd/Notification" />}>Notification</MenuItem> */}
+
          <MenuItem icon={<AccountCircleIcon />} component={<Link to="/admindnd/user-records" />}>User</MenuItem>
           <MenuItem icon={<ShoppingCartIcon />} component={<Link to="/admindnd/product-table" />}>Product</MenuItem>
           <MenuItem icon={<LanguageIcon />} component={<Link to="/admindnd/country-table" />}>Country</MenuItem>

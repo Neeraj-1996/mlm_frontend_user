@@ -190,7 +190,6 @@ const Order = () => {
                   <img
                     src={img}
                     alt="Symbol"
-                    // style={{ width: "100px", height: "auto" }}
                   />
                 </div>
               ))}
@@ -241,7 +240,7 @@ const Order = () => {
               Balance {balance.toFixed(2)}
             </span>
             <span style={{ fontSize: "18px" }}>
-              Grab Count {grabCount.grabCountLeft}
+              Order Count {grabCount.grabCountLeft}
             </span>
           </div>
         </div>

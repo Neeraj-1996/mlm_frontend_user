@@ -112,13 +112,13 @@ const Withdrwal = () => {
         setLoadingLogin(false);
       } else {
         console.error("Error in request:", response.data);
-        toast.error(response.data.message || "Something went wrong"); // Show error message from the server
+        toast.error(response.data.message || "Something went wrong"); 
         setLoadingLogin(false);
       }
     } catch (error) {
       // Handle unexpected errors
       console.error("Error posting withdrawal request:", error);
-      toast.error(error.response?.data?.message || "Unexpected error occurred"); // Display error message if available
+      toast.error(error.response?.data?.message || "Unexpected error occurred");
       setLoadingLogin(false);
     }
   };

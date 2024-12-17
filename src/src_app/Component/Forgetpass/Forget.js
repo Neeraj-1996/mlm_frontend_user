@@ -68,7 +68,7 @@ const ForgetPassword = () => {
       });
   };
 
-  // console.log("otp ",mobileOtp);
+
 
   const handleVerifyCode = () => {
     console.log("mobileotp", mobileOtp);

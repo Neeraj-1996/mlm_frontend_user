@@ -90,9 +90,8 @@ const Order = () => {
     setSlot2(getLogoImages());
     setSlot3(getLogoImages());
 
-    api.post(
-      // grabUrlapp 
-      "http://localhost:9001/api/grab/"+ "grabProduct")
+    api
+      .post(grabUrlapp + "grabProduct")
       .then((response) => {
         const data = response.data;
 

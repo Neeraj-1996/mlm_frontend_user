@@ -24,7 +24,7 @@ const Withdrwal = () => {
     const enteredAmount = parseFloat(text);
     if (!isNaN(enteredAmount)) {
       // Calculate the reduced amount (5% less)
-      const newAmount = enteredAmount - enteredAmount * 0.05;
+      const newAmount = enteredAmount - enteredAmount * 0.07;
       setAmount(text);
       // setAmountSend(newAmount);
       setReducedAmount(newAmount.toFixed(2)); // Limit the decimal places to 2
@@ -39,7 +39,6 @@ const Withdrwal = () => {
   }, [latestBalance]);
 
   const resultDataWallet = async () => {
-    // const token = await AsyncStorage.getItem("tokenId");
     const userId = localStorage.getItem("userId");
     const token = localStorage.getItem("tokenId");
     try {
@@ -67,66 +66,7 @@ const Withdrwal = () => {
     }
   };
 
-  const handleAdd = async () => {
-    const withdrawal_amount = amount;
-    const withdrawal_address = walletAddress;
-    const enteredAmount = parseFloat(withdrawal_amount);
-    //
-    const latestAmount = latestBalance;
-    const enteredAmountFloat = parseFloat(enteredAmount);
-    const latestAmountFloat = parseFloat(latestAmount);
 
-    console.log("enteredAmountFloat", enteredAmountFloat);
-    console.log("latestAmountFloat", latestAmountFloat);
-    console.log("withdrawal_address", withdrawal_address);
-
-    if (isNaN(enteredAmount) || enteredAmount < 50) {
-      alert("Please enter a valid amount greater than or equal to 50 USDT");
-      setAmount("");
-      setUpi("");
-      setReducedAmount("");
-    } else if (enteredAmount > latestAmountFloat) {
-      alert("Insufficient balance");
-      setAmount("");
-      setUpi("");
-    } else {
-      const formData = new FormData();
-      formData.append("withdrawal_amount", withdrawal_amount);
-      formData.append("withdrawal_address", withdrawal_address);
-
-      try {
-        // const token = await AsyncStorage.getItem('tokenId');
-        const token = localStorage.getItem("tokenId");
-        if (token) {
-          const response = await fetch(baseUrl + "withdrawal-request", {
-            method: "POST",
-            body: formData,
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (response.status === 200) {
-            const responseData = await response.json();
-            resultdata();
-            setAmount("");
-            setUpi("");
-            setWalletAddress("");
-            toast.success(responseData.message);
-          } else if (response.status === 400) {
-            const errorData = await response.json();
-            toast.error(errorData.errors);
-          } else {
-            toast.error("An error occurred: " + response.status);
-          }
-        } else {
-          toast.error("Token is missing or not found.");
-        }
-      } catch (error) {
-        toast.error("An error occurred: ");
-      }
-    }
-  };
   const handleAddressChange = (event) => {
     setWalletAddress(event.target.value);
   };
@@ -136,54 +76,53 @@ const Withdrwal = () => {
   };
 
   const handleRequest = async () => {
-
-
     try {
-      // Retrieve access token from local storage
-
       const accessToken = localStorage.getItem("accessToken");
       const mobileNo = localStorage.getItem("mobileNo");
       const username = localStorage.getItem("username");
       const userId = localStorage.getItem("userId");
-      
-   const requestBody = {
-        userId:userId,
-        address: walletAddress, // Replace with the actual address you want to send
+  
+      const requestBody = {
+        userId: userId,
+        address: walletAddress,
         amount: amount,
         username: username,
         mobile: mobileNo,
       };
-console.log("requestBody",requestBody);
-      // Define headers for the request
+      console.log("requestBody", requestBody);
+  
       const myHeaders = {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`, // Use the retrieved token
+        Authorization: `Bearer ${accessToken}`, 
       };
+  
       setLoadingLogin(true);
-      // Create the request body
-   
+  
       // Send POST request using Axios
       const response = await axios.post(
         baseUrlapp + "withdrawalrequest",
         requestBody,
         { headers: myHeaders }
       );
-
-      // Check if the response status code is 200
+  
+      // Handle response
       if (response.data.statusCode === 200) {
         console.log(response.data.data);
-        toast.success(response.data.message);
-        setLoadingLogin(false)
-        console.log(response.data); // Log the successful response data
+        toast.success(response.data.message); // Success toast
+        setLoadingLogin(false);
       } else {
-        console.error("Error in request:", response.data); // Log any non-200 responses
+        console.error("Error in request:", response.data);
+        toast.error(response.data.message || "Something went wrong"); // Show error message from the server
+        setLoadingLogin(false);
       }
     } catch (error) {
-      // Handle any errors
-      toast.error("error in");
+      // Handle unexpected errors
       console.error("Error posting withdrawal request:", error);
+      toast.error(error.response?.data?.message || "Unexpected error occurred"); // Display error message if available
+      setLoadingLogin(false);
     }
   };
+  
 
   const handleAddressValidation = async () => {
     try {
@@ -198,7 +137,7 @@ console.log("requestBody",requestBody);
 
       // Create the request body
       const requestBody = {
-        address: walletAddress, // Replace with the actual address you want to send
+        address: walletAddress, 
       };
 
       setLoadingLogin(true)
@@ -232,20 +171,17 @@ console.log("requestBody",requestBody);
     const accessToken = localStorage.getItem("accessToken");
     const userId = localStorage.getItem("userId");
     axios.get(`${baseUrlapp}getWithdrawalAddress?userId=${userId}`,
-
-        {
+      {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       )
       .then((response) => {
         if (response.data.statusCode === 200) {
-          // setData(response.data.data);
-
-          const fetchedData = response.data.data;
+        const fetchedData = response.data.data;
           if (Array.isArray(fetchedData)) {
             setData(fetchedData);
           } else {
-            setData([fetchedData]); // Wrap the object in an array if it's not an array
+            setData([fetchedData]); 
           }
           console.log("response.data.data", response.data.data)
         }
@@ -298,11 +234,11 @@ console.log("requestBody",requestBody);
         >
           <button
             style={{
-              background: "linear-gradient(90deg, #EC8E22, #FFC107)", // Gradient background for button
+              background: "linear-gradient(90deg, #EC8E22, #FFC107)", 
               border: "none",
               borderRadius: 5,
-              padding: "5px", // Adjusted padding to fill the button better
-              width: "100%", // Make button take the full width
+              padding: "5px", 
+              width: "100%",
               cursor: "pointer",
               outline: "none",
             }}
@@ -339,7 +275,7 @@ console.log("requestBody",requestBody);
           <button
             onClick={() => handleItemClick(item)}
             style={{
-              background: "linear-gradient(90deg, #FF5733, #C70039)", // Gradient background for the withdrawal button
+              background: "linear-gradient(90deg, #FF5733, #C70039)", 
               border: "none",
               borderRadius: 5,
               padding: "2px", 
@@ -472,3 +408,65 @@ console.log("requestBody",requestBody);
 };
 
 export default Withdrwal;
+
+
+  // const handleAdd = async () => {
+  //   const withdrawal_amount = amount;
+  //   const withdrawal_address = walletAddress;
+  //   const enteredAmount = parseFloat(withdrawal_amount);
+  //   //
+  //   const latestAmount = latestBalance;
+  //   const enteredAmountFloat = parseFloat(enteredAmount);
+  //   const latestAmountFloat = parseFloat(latestAmount);
+
+  //   console.log("enteredAmountFloat", enteredAmountFloat);
+  //   console.log("latestAmountFloat", latestAmountFloat);
+  //   console.log("withdrawal_address", withdrawal_address);
+
+  //   if (isNaN(enteredAmount) || enteredAmount < 50) {
+  //     alert("Please enter a valid amount greater than or equal to 50 USDT");
+  //     setAmount("");
+  //     setUpi("");
+  //     setReducedAmount("");
+  //   } else if (enteredAmount > latestAmountFloat) {
+  //     alert("Insufficient balance");
+  //     setAmount("");
+  //     setUpi("");
+  //   } else {
+  //     const formData = new FormData();
+  //     formData.append("withdrawal_amount", withdrawal_amount);
+  //     formData.append("withdrawal_address", withdrawal_address);
+
+  //     try {
+  //       // const token = await AsyncStorage.getItem('tokenId');
+  //       const token = localStorage.getItem("tokenId");
+  //       if (token) {
+  //         const response = await fetch(baseUrl + "withdrawal-request", {
+  //           method: "POST",
+  //           body: formData,
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         });
+
+  //         if (response.status === 200) {
+  //           const responseData = await response.json();
+  //           resultdata();
+  //           setAmount("");
+  //           setUpi("");
+  //           setWalletAddress("");
+  //           toast.success(responseData.message);
+  //         } else if (response.status === 400) {
+  //           const errorData = await response.json();
+  //           toast.error(errorData.errors);
+  //         } else {
+  //           toast.error("An error occurred: " + response.status);
+  //         }
+  //       } else {
+  //         toast.error("Token is missing or not found.");
+  //       }
+  //     } catch (error) {
+  //       toast.error("An error occurred: ");
+  //     }
+  //   }
+  // };

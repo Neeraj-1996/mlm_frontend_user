@@ -12,14 +12,14 @@ const CompanyDetail = () => {
     <div className="company-detail">
        <Header name="Company Detail" onBack={handleBackClick} />
        <div className='card'>
-      <h1>Vatex Vanture: </h1>
+      <h1>Vortex Vantures: </h1>
       <h2> A Professional Employment</h2>
       <h2>Platform for Boosting</h2>
       <h2>E-Commerce Sales</h2>
       <div className="detail-card">
         <h2>Platform Overview</h2>
         <p>
-          Vatex Vanture is designed to enhance e-commerce sales through a specialized employment platform. We connect businesses with top talent, providing a robust platform that streamlines recruitment and boosts product visibility. Our goal is to empower companies to maximize their online sales potential with a professional and efficient approach.
+          Vortex Vantures is designed to enhance e-commerce sales through a specialized employment platform. We connect businesses with top talent, providing a robust platform that streamlines recruitment and boosts product visibility. Our goal is to empower companies to maximize their online sales potential with a professional and efficient approach.
         </p>
       </div>
 
@@ -48,7 +48,7 @@ const CompanyDetail = () => {
       </div>
 
       <div className="detail-card">
-        <h2>Why Choose Vatex Vanture?</h2>
+        <h2>Why Choose Vortex Vantures?</h2>
         <ul>
           <li>
             <h3>Professional Team</h3>
@@ -74,7 +74,7 @@ const CompanyDetail = () => {
       <div className="detail-card">
         <h2>Conclusion</h2>
         <p>
-          Choosing Vatex Vanture means partnering with a leading platform dedicated to enhancing e-commerce sales through expert services, innovative solutions, and a commitment to excellence. We are here to support your growth and drive success in the digital marketplace.
+          Choosing Vortex Vantures means partnering with a leading platform dedicated to enhancing e-commerce sales through expert services, innovative solutions, and a commitment to excellence. We are here to support your growth and drive success in the digital marketplace.
         </p>
       </div>
       </div>

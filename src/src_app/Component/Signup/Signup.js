@@ -1,5 +1,5 @@
 // src/components/SignUpPage.js
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 // import WorldFlag from 'react-world-flags';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,6 +33,28 @@ const SignUpPage = () => {
   const [loadingLogin, setLoadingLogin] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
 
+  console.log("selectedCountry",selectedCountry);
+  const [selectedCountryCode, setSelectedCountryCode] = useState("+91"); 
+
+  const [countriesCode, setCountriesCode] = useState([]);
+
+ const fetchCountries = async () => {
+  try {
+    const result = await axios.get("https://api.vortexvantures.com/api/users/getCountryUser");
+    setCountriesCode(result.data.countries);
+  } catch (error) {
+    console.error("Error fetching countries:", error);
+  }
+};
+
+useEffect(() => {
+  fetchCountries();
+}, []);
+
+console.log("countries",countriesCode);
+useEffect(() => {
+  fetchCountries();
+}, []);
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -190,7 +212,46 @@ const SignUpPage = () => {
                 />
                 <FontAwesomeIcon icon={faEnvelope} className="position-absolute top-50 start-0 translate-middle-y ms-2 text-black" />
               </div>
+
               <div className="mb-3 position-relative">
+  <div className="d-flex align-items-center">
+    <select
+      value={selectedCountryCode}
+      onChange={(e) => setSelectedCountryCode(e.target.value)}
+      className="form-select border-end-0"
+      style={{
+        width: "100px",
+        height: "100%",
+        borderRadius: "0.375rem 0 0 0.375rem",
+        padding: "0.375rem 0.75rem",
+      }}
+    >
+      {countriesCode.map((country) => (
+        <option key={country._id} value={country.countryCode}>
+          {country.countryCode}
+        </option>
+      ))}
+    </select>
+    <input
+      type="tel"
+      className="form-control"
+      style={{
+        borderRadius: "0 0.375rem 0.375rem 0",
+      }}
+      placeholder="Phone"
+      value={phone}
+      onChange={(e) => {
+        const value = e.target.value;
+        if (/^\d{0,10}$/.test(value)) {
+          setPhone(value);
+        }
+      }}
+      required
+    />
+  </div>
+</div>
+              {/* <div className="mb-3 position-relative">
+                
                 <input
                   type="tel"
                   className="form-control ps-5"
@@ -206,8 +267,25 @@ const SignUpPage = () => {
                   }}
                   required
                 />
-                <FontAwesomeIcon icon={faAddressCard} className="position-absolute top-50 start-0 translate-middle-y ms-2 text-black" />
-              </div>
+
+<select
+      value={selectedCountryCode}
+      onChange={(e) => setSelectedCountryCode(e.target.value)}
+      className="form-select border-end-0"
+      style={{
+        width: "80px",
+        height: "100%",
+        borderRadius: "0.375rem 0 0 0.375rem",
+        padding: "0.375rem 0.75rem",
+      }}
+    >
+      {countriesCode.map((country) => (
+        <option key={country._id} value={country.countryCode}>
+          {country.countryCode}
+        </option>
+      ))}
+    </select>
+              </div> */}
               <div className="mb-3 position-relative">
                 <input
                     type="text"

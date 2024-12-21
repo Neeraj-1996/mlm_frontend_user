@@ -21,11 +21,11 @@ const CountryTable = () => {
 
   const fetchCountries = async () => {
      const accessToken = localStorage.getItem('accessTokenAdmin'); 
-    // const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmYyNDBiNDVkZGYwMTk5YThkYmZkOGMiLCJlbWFpbCI6InRlc3QxMjRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJuZWVyYWoiLCJpYXQiOjE3MjczNTkyNDUsImV4cCI6MTcyNzQ0NTY0NX0.0K6WcpoRxTZB4BWT0Vp99e42zYmrSR9SiPXi6BO1qZo"
+    
     setLoading(true);
     try {
       const result = await axios.get(`${baseUrl}getCountries`, {
-        headers: { Authorization: `Bearer ${accessToken}` }, // Pass token in headers
+        headers: { Authorization: `Bearer ${accessToken}` }, 
       });
       setCountries(result.data.countries);
     } catch (error) {

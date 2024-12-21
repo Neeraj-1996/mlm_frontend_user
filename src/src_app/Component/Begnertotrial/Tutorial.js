@@ -81,9 +81,9 @@ const TutorialScreen = () => {
 
             {/* Card for the Description */}
             <div style={styles.card}>
-                <h2>Venture Vertux  Overview</h2>
+                <h2>Vortex Vantures  Overview</h2>
                 <p>
-                    Venture Vertux  includes six levels: <strong>Bronze</strong>, <strong>Silver</strong>, <strong>Gold</strong>, 
+                    Vortex Vantures  includes six levels: <strong>Bronze</strong>, <strong>Silver</strong>, <strong>Gold</strong>, 
                     <strong>Platinum</strong>, <strong>Diamond</strong>, and <strong>Titanium</strong>. Each level offers different benefits 
                     in the following areas:
                 </p>

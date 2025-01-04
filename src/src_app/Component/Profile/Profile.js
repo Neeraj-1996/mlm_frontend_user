@@ -59,6 +59,7 @@ const  resultDataTranasaction= async () => {
 const loadLevel = async () => {
     try {
       const levelData = await fetchUserLevel();
+      console.log("levelData",levelData);
       setShareCount(levelData.shareCount);
       setActivePlanTitle(levelData.activePlan.title)
     } catch (error) {

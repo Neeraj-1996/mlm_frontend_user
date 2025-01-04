@@ -89,8 +89,10 @@ const UserRecords = () => {
     setLoading(true);
     try {
       const userData = await fetchUsers();
+      console.log(userData)
       setUsers(userData);
-      setFilteredUsers(userData);
+      const sortedData = userData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      setFilteredUsers(sortedData);
     } catch (error) {
       console.error('Error fetching plans:', error);
     } finally {
@@ -103,6 +105,7 @@ const UserRecords = () => {
     try {
       const userDataOrder = await fetchOrderAsPerUser(userId);
       console.log("userDataOrder",userDataOrder);
+      
       setOrderDetails(userDataOrder);
       setFilteredOrders(userDataOrder);
     } catch (error) {
@@ -123,7 +126,7 @@ const UserRecords = () => {
       const mobileNo = user.mobileNo ? user.mobileNo.toString() : ""; // Convert mobileNo to string
       const sharedId = user.sharedId
         ? user.sharedId.toString().toLowerCase()
-        : ""; // Convert sharedId to string and lowercase
+        : ""; 
 
       return (
         username.includes(term) ||
@@ -178,11 +181,6 @@ const UserRecords = () => {
   };
 
   
-  // const handleEditUser = (e) => {
-  //   e.preventDefault();
-  //   console.log("Edit user details:", selectedUser);
-  //   handleModalClose();
-  // };
 
   return (
     <div className="container mt-4 main_dsborad_cntenT ">

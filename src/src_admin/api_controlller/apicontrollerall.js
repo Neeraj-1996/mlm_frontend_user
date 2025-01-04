@@ -102,9 +102,10 @@ export const fetchEvents = async () => {
     return response.data;
   };
 
-  export const deleteUser = async (user) => {
+  export const deleteUser = async (id) => {
+    
     const accessToken = getAccessToken();
-    const response = await axios.post(`${baseUrl}deleteUser/${user._id}`, {
+    const response = await axios.delete(`${baseUrl}deleteUser/${id}`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     return response.data.data;

@@ -14,6 +14,7 @@ const TeamReportScreen = () => {
   const [endDate, setEndDate] = useState(new Date());
   const [userData, setUserData] = useState([]);
   const [selectedLevel, setSelectedLevel] = useState("level1");
+  const [levelOneCount, setLevelOneCount] = useState(0); 
 
 
   const [demoData, setDemoData] = useState([
@@ -54,24 +55,28 @@ const TeamReportScreen = () => {
       // Handle the response
       console.log(response.data);
       setUserData(response.data);
+      const levelOneUsers = response.data.filter(user => user.level === 1);
+      setLevelOneCount(levelOneUsers.length);
     } catch (error) {
       console.error("Error fetching users at level:", error);
     }
   };
 
+  console.log("userData",userData);
   const getLevelTeamData = async () => {
   
-    const token = localStorage.getItem("accessToken"); // Get the token from localStorage
+    const token = localStorage.getItem("accessToken"); 
+    const userId = localStorage.getItem("userId");
   
     // Set up headers with the token
     const headers = {
-      Authorization: `Bearer ${token}`, // Add the token in the Authorization header
-      "Content-Type": "application/json", // Optional, but often good to include
+      Authorization: `Bearer ${token}`, 
+      "Content-Type": "application/json", 
     };
   
     try {
       // Make the GET request using Axios
-      const response = await axios.get(`${mainlUrl}team/getTeamDataByDate`, {
+      const response = await axios.get(`${mainlUrl}team/getTeamDataByDate?user_id=${userId}`, {
         headers: headers,
       });
 
@@ -85,10 +90,10 @@ const TeamReportScreen = () => {
         { label: "Team Withdrawal", value: data.teamWithdraw?.toFixed(2) || "0" },
         { label: "Team order comission", value: data.teamOrderCommission?.toFixed(2) || "0" },
         { label: "First time depositor", value: data.firstTimeDepositors || "0" },
-        { label: "First level member", value: data.firstLevelMembers || "0" },
+        { label: "First level member", value: levelOneCount || "0" },
         { label: "Team Size", value: data.teamSize || "0" },
-        { label: "New Members today", value: "0" }, // You may need additional data for this
-        { label: "Active members day", value: "0" }, // You may need additional data for this
+        { label: "New Members today", value: "0" },
+        { label: "Active members day", value: "0" }, 
       ];
 
       setDemoData(updatedDemoData);

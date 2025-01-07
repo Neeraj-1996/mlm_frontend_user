@@ -16,7 +16,7 @@ const TeamReportScreen = () => {
   const [selectedLevel, setSelectedLevel] = useState("level1");
   const [levelOneCount, setLevelOneCount] = useState(0); 
 
-
+  const [activeUserCount, setActiveUserCount] = useState(0); 
   const [demoData, setDemoData] = useState([
     { label: "Team Balance", value: "0" },
     { label: "Team Cash Flow", value: "0" },
@@ -52,11 +52,13 @@ const TeamReportScreen = () => {
         headers: headers,
       });
   
-      // Handle the response
-      console.log(response.data);
+   
       setUserData(response.data);
       const levelOneUsers = response.data.filter(user => user.level === 1);
       setLevelOneCount(levelOneUsers.length);
+      const activeUsersCount = response.data.filter(user => user.walletBalance >= 100).length;
+      // console.log("activeUsersCount",activeUsersCount)
+      setActiveUserCount(activeUsersCount);
     } catch (error) {
       console.error("Error fetching users at level:", error);
     }
@@ -93,7 +95,7 @@ const TeamReportScreen = () => {
         { label: "First level member", value: levelOneCount || "0" },
         { label: "Team Size", value: data.teamSize || "0" },
         { label: "New Members today", value: "0" },
-        { label: "Active members day", value: "0" }, 
+        { label: "Active members day", value: activeUserCount }, 
       ];
 
       setDemoData(updatedDemoData);

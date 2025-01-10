@@ -33,7 +33,7 @@ const TeamReportScreen = () => {
   useEffect(() => {
     getUsersAtLevel();
     getLevelTeamData()
-  }, []);
+  }, [activeUserCount]);
 
   
   const getUsersAtLevel = async () => {
@@ -57,7 +57,7 @@ const TeamReportScreen = () => {
       const levelOneUsers = response.data.filter(user => user.level === 1);
       setLevelOneCount(levelOneUsers.length);
       const activeUsersCount = response.data.filter(user => user.walletBalance >= 100).length;
-      // console.log("activeUsersCount",activeUsersCount)
+      console.log("activeUsersCount",activeUsersCount)
       setActiveUserCount(activeUsersCount);
     } catch (error) {
       console.error("Error fetching users at level:", error);

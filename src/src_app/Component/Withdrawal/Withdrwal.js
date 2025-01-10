@@ -77,6 +77,11 @@ const Withdrwal = () => {
 
   const handleRequest = async () => {
     try {
+      if (amount < 50) {
+        toast.error("Minimum amount is 50");
+        return;
+      }
+  
       const accessToken = localStorage.getItem("accessToken");
       const mobileNo = localStorage.getItem("mobileNo");
       const username = localStorage.getItem("username");
@@ -89,39 +94,79 @@ const Withdrwal = () => {
         username: username,
         mobile: mobileNo,
       };
-      console.log("requestBody", requestBody);
   
       const myHeaders = {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`, 
+        Authorization: `Bearer ${accessToken}`,
       };
   
       setLoadingLogin(true);
   
-      // Send POST request using Axios
       const response = await axios.post(
         baseUrlapp + "withdrawalrequest",
         requestBody,
         { headers: myHeaders }
       );
   
-      // Handle response
       if (response.data.statusCode === 200) {
-        console.log(response.data.data);
-        toast.success(response.data.message); // Success toast
-        setLoadingLogin(false);
+        toast.success(response.data.message);
       } else {
-        console.error("Error in request:", response.data);
-        toast.error(response.data.message || "Something went wrong"); 
-        setLoadingLogin(false);
+        toast.error(response.data.message || "Something went wrong");
       }
     } catch (error) {
-      // Handle unexpected errors
-      console.error("Error posting withdrawal request:", error);
       toast.error(error.response?.data?.message || "Unexpected error occurred");
+    } finally {
       setLoadingLogin(false);
     }
   };
+  
+  // const handleRequest = async () => {
+  //   try {
+  //     const accessToken = localStorage.getItem("accessToken");
+  //     const mobileNo = localStorage.getItem("mobileNo");
+  //     const username = localStorage.getItem("username");
+  //     const userId = localStorage.getItem("userId");
+  
+  //     const requestBody = {
+  //       userId: userId,
+  //       address: walletAddress,
+  //       amount: amount,
+  //       username: username,
+  //       mobile: mobileNo,
+  //     };
+  //     console.log("requestBody", requestBody);
+  
+  //     const myHeaders = {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${accessToken}`, 
+  //     };
+  
+  //     setLoadingLogin(true);
+  
+  //     // Send POST request using Axios
+  //     const response = await axios.post(
+  //       baseUrlapp + "withdrawalrequest",
+  //       requestBody,
+  //       { headers: myHeaders }
+  //     );
+  
+  //     // Handle response
+  //     if (response.data.statusCode === 200) {
+  //       console.log(response.data.data);
+  //       toast.success(response.data.message); // Success toast
+  //       setLoadingLogin(false);
+  //     } else {
+  //       console.error("Error in request:", response.data);
+  //       toast.error(response.data.message || "Something went wrong"); 
+  //       setLoadingLogin(false);
+  //     }
+  //   } catch (error) {
+  //     // Handle unexpected errors
+  //     console.error("Error posting withdrawal request:", error);
+  //     toast.error(error.response?.data?.message || "Unexpected error occurred");
+  //     setLoadingLogin(false);
+  //   }
+  // };
   
 
   const handleAddressValidation = async () => {

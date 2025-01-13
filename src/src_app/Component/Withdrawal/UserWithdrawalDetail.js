@@ -12,16 +12,27 @@ const WithdrawalTransaction = () => {
   const handleBackClick = () => navigate(-1);
 
   const resultDataTransaction = async () => {
+    const mobileNo = localStorage.getItem("mobileNo");
+    console.log("mobileNo", mobileNo);
+  
     try {
       const fetchData = await fetchUserWithdrawal();
       console.log("fetchUserWithdrawal", fetchData);
-      setTransactions(fetchData);
+  
+      // Filter fetchData based on the mobile number
+      const filteredData = fetchData.filter(transaction => transaction.mobile === mobileNo);
+  
+      console.log("Filtered Data", filteredData);
+  
+      // Set filtered data to the state
+      setTransactions(filteredData);
       setLoading(false);
     } catch (error) {
       console.error(error);
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     resultDataTransaction();

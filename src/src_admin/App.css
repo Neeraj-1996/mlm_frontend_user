@@ -86,3 +86,32 @@ th {
   top: 0;
   left: 0;
 }
+
+.custom-spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px; /* Adjust height as needed */
+}
+
+.custom-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.custom-spinner-container p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #555;
+}

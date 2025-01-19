@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import { Table, Button, Modal, Form, Card } from "react-bootstrap";
 import baseUrl from "./url";
 import axios from "axios";
 import ImageUploader from 'react-image-upload'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const SupportTable = () => {
   const [showMessageModal, setShowMessageModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -14,34 +13,37 @@ const SupportTable = () => {
   const [users, setUsers] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [userInput, setUserInput] = useState("");
-  const [notificationCount, setNotificationCounts] = useState(0);
+  const [notificationCount, setNotificationCounts] = useState({});
 
   const handleViewMessages = async (user) => {
     setSelectedUser(user);
     await getMessages(user.userId);
+    await fetchNotificationMessageRemove(user.userId);
     setShowMessageModal(true);
   };
 
   const handleSendMessageSubmit = async () => {
     if (!userInput && !selectedImage) {
-      toast.warn("Please enter a message or select an image", {
-        autoClose: 3000,
-      });
+      toast.warn("Please enter a message or select an image", { autoClose: 3000 });
       return;
     }
     const formData = new FormData();
     if (userInput) formData.append("content", userInput);
-    if (selectedImage && selectedImage.file) {
-      formData.append("chatImg", selectedImage.file);
-    }
+    if (selectedImage?.file) formData.append("chatImg", selectedImage.file);
+
     try {
-      const response = await axios.post(`${baseUrl}sendMessageAdmin?user_id=${selectedUser.userId}`, formData);
+      const response = await axios.post(
+        `${baseUrl}sendMessageAdmin?user_id=${selectedUser.userId}`,
+        formData
+      );
+      console.log("Message sent:", response.data);
       setUserInput("");
       setSelectedImage(null);
-      getMessages(selectedUser.userId); 
-      toast.success("Message sent successfully!", {autoClose: 2000});
+      getMessages(selectedUser.userId);
+      toast.success("Message sent successfully!", { autoClose: 2000 });
     } catch (error) {
-      toast.error("Failed to send message!", {autoClose: 3000});
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message!", { autoClose: 3000 });
     }
   };
 
@@ -52,31 +54,44 @@ const SupportTable = () => {
 
   const fetchUsers = async () => {
     setLoading(true);
-    const accessToken = localStorage.getItem('accessTokenAdmin');
+    const accessToken = localStorage.getItem("accessTokenAdmin");
+
     try {
       const result = await axios.get(`${baseUrl}getUserRecords`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
+
       if (result.status === 200) {
-        setUsers(result.data.data);
+        const allUsers = result.data.data;
+        const updatedUsers = await Promise.all(
+          allUsers.map(async (user) => {
+            const unreadCount = await fetchNotificationMessage(user.userId);
+            return { ...user, unreadCount };
+          })
+        );
+
+        const sortedUsers = updatedUsers.sort((a, b) =>
+          b.unreadCount - a.unreadCount
+        );
+        setUsers(sortedUsers);
       }
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error("Error fetching users:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const getMessages = async (userId) => {
-    const accessToken = localStorage.getItem('accessTokenAdmin');
+    const accessToken = localStorage.getItem("accessTokenAdmin");
     setLoading(true);
+
     try {
       const result = await axios.get(`${baseUrl}getMessages?user_id=${userId}`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       if (result.status === 200) {
-        const sortedMessages = result.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Sort by timestamp descending
-        setMessage(sortedMessages);
+        setMessage(result.data);
       }
     } catch (error) {
       console.error("Error fetching messages:", error);
@@ -85,20 +100,38 @@ const SupportTable = () => {
     }
   };
 
+  const fetchNotificationMessage = async (userId) => {
+    try {
+      const response = await axios.get(`${baseUrl}getAdminUnreadMessageCount?user_id=${userId}`);
+      return response.data.success ? response.data.data.unreadCount : 0;
+    } catch (error) {
+      console.error("Error fetching notification messages:", error);
+      return 0;
+    }
+  };
+
+  const fetchNotificationMessageRemove = async (userId) => {
+    try {
+      const response = await axios.get(`${baseUrl}getAdminMessagesCountRemove?user_id=${userId}`);
+      if (response.data.success) {
+        return response.data.data.unreadCount;
+      }
+    } catch (error) {
+      console.error("Error removing notification messages:", error);
+    }
+  };
+
   useEffect(() => {
     fetchUsers();
   }, []);
 
-  const getImageFileObject = (imageFile) => {
-    setSelectedImage({
-      file: imageFile.file,
-      dataUrl: imageFile.dataUrl
-    });
-  };
+  function getImageFileObject(imageFile) {
+    setSelectedImage({ file: imageFile.file, dataUrl: imageFile.dataUrl });
+  }
 
-  const runAfterImageDelete = (file) => {
+  function runAfterImageDelete(file) {
     console.log({ file });
-  };
+  }
 
   return (
     <div className="container mt-1 main_dsborad_cntenT">
@@ -108,7 +141,47 @@ const SupportTable = () => {
       <Card className="card-container">
         <Card.Body>
           <div className="table-container">
-            <Table striped bordered hover>
+          {loading ? (
+              <div className="custom-spinner-container">
+                <div className="custom-spinner"></div>
+                <p>Loading data, please wait...</p>
+              </div>
+            ) : (
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>S. No.</th>
+                    <th>User Name</th>
+                    <th>Phone Number</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {users.map((user, index) => (
+                    <tr key={user.userId}>
+                      <td>{index + 1}</td>
+                      <td>{user.username}</td>
+                      <td>{user.mobileNo}</td>
+                      <td>
+                        <Button
+                          variant="info"
+                          size="sm"
+                          onClick={() => handleViewMessages(user)}
+                        >
+                          View Messages
+                        </Button>
+                        {user.unreadCount > 0 && (
+                          <span className="notification-badge-admin-support">
+                            {user.unreadCount}
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            )}
+            {/* <Table striped bordered hover>
               <thead>
                 <tr>
                   <th>S. No.</th>
@@ -119,74 +192,65 @@ const SupportTable = () => {
               </thead>
               <tbody>
                 {users.map((user, index) => (
-                  <tr key={user.id}>
+                  <tr key={user.userId}>
                     <td>{index + 1}</td>
                     <td>{user.username}</td>
                     <td>{user.mobileNo}</td>
                     <td>
-                      <Button
-                        variant="info"
-                        size="sm"
-                        className="me-2"
-                        onClick={() => handleViewMessages(user)}
-                      >
+                      <Button variant="info" size="sm" onClick={() => handleViewMessages(user)}>
                         View Messages
                       </Button>
-                      {notificationCount[user.userId] > 0 && (
-                        <span className="notification-badge-admin-support">
-                          {notificationCount[user.userId]}
-                        </span>
+                      {user.unreadCount > 0 && (
+                        <span className="notification-badge-admin-support">{user.unreadCount}</span>
                       )}
                     </td>
                   </tr>
                 ))}
               </tbody>
-            </Table>
+            </Table> */}
           </div>
         </Card.Body>
       </Card>
 
-      {/* View Messages Modal */}
       <Modal show={showMessageModal} onHide={handleCloseMessageModal}>
         <Modal.Header closeButton>
           <Modal.Title>Messages from {selectedUser?.username || "User"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ul style={{ listStyleType: "none", padding: 0 }}>
-            {message.length > 0 ? (
-              message.map((msg, idx) => (
-                <li key={idx} style={{ display: "flex", justifyContent: msg.isAdmin ? "flex-end" : "flex-start", margin: "10px 0" }}>
-                  <div
+            {message.length > 0
+              ? message.map((msg, idx) => (
+                  <li
+                    key={idx}
                     style={{
-                      maxWidth: "60%",
-                      padding: "10px",
-                      borderRadius: "10px",
-                      backgroundColor: msg.isAdmin ? "#e1f5fe" : "#fce4ec", 
-                      color: "#000",
                       display: "flex",
-                      flexDirection: "column",
-                      alignItems: msg.isAdmin ? "flex-end" : "flex-start",
+                      justifyContent: msg.isAdmin ? "flex-end" : "flex-start",
+                      margin: "10px 0",
                     }}
                   >
-                    {msg.chatImg && (
-                      <img
-                        src={msg.chatImg}
-                        alt="ChatImage"
-                        style={{ maxWidth: "100px", maxHeight: "100px", borderRadius: "5px" }}
-                      />
-                    )}
-                    <p style={{ margin: "5px 0" }}>{msg.content}</p>
-                    <small style={{ color: "#666" }}>
-                      {new Date(msg.createdAt).toLocaleString()}
-                    </small>
-                  </div>
-                </li>
-              ))
-            ) : (
-              <li>No messages found.</li>
-            )}
+                    <div
+                      style={{
+                        maxWidth: "60%",
+                        padding: "10px",
+                        borderRadius: "10px",
+                        backgroundColor: msg.isAdmin ? "#e1f5fe" : "#fce4ec",
+                        color: "#000",
+                      }}
+                    >
+                      {msg.chatImg && (
+                        <img
+                          src={msg.chatImg}
+                          alt="ChatImage"
+                          style={{ maxWidth: "100px", maxHeight: "100px", borderRadius: "5px" }}
+                        />
+                      )}
+                      <p>{msg.content}</p>
+                      <small>{new Date(msg.createdAt).toLocaleString()}</small>
+                    </div>
+                  </li>
+                ))
+              : "No messages found."}
           </ul>
-
           <Form>
             <Form.Group controlId="formMessage">
               <Form.Label>Message</Form.Label>
@@ -198,22 +262,15 @@ const SupportTable = () => {
                 onChange={(e) => setUserInput(e.target.value)}
               />
             </Form.Group>
-
             <ImageUploader
               id="imageUploader"
-              withIcon={false}
               buttonText="Choose image"
-              onFileAdded={(img) => getImageFileObject(img)}
-              onFileRemoved={(img) => runAfterImageDelete(img)}
-              singleImage={true}
+              onFileAdded={getImageFileObject}
+              onFileRemoved={runAfterImageDelete}
+              singleImage
               withLabel={false}
-              buttonStyles={{ display: "none" }} 
             />
-            <Button
-              variant="primary"
-              onClick={handleSendMessageSubmit}
-              className="mt-3"
-            >
+            <Button variant="primary" onClick={handleSendMessageSubmit} className="mt-3">
               Send
             </Button>
           </Form>
@@ -224,6 +281,9 @@ const SupportTable = () => {
 };
 
 export default SupportTable;
+
+
+
 // import React, { useState, useEffect } from "react";
 // import { Table, Button, Modal, Form, Card } from "react-bootstrap";
 // import baseUrl from "./url";
@@ -559,52 +619,3 @@ export default SupportTable;
 
 // export default SupportTable;
 
-
-  // console.log("notification",notificationCount);
-
-  
-  // useEffect(() => {
-    
-
-  //   fetchNotificationMessage();
-  //     }, []);
-//   const message = await axios.get(`${baseUrl}getPlanRecords`, {
-//     headers: { Authorization: `Bearer ${accessToken}` },
-//   });
-
-//   const [rest1, reslt2]= await Promise.all([
-//     axios.get(`${baseUrl}getPlanRecords`, {
-//       headers: { Authorization: `Bearer ${accessToken}` },
-//     }),
-//     axios.get(baseUrl + 'getAllProducts', {
-//       headers: { Authorization: `Bearer ${accessToken}` },
-//     }),
-//   ])
-
-//   user?.forEach((itm)=>{
-// const userMessage=        message?.find(itmCh=>itmCh.userId===itm.userId);
-// itm.userMessage=userMessage
-//   });
-
-// try {
-//   const user = await axios.get(baseUrl + 'getAllProducts', {
-//     headers: { Authorization: `Bearer ${accessToken}` },
-//   });
-
-//   const message = await axios.get(`${baseUrl}getPlanRecords`, {
-//     headers: { Authorization: `Bearer ${accessToken}` },
-//   });
-
-//   const [rest1, reslt2]= await Promise.all([
-//     axios.get(`${baseUrl}getPlanRecords`, {
-//       headers: { Authorization: `Bearer ${accessToken}` },
-//     }),
-//     axios.get(baseUrl + 'getAllProducts', {
-//       headers: { Authorization: `Bearer ${accessToken}` },
-//     }),
-//   ])
-
-//   user?.forEach((itm)=>{
-// const userMessage=        message?.find(itmCh=>itmCh.userId===itm.userId);
-// itm.userMessage=userMessage
-//   });

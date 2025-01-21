@@ -104,7 +104,7 @@ const Withdrwal = () => {
   
       const response = await axios.post(
         baseUrlapp + "withdrawalrequest",
-        requestBody,
+         requestBody,
         { headers: myHeaders }
       );
   

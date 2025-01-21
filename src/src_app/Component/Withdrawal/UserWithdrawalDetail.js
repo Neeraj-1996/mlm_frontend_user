@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { fetchUserWithdrawal } from '../Navigation/Allapi';
 import Header from '../Header/Header';
+import axios from 'axios';
 import '.././Tranasaction/DepositTransaction.css';
+import baseUrlapp from '../Url/Urlapp';
 
 const WithdrawalTransaction = () => {
   const navigate = useNavigate();
@@ -42,6 +44,43 @@ const WithdrawalTransaction = () => {
     return <div>Loading...</div>;
   }
 
+  const handleStatusChange = async (id, newStatus,request) => {
+    const confirmation = window.confirm(
+      `Are you sure you want to ${
+        newStatus === "Approved" ? "approve" : "reject"
+      } this request?`
+    );
+
+    if (!confirmation) {
+      return; // Exit if the user cancels
+    }
+
+    const accessTokenUser = localStorage.getItem("accessToken");
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        `${baseUrlapp}withdrawalrequest/status`,
+
+         { id, status: newStatus ,userId:request.userId, address:request.address, amount:request.amount , },
+        {
+          headers: { Authorization: `Bearer ${accessTokenUser}` },
+        }
+      );
+
+      if (response.status === 200) {
+      
+        resultDataTransaction();
+      }
+    } catch (error) {
+      // setAlertMessage("Error updating status");
+      console.error("Error updating status:", error);
+    } finally {
+      setLoading(false);
+      // setTimeout(() => setAlertMessage(null), 3000); // Hide alert after 3 seconds
+    }
+  };
+
   return (
     <div className="containerDeposit">
       <Header name="Withdrawal Detail" onBack={handleBackClick} />
@@ -59,11 +98,30 @@ const WithdrawalTransaction = () => {
                 </div>
                 <div style={{ flexDirection: 'row', display: 'flex', justifyContent: "space-between" }}>
                   <p className="transactionDetail">Mobile: {transaction.mobile}</p>
-                  <p className="transactionDetail">Status: {transaction.status}</p>
-                </div>
-                <p className="transactionDetail">
-                  Date: {new Date(transaction.createdAt).toLocaleString()}
+                  <p className="transactionDetail">
+                  Status: {transaction.status === 'Rejected' ? 'Cancelled by User' : transaction.status}
                 </p>
+                </div>
+                <div style={{ flexDirection: 'row', display: 'flex', justifyContent: "space-between" }}>
+                  <p className="transactionDetail">Date: {new Date(transaction.createdAt).toLocaleString()}</p>
+                  {transaction.status !== 'Cancelled by Admin' && transaction.status !== 'Rejected' && (
+                    <button
+                      onClick={() => handleStatusChange(transaction._id, "Rejected", transaction)}
+                      className="cancelButton"
+                      style={{
+                        backgroundColor: '#f44336',
+                        color: 'white',
+                        border: 'none',
+                        padding: '5px 10px',
+                        cursor: 'pointer',
+                        borderRadius: '5px',
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  )}
+                </div>
+
               </div>
             ))
           ) : (

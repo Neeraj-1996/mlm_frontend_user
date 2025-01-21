@@ -29,7 +29,7 @@ const WithdrawalRequestsTable = () => {
   };
 
 
-  const handleStatusChange = async (id, newStatus) => {
+  const handleStatusChange = async (id, newStatus,request) => {
     // Show confirmation dialog
     const confirmation = window.confirm(
       `Are you sure you want to ${
@@ -47,7 +47,7 @@ const WithdrawalRequestsTable = () => {
     try {
       const response = await axios.post(
         `${baseUrl}withdrawalrequest/status`,
-        { id, status: newStatus },
+         { id, status: newStatus ,userId:request.userId, address:request.address, amount:request.amount , },
         {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
@@ -123,7 +123,7 @@ const WithdrawalRequestsTable = () => {
                   <th>Final Amount</th>
                   <th>Status</th>
                   <th>Date / Time</th>
-                  <th>Action</th> {/* New column for actions */}
+                  <th>Action</th> 
                 </tr>
               </thead>
               <tbody>
@@ -151,9 +151,7 @@ const WithdrawalRequestsTable = () => {
                       <Button
                         variant="danger"
                         size="sm"
-                        onClick={() =>
-                          handleStatusChange(request._id, "Cancelled by Admin")
-                        }
+                        onClick={() => handleStatusChange(request._id, "Cancelled by Admin",request)}
                         disabled={request.status !== "Pending"}
                       >
                         Reject

@@ -25,7 +25,7 @@ const Notification = () => {
 
     setLoading(true);
     try {
-        // http://localhost:9001/api/admin/getNotifications
+
       const result = await axios.get(`${baseUrl}getNotifications`, {
         headers: { Authorization: `Bearer ${accessToken}` }, // Pass token in headers
       });

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const SupportTable = () => {
   const [showMessageModal, setShowMessageModal] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
+  // const [selectedUser, setSelectedUser] = useState(null);
   const [message, setMessage] = useState([]);
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -15,6 +15,9 @@ const SupportTable = () => {
   const [userInput, setUserInput] = useState("");
   const [notificationCount, setNotificationCounts] = useState({});
 
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [filteredUsers, setFilteredUsers] = useState([]);
+      const [searchTerm, setSearchTerm] = useState("");
   const handleViewMessages = async (user) => {
     setSelectedUser(user);
     await getMessages(user.userId);
@@ -74,12 +77,34 @@ const SupportTable = () => {
           b.unreadCount - a.unreadCount
         );
         setUsers(sortedUsers);
+        setFilteredUsers(sortedUsers);
       }
     } catch (error) {
       console.error("Error fetching users:", error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSearch = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+
+    const filtered = users.filter((user) => {
+      const username = user.username?.toLowerCase() || "";
+      const email = user.email?.toLowerCase() || "";
+      const mobileNo = user.mobileNo ? user.mobileNo.toString() : ""; // Convert mobileNo to string
+      const sharedId = user.sharedId ? user.sharedId.toString().toLowerCase(): ""; 
+
+      return (
+        username.includes(term) ||
+        email.includes(term) ||
+        mobileNo.includes(term) ||
+        sharedId.includes(term)
+      );
+    });
+
+    setFilteredUsers(filtered);
   };
 
   const getMessages = async (userId) => {
@@ -138,6 +163,16 @@ const SupportTable = () => {
       <div className="d-flex justify-content-between mb-1">
         <h2>Support Table</h2>
       </div>
+
+            <div className="d-flex justify-content-center mb-4">
+              <Form.Control
+                type="text"
+                placeholder="Search by Username, Email, Mobile or Share ID"
+                value={searchTerm}
+                onChange={handleSearch}
+                className="w-100" 
+              />
+            </div>
       <Card className="card-container">
         <Card.Body>
           <div className="table-container">
@@ -157,7 +192,7 @@ const SupportTable = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user, index) => (
+                  {filteredUsers.map((user, index) => (
                     <tr key={user.userId}>
                       <td>{index + 1}</td>
                       <td>{user.username}</td>
@@ -181,33 +216,7 @@ const SupportTable = () => {
                 </tbody>
               </Table>
             )}
-            {/* <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>S. No.</th>
-                  <th>User Name</th>
-                  <th>Phone Number</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {users.map((user, index) => (
-                  <tr key={user.userId}>
-                    <td>{index + 1}</td>
-                    <td>{user.username}</td>
-                    <td>{user.mobileNo}</td>
-                    <td>
-                      <Button variant="info" size="sm" onClick={() => handleViewMessages(user)}>
-                        View Messages
-                      </Button>
-                      {user.unreadCount > 0 && (
-                        <span className="notification-badge-admin-support">{user.unreadCount}</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table> */}
+       
           </div>
         </Card.Body>
       </Card>

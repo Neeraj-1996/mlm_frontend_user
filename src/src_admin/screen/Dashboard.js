@@ -1,10 +1,12 @@
 import { Spinner, Card } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
 import { fetchTransactions } from "../api_controlller/apicontrollerall";
-
+import { fetchUsers } from "../api_controlller/apicontrollerall";
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [totalUsers, setTotalUsers] = useState(0); 
+  const [newUsersToday, setNewUsersToday] = useState(0);
   const today = new Date().toISOString().split("T")[0]; // Today's date in 'YYYY-MM-DD' format
 
   const fetchTransactionData = async () => {
@@ -19,10 +21,26 @@ const Dashboard = () => {
     }
   };
 
+    const resultDataUser = async () => {
+      setLoading(true);
+      try {
+        const userData = await fetchUsers();
+        setTotalUsers(userData.length);
+        // console.log(userData)
+      
+        const newUsersCount = userData.filter(user => user.createdAt.startsWith(today)).length;
+        setNewUsersToday(newUsersCount)
+      } catch (error) {
+        console.error('Error fetching plans:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
   
 
   useEffect(() => {
     fetchTransactionData();
+    resultDataUser();
   }, []);
 
   // Calculate total credit
@@ -108,6 +126,19 @@ const Dashboard = () => {
             <Card.Body>
               <Card.Title>Today's Admin Credit</Card.Title>
               <Card.Text>{todayAdminCredit.toFixed(2)}</Card.Text>
+            </Card.Body>
+          </Card>
+
+          <Card style={{ width: "18rem" }} className="m-2">
+            <Card.Body>
+              <Card.Title>Total Users</Card.Title>
+              <Card.Text>{totalUsers}</Card.Text>
+            </Card.Body>
+          </Card>
+          <Card style={{ width: "18rem" }} className="m-2">
+            <Card.Body>
+              <Card.Title>New Users Added Today</Card.Title>
+              <Card.Text>{newUsersToday}</Card.Text>
             </Card.Body>
           </Card>
         </div>

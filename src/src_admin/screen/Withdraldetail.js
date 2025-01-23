@@ -31,6 +31,7 @@ const WithdrawalRequestsTable = () => {
 
   const handleStatusChange = async (id, newStatus,request) => {
     // Show confirmation dialog
+    console.log("request",request)
     const confirmation = window.confirm(
       `Are you sure you want to ${
         newStatus === "Approved" ? "approve" : "reject"
@@ -59,18 +60,20 @@ const WithdrawalRequestsTable = () => {
             newStatus === "Approved" ? "approved" : "rejected"
           } successfully.`
         );
+   
         setWithdrawalRequests((prev) =>
           prev.map((request) =>
             request._id === id ? { ...request, status: newStatus } : request
           )
         );
+        resultData();
       }
     } catch (error) {
       setAlertMessage("Error updating status");
       console.error("Error updating status:", error);
     } finally {
       setLoading(false);
-      setTimeout(() => setAlertMessage(null), 3000); // Hide alert after 3 seconds
+      setTimeout(() => setAlertMessage(null), 3000);
     }
   };
 
@@ -80,7 +83,7 @@ const WithdrawalRequestsTable = () => {
 
     const filtered = withdrawalRequests.filter((user) => {
       const username = user.username?.toLowerCase() || "";
-      const mobileNo = user.mobile ? user.mobile.toString() : ""; // Convert mobileNo to string
+      const mobileNo = user.mobile ? user.mobile.toString() : "";
        return (
         username.includes(term) || mobileNo.includes(term)
       );
@@ -142,7 +145,7 @@ const WithdrawalRequestsTable = () => {
                         variant="success"
                         size="sm"
                         onClick={() =>
-                          handleStatusChange(request._id, "Approved")
+                          handleStatusChange(request._id, "Approved",request)
                         }
                         disabled={request.status !== "Pending"}
                       >

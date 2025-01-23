@@ -1,14 +1,10 @@
 /* Container styles */
-.container {
-    height: 100%;
-    width: 100%;
-    /* background-color: #00d1e0; */
-}
+
 
 /* Body styles */
 .body {
     height: 100%;
-    width: 95%;
+    /* width: 95%; */
 }
 
 /* Card styles */

@@ -28,7 +28,7 @@ const ProfileComponent = () => {
 
   return (
     <div className="container">
-   <Header name="Transaction" onBack={handleBackClick} />
+   <Header name="Profile" onBack={handleBackClick} />
     <div className="profile-container">
 
       <div className="profile-card">
@@ -52,8 +52,8 @@ const ProfileComponent = () => {
         </div>
         
         <div className="profile-item">
-          <div className="profile-label">Email address</div>
-          <div className="profile-value">{userEmail}</div>
+          <div className="profile-label" style={{width:'35%'}}>Email address</div>
+          <div className="profile-value" style={{width:'50%',fontSize:10,}}>{userEmail}</div>
         </div>
 
         {/* Logout Button */}

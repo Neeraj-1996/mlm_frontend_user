@@ -18,62 +18,62 @@ const TutorialScreen = () => {
                 <table style={styles.table}>
                     <thead>
                         <tr>
-                            <th style={styles.th}>Partner Merchants Category</th>
-                            <th style={styles.th}>Partner Merchant</th>
-                            <th style={styles.th}>Valid direct downline</th>
-                            <th style={styles.th}>Balancesheet ($)</th>
-                            <th style={styles.th}>Assignable daily order</th>
-                            <th style={styles.th}>Commission rate (%)</th>
+                            <th style={styles.th}>NAME</th>
+                            <th style={styles.th}>Balance</th>
+                            <th style={styles.th}>COMMISSION</th>
+                            <th style={styles.th}>DIRECT REQUIRED</th>
+                            {/* <th style={styles.th}>Assignable daily order</th>
+                            <th style={styles.th}>Commission rate (%)</th> */}
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style={styles.td}>Bronze</td>
-                            <td style={styles.td}>300</td>
-                            <td style={styles.td}>0.77%</td>
+                            <td style={styles.td}>BEP</td>
+                            <td style={styles.td}>100 </td>
+                            <td style={styles.td}>2.5%</td>
                             <td style={styles.td}>0</td>
+                            {/* <td style={styles.td}>3</td>
+                            <td style={styles.td}>9</td> */}
+                        </tr>
+                        <tr>
+                            <td style={styles.td}>ERP</td>
+                            <td style={styles.td}>500</td>
+                            <td style={styles.td}>3%</td>
                             <td style={styles.td}>3</td>
-                            <td style={styles.td}>9</td>
+                            {/* <td style={styles.td}>5</td>
+                            <td style={styles.td}>15</td> */}
                         </tr>
                         <tr>
-                            <td style={styles.td}>Silver</td>
-                            <td style={styles.td}>2,000</td>
-                            <td style={styles.td}>0.82%</td>
-                            <td style={styles.td}>1</td>
-                            <td style={styles.td}>5</td>
-                            <td style={styles.td}>15</td>
+                            <td style={styles.td}>ETHERIUM</td>
+                            <td style={styles.td}>1500</td>
+                            <td style={styles.td}>3.5%</td>
+                            <td style={styles.td}>6</td>
+                            {/* <td style={styles.td}>10</td>
+                            <td style={styles.td}>20</td> */}
                         </tr>
                         <tr>
-                            <td style={styles.td}>Gold</td>
-                            <td style={styles.td}>5,000</td>
-                            <td style={styles.td}>0.87%</td>
-                            <td style={styles.td}>2,000</td>
-                            <td style={styles.td}>10</td>
+                            <td style={styles.td}>SOLANA</td>
+                            <td style={styles.td}>5000 </td>
+                            <td style={styles.td}>4%</td>
+                            <td style={styles.td}>12</td>
+                            {/* <td style={styles.td}>15</td>
+                            <td style={styles.td}>20</td> */}
+                        </tr>
+                        <tr>
+                            <td style={styles.td}>LITECOIN</td>
+                            <td style={styles.td}>10000</td>
+                            <td style={styles.td}>5%</td>
                             <td style={styles.td}>20</td>
+                            {/* <td style={styles.td}>25</td>
+                            <td style={styles.td}>30</td> */}
                         </tr>
                         <tr>
-                            <td style={styles.td}>Platinum</td>
-                            <td style={styles.td}>20</td>
-                            <td style={styles.td}>0.89%</td>
-                            <td style={styles.td}>5,000</td>
-                            <td style={styles.td}>15</td>
-                            <td style={styles.td}>20</td>
-                        </tr>
-                        <tr>
-                            <td style={styles.td}>Diamond</td>
-                            <td style={styles.td}>35</td>
-                            <td style={styles.td}>0.91%</td>
-                            <td style={styles.td}>30,000</td>
-                            <td style={styles.td}>25</td>
-                            <td style={styles.td}>30</td>
-                        </tr>
-                        <tr>
-                            <td style={styles.td}>Titanium</td>
+                            <td style={styles.td}>ETHERIUM CLASSIC</td>
+                            <td style={styles.td}>20000</td>
+                            <td style={styles.td}>6%</td>
                             <td style={styles.td}>50</td>
-                            <td style={styles.td}>0.93%</td>
-                            <td style={styles.td}>80,000</td>
-                            <td style={styles.td}>25</td>
-                            <td style={styles.td}>30</td>
+                            {/* <td style={styles.td}>25</td>
+                            <td style={styles.td}>30</td> */}
                         </tr>
                     </tbody>
                 </table>

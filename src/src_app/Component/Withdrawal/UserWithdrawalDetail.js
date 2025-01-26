@@ -99,7 +99,7 @@ const WithdrawalTransaction = () => {
                   </div>
                   <div style={{ flexDirection: 'row', display: 'flex', justifyContent: "space-between" }}>
                     <p className="transactionDetail">Date: {new Date(transaction.createdAt).toLocaleString()}</p>
-                    {transaction.status !== 'Cancelled by Admin' && transaction.status !== 'Rejected' && (
+                    {transaction.status !== 'Cancelled by Admin' && transaction.status !== 'Rejected'  && transaction?.status !== "Approved" && (
                       <button
                         disabled={transaction?.status == "Approved" ? true : false}
                         onClick={() => handleStatusChange(transaction._id, "Rejected", transaction)}

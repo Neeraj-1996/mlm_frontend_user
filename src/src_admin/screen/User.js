@@ -92,7 +92,20 @@ const UserRecords = () => {
       console.log(userData)
       setUsers(userData);
       const sortedData = userData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      setFilteredUsers(sortedData);
+      // setFilteredUsers(sortedData);
+
+
+
+      const shuffledData = [...userData]; // Make a copy of the userData array
+      for (let i = shuffledData.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));  // Get a random index
+        [shuffledData[i], shuffledData[j]] = [shuffledData[j], shuffledData[i]]; // Swap the elements
+      }
+      
+      // Set the random user in filtered users
+    setFilteredUsers(shuffledData);
+
+  
     } catch (error) {
       console.error('Error fetching plans:', error);
     } finally {

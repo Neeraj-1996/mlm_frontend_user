@@ -83,8 +83,8 @@ const TutorialScreen = () => {
             <div style={styles.card}>
                 <h2>Vortex Vantures  Overview</h2>
                 <p>
-                    Vortex Vantures  includes six levels: <strong>Bronze</strong>, <strong>Silver</strong>, <strong>Gold</strong>, 
-                    <strong>Platinum</strong>, <strong>Diamond</strong>, and <strong>Titanium</strong>. Each level offers different benefits 
+                    Vortex Vantures  includes six levels: <strong>BEP</strong>, <strong>ERP</strong>, <strong>ETHERIUM</strong>, 
+                    <strong> SOLANA</strong>, <strong> LITECOIN</strong>, and <strong>ETHERIUM CLASSIC</strong>. Each level offers different benefits 
                     in the following areas:
                 </p>
                 <h3>Valid Direct Downline</h3>

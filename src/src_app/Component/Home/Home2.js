@@ -81,7 +81,7 @@ const Homeplan = () => {
             <img src={item.planImg} alt={item.title} className="cardImage" />
             {item._id !== activePlanId && (
               <div className="lockIcon">
-                <FontAwesomeIcon icon={faLock} style={{ color: "#000" }} />
+                <FontAwesomeIcon icon={faLock} style={{ color: "#afabab" }} />
               </div>
             )}
           </button>

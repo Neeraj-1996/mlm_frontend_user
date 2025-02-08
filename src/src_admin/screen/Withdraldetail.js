@@ -18,9 +18,11 @@ const WithdrawalRequestsTable = () => {
   const resultData = async () => {
     setLoading(true);
     try {
-      const plansData = await fetchWithdrawal(); // Use the fetchPlans function
+      const plansData = await fetchWithdrawal(); 
+      const sortedData = plansData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
       setFilteredUsers(plansData);
-      setWithdrawalRequests(plansData);
+      setWithdrawalRequests(sortedData);
     } catch (error) {
       console.error('Error fetching plans:', error);
     } finally {

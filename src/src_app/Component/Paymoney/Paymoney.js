@@ -128,7 +128,7 @@ const Paymoney = () => {
                   <h6 style={{marginTop:5}}>{trackId}</h6>
                 </div>
                 <button onClick={() => demo(add)} className="paymoneybutton">Copy Wallet Address</button>
-                <div className="countdown-timer">
+                <div className="countdown-timer" style={{marginTop:20}}>
                   <h6>Time remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h6>
                 </div>
 

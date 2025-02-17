@@ -120,14 +120,18 @@ const Paymoney = () => {
                 <h6 className="network">{network}</h6>
                 <img src={newUrl} alt="QR Code" />
                 <h6 className="gmail">{gmail}</h6>
-                <div className="address">
-                <h6 style={{ fontSize: "12px" }}>{add}</h6>
+                <div className="address" >
+                <h6 style={{ fontSize: "12px",marginTop:5}}>{add}</h6>
 
                 </div>
                 <div className="track-id">
-                  <h6>{trackId}</h6>
+                  <h6 style={{marginTop:5}}>{trackId}</h6>
                 </div>
                 <button onClick={() => demo(add)} className="paymoneybutton">Copy Wallet Address</button>
+                <div className="countdown-timer">
+                  <h6>Time remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h6>
+                </div>
+
               </div>
             )}
           </div>
